@@ -7,9 +7,16 @@ let currentDate = new Date();
 
 let activeInput = null;
 
+let activePopup = null;
 
-const calendarArea =
-document.getElementById("calendarArea");
+
+
+const startInput =
+document.getElementById("startDate");
+
+
+const endInput =
+document.getElementById("endDate");
 
 
 const startButton =
@@ -20,16 +27,16 @@ const endButton =
 document.getElementById("endCalendarButton");
 
 
+const startPopup =
+document.getElementById("startCalendarPopup");
+
+
+const endPopup =
+document.getElementById("endCalendarPopup");
+
+
 const calculateButton =
 document.getElementById("calculate");
-
-
-const startInput =
-document.getElementById("startDate");
-
-
-const endInput =
-document.getElementById("endDate");
 
 
 
@@ -90,6 +97,7 @@ function formatDateInput(input){
         }
     );
 
+
 }
 
 
@@ -113,6 +121,8 @@ startButton.onclick=function(){
 
     activeInput=startInput;
 
+    activePopup=startPopup;
+
 
     openCalendar();
 
@@ -126,11 +136,14 @@ endButton.onclick=function(){
 
     activeInput=endInput;
 
+    activePopup=endPopup;
+
 
     openCalendar();
 
 
 };
+
 
 
 
@@ -147,6 +160,12 @@ function openCalendar(){
 
 }
 
+
+
+
+
+
+
 /* ==========================
    Calendar Render
 ========================== */
@@ -155,7 +174,7 @@ function openCalendar(){
 function renderCalendar(year, month){
 
 
-    calendarArea.innerHTML="";
+    activePopup.innerHTML="";
 
 
 
@@ -170,21 +189,24 @@ function renderCalendar(year, month){
 
     calendar.innerHTML = `
 
+
     <div class="calendar-header">
 
-        <button id="prevMonth">
+
+        <button class="prev-month">
         ◀
         </button>
 
 
-        <div class="calendar-title">
-        ${year}년 ${month + 1}월
+        <div>
+        ${year}년 ${month+1}월
         </div>
 
 
-        <button id="nextMonth">
+        <button class="next-month">
         ▶
         </button>
+
 
     </div>
 
@@ -193,16 +215,17 @@ function renderCalendar(year, month){
     <div class="calendar-grid">
 
 
-        <div class="calendar-week">일</div>
-        <div class="calendar-week">월</div>
-        <div class="calendar-week">화</div>
-        <div class="calendar-week">수</div>
-        <div class="calendar-week">목</div>
-        <div class="calendar-week">금</div>
-        <div class="calendar-week">토</div>
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
 
 
     </div>
+
 
     `;
 
@@ -232,6 +255,7 @@ function renderCalendar(year, month){
 
 
 
+
     for(
         let i=0;
         i<firstDay;
@@ -254,43 +278,36 @@ function renderCalendar(year, month){
     ){
 
 
-        const dayElement =
+        const dayBox =
         document.createElement("div");
 
 
-
-        dayElement.className =
+        dayBox.className =
         "calendar-day";
 
 
-
-        dayElement.textContent =
+        dayBox.textContent =
         day;
 
 
 
-        dayElement.onclick=function(){
+        dayBox.onclick=function(){
 
 
-            const value =
+            activeInput.value =
 
             `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
 
 
-            activeInput.value =
-            value;
-
-
-
-            calendarArea.innerHTML="";
+            activePopup.innerHTML="";
 
 
         };
 
 
 
-        grid.appendChild(dayElement);
+        grid.appendChild(dayBox);
 
 
     }
@@ -298,14 +315,15 @@ function renderCalendar(year, month){
 
 
 
-    calendarArea.appendChild(calendar);
+
+    activePopup.appendChild(calendar);
 
 
 
 
 
-    document
-    .getElementById("prevMonth")
+    calendar
+    .querySelector(".prev-month")
     .onclick=function(){
 
 
@@ -326,8 +344,8 @@ function renderCalendar(year, month){
 
 
 
-    document
-    .getElementById("nextMonth")
+    calendar
+    .querySelector(".next-month")
     .onclick=function(){
 
 
@@ -347,8 +365,14 @@ function renderCalendar(year, month){
 
 }
 
+
+
+
+
+
+
 /* ==========================
-   Date Validation
+   Date Check
 ========================== */
 
 
@@ -376,36 +400,22 @@ function parseDate(value){
 
 
 
-    const year =
-    Number(parts[0]);
-
-
-    const month =
-    Number(parts[1]);
-
-
-    const day =
-    Number(parts[2]);
-
-
-
     const date =
     new Date(
-        year,
-        month - 1,
-        day
+        Number(parts[0]),
+        Number(parts[1])-1,
+        Number(parts[2])
     );
 
 
 
-    // 잘못된 날짜 검사
     if(
 
-        date.getFullYear() !== year ||
+        date.getFullYear() !== Number(parts[0]) ||
 
-        date.getMonth() !== month - 1 ||
+        date.getMonth() !== Number(parts[1])-1 ||
 
-        date.getDate() !== day
+        date.getDate() !== Number(parts[2])
 
     ){
 
@@ -426,19 +436,17 @@ function parseDate(value){
 
 
 /* ==========================
-   Date Calculate
+   Calculate
 ========================== */
 
 
 calculateButton.onclick=function(){
 
 
-
     const start =
     parseDate(
         startInput.value
     );
-
 
 
     const end =
@@ -453,15 +461,11 @@ calculateButton.onclick=function(){
 
 
 
-
-
     if(!start || !end){
 
 
         result.innerHTML =
-
-        `날짜 형식을 확인해주세요.<br>
-        예: 2026-07-10`;
+        "날짜 형식을 확인해주세요.";
 
 
         return;
@@ -470,19 +474,13 @@ calculateButton.onclick=function(){
 
 
 
-
-
-    const oneDay =
-    1000 * 60 * 60 * 24;
-
-
-
     const diff =
+
     Math.floor(
-        (end - start) / oneDay
+        (end-start)
+        /
+        (1000*60*60*24)
     );
-
-
 
 
 
@@ -490,7 +488,6 @@ calculateButton.onclick=function(){
 
 
         result.innerHTML =
-
         "종료 날짜가 시작 날짜보다 빠릅니다.";
 
 
@@ -502,10 +499,8 @@ calculateButton.onclick=function(){
 
 
 
+    result.innerHTML = `
 
-    result.innerHTML =
-
-    `
 
     <h2>
     D-${diff}
@@ -513,33 +508,35 @@ calculateButton.onclick=function(){
 
 
     <p>
-
-    시작일:
-    ${startInput.value}
-
-    <br>
-
-    종료일:
     ${endInput.value}
-
+    까지
     </p>
 
 
     <p>
-
     총
     <strong>${diff}일</strong>
     남았습니다.
-
     </p>
 
-    `;
-   
-   showResultCalendar(end);
 
+    `;
+
+
+    showResultCalendar(end);
 
 
 };
+
+
+
+
+
+
+/* ==========================
+   Result Calendar
+========================== */
+
 
 function showResultCalendar(date){
 
@@ -548,163 +545,15 @@ function showResultCalendar(date){
     document.getElementById("resultCalendar");
 
 
-    if(!area){
+    area.innerHTML = `
 
-        return;
-
-    }
-
-
-
-    area.innerHTML = "";
-
-
-
-    const year =
-    date.getFullYear();
-
-
-    const month =
-    date.getMonth();
-
-
-    const targetDay =
-    date.getDate();
-
-
-
-
-
-    const calendar =
-    document.createElement("div");
-
-
-    calendar.className =
-    "calendar result-calendar";
-
-
-
-    calendar.innerHTML =
-
-    `
 
     <h3>
-    ${year}년 ${month+1}월 D-Day
+    ${date.getFullYear()}년 ${date.getMonth()+1}월 D-Day
     </h3>
 
 
-    <div class="calendar-grid">
-
-
-        <div class="calendar-week">일</div>
-        <div class="calendar-week">월</div>
-        <div class="calendar-week">화</div>
-        <div class="calendar-week">수</div>
-        <div class="calendar-week">목</div>
-        <div class="calendar-week">금</div>
-        <div class="calendar-week">토</div>
-
-
-    </div>
-
     `;
-
-
-
-
-    const grid =
-    calendar.querySelector(".calendar-grid");
-
-
-
-
-    const firstDay =
-    new Date(
-        year,
-        month,
-        1
-    ).getDay();
-
-
-
-    const lastDate =
-    new Date(
-        year,
-        month + 1,
-        0
-    ).getDate();
-
-
-
-
-
-    // 시작 요일 빈칸
-
-    for(
-        let i=0;
-        i<firstDay;
-        i++
-    ){
-
-        grid.appendChild(
-            document.createElement("div")
-        );
-
-    }
-
-
-
-
-
-
-    // 날짜 생성
-
-    for(
-        let day=1;
-        day<=lastDate;
-        day++
-    ){
-
-
-        const dayBox =
-        document.createElement("div");
-
-
-        dayBox.className =
-        "calendar-day";
-
-
-
-        dayBox.textContent =
-        day;
-
-
-
-        if(day === targetDay){
-
-
-            dayBox.classList.add(
-                "dday"
-            );
-
-
-            dayBox.title =
-            "D-Day";
-
-
-        }
-
-
-
-        grid.appendChild(dayBox);
-
-
-    }
-
-
-
-
-    area.appendChild(calendar);
 
 
 }
