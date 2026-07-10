@@ -8,93 +8,114 @@ let currentDate = new Date();
 let activeInput = null;
 
 
-const calendarArea = document.getElementById("calendarArea");
-
-const startButton = document.getElementById("startCalendarButton");
-
-const endButton = document.getElementById("endCalendarButton");
-
-const calculateButton = document.getElementById("calculate");
-
-const startInput = document.getElementById("startDate");
-
-const endInput = document.getElementById("endDate");
+const calendarArea =
+document.getElementById("calendarArea");
 
 
+const startButton =
+document.getElementById("startCalendarButton");
+
+
+const endButton =
+document.getElementById("endCalendarButton");
+
+
+const calculateButton =
+document.getElementById("calculate");
+
+
+const startInput =
+document.getElementById("startDate");
+
+
+const endInput =
+document.getElementById("endDate");
 
 
 
-/* =========================
-   Auto Date Format
-========================= */
 
 
-function autoFormatDate(input){
+/* ==========================
+   Input Format
+========================== */
 
 
-    input.addEventListener("input",function(){
+function formatDateInput(input){
 
 
-        let value =
-        input.value.replace(/[^0-9]/g,"");
+    input.addEventListener(
+        "input",
+        function(){
 
 
-        if(value.length > 8){
+            let value =
+            input.value.replace(/[^0-9]/g,"");
 
-            value =
-            value.substring(0,8);
+
+
+            if(value.length > 8){
+
+                value =
+                value.substring(0,8);
+
+            }
+
+
+
+            if(value.length >= 5){
+
+                value =
+                value.substring(0,4)
+                + "-"
+                + value.substring(4);
+
+            }
+
+
+
+            if(value.length >= 8){
+
+                value =
+                value.substring(0,7)
+                + "-"
+                + value.substring(7);
+
+            }
+
+
+
+            input.value=value;
+
 
         }
-
-
-        if(value.length >= 5){
-
-            value =
-            value.substring(0,4)
-            + "-"
-            + value.substring(4);
-
-        }
-
-
-        if(value.length >= 8){
-
-            value =
-            value.substring(0,7)
-            + "-"
-            + value.substring(7);
-
-        }
-
-
-        input.value=value;
-
-
-    });
-
+    );
 
 }
 
 
-autoFormatDate(startInput);
 
-autoFormatDate(endInput);
+formatDateInput(startInput);
 
-
-
+formatDateInput(endInput);
 
 
 
-/* =========================
-   Calendar Button
-========================= */
+
+
+
+/* ==========================
+   Calendar Open
+========================== */
 
 
 startButton.onclick=function(){
 
+
     activeInput=startInput;
 
-    renderCalendar();
+
+    openCalendar();
+
 
 };
 
@@ -102,9 +123,12 @@ startButton.onclick=function(){
 
 endButton.onclick=function(){
 
+
     activeInput=endInput;
 
-    renderCalendar();
+
+    openCalendar();
+
 
 };
 
@@ -112,57 +136,71 @@ endButton.onclick=function(){
 
 
 
+function openCalendar(){
 
 
-/* =========================
-   Calendar
-========================= */
+    renderCalendar(
+        currentDate.getFullYear(),
+        currentDate.getMonth()
+    );
 
 
-function renderCalendar(){
+}
+
+/* ==========================
+   Calendar Render
+========================== */
+
+
+function renderCalendar(year, month){
 
 
     calendarArea.innerHTML="";
 
 
-    let year=currentDate.getFullYear();
 
-    let month=currentDate.getMonth();
+    const calendar =
+    document.createElement("div");
 
 
-
-    const calendar=document.createElement("div");
-
-    calendar.className="calendar";
+    calendar.className =
+    "calendar";
 
 
 
-    calendar.innerHTML=
-
-    `
+    calendar.innerHTML = `
 
     <div class="calendar-header">
 
-    <button id="prevMonth">◀</button>
+        <button id="prevMonth">
+        ◀
+        </button>
 
-    <div class="calendar-title">
-    ${year}년 ${month+1}월
+
+        <div class="calendar-title">
+        ${year}년 ${month + 1}월
+        </div>
+
+
+        <button id="nextMonth">
+        ▶
+        </button>
+
     </div>
 
-    <button id="nextMonth">▶</button>
-
-    </div>
 
 
     <div class="calendar-grid">
 
-    <div class="calendar-week">일</div>
-    <div class="calendar-week">월</div>
-    <div class="calendar-week">화</div>
-    <div class="calendar-week">수</div>
-    <div class="calendar-week">목</div>
-    <div class="calendar-week">금</div>
-    <div class="calendar-week">토</div>
+
+        <div class="calendar-week">일</div>
+        <div class="calendar-week">월</div>
+        <div class="calendar-week">화</div>
+        <div class="calendar-week">수</div>
+        <div class="calendar-week">목</div>
+        <div class="calendar-week">금</div>
+        <div class="calendar-week">토</div>
+
 
     </div>
 
@@ -175,53 +213,88 @@ function renderCalendar(){
 
 
 
-    let start =
-    new Date(year,month,1).getDay();
+    const firstDay =
+    new Date(
+        year,
+        month,
+        1
+    ).getDay();
 
 
 
-    let days =
-    new Date(year,month+1,0).getDate();
+    const lastDate =
+    new Date(
+        year,
+        month + 1,
+        0
+    ).getDate();
 
 
 
-    for(let i=0;i<start;i++){
 
-        grid.appendChild(document.createElement("div"));
+    for(
+        let i=0;
+        i<firstDay;
+        i++
+    ){
+
+        grid.appendChild(
+            document.createElement("div")
+        );
 
     }
 
 
 
-    for(let d=1;d<=days;d++){
+
+    for(
+        let day=1;
+        day<=lastDate;
+        day++
+    ){
 
 
-        let day=document.createElement("div");
-
-        day.className="calendar-day";
-
-        day.textContent=d;
+        const dayElement =
+        document.createElement("div");
 
 
 
-        day.onclick=function(){
+        dayElement.className =
+        "calendar-day";
 
 
-            activeInput.value=
 
-            `${year}-${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        dayElement.textContent =
+        day;
+
+
+
+        dayElement.onclick=function(){
+
+
+            const value =
+
+            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+
+
+            activeInput.value =
+            value;
+
 
 
             calendarArea.innerHTML="";
+
 
         };
 
 
 
-        grid.appendChild(day);
+        grid.appendChild(dayElement);
 
 
     }
+
 
 
 
@@ -231,69 +304,108 @@ function renderCalendar(){
 
 
 
-    document.getElementById("prevMonth").onclick=function(){
+    document
+    .getElementById("prevMonth")
+    .onclick=function(){
 
-        currentDate.setMonth(currentDate.getMonth()-1);
 
-        renderCalendar();
+        currentDate.setMonth(
+            currentDate.getMonth()-1
+        );
+
+
+        renderCalendar(
+            currentDate.getFullYear(),
+            currentDate.getMonth()
+        );
+
 
     };
 
 
 
-    document.getElementById("nextMonth").onclick=function(){
 
-        currentDate.setMonth(currentDate.getMonth()+1);
 
-        renderCalendar();
+    document
+    .getElementById("nextMonth")
+    .onclick=function(){
+
+
+        currentDate.setMonth(
+            currentDate.getMonth()+1
+        );
+
+
+        renderCalendar(
+            currentDate.getFullYear(),
+            currentDate.getMonth()
+        );
+
 
     };
 
 
 }
 
+/* ==========================
+   Date Validation
+========================== */
+
+
+function parseDate(value){
+
+
+    if(!value){
+
+        return null;
+
+    }
 
 
 
-
-
-/* =========================
-   Date Check
-========================= */
-
-
-function checkDate(value){
-
-
-    if(!value) return null;
-
-
-    let parts=value.split("-");
-
-
-    if(parts.length!==3)
-    return null;
-
-
-    let y=Number(parts[0]);
-
-    let m=Number(parts[1]);
-
-    let d=Number(parts[2]);
+    const parts =
+    value.split("-");
 
 
 
-    let date=new Date(y,m-1,d);
+    if(parts.length !== 3){
+
+        return null;
+
+    }
 
 
 
+    const year =
+    Number(parts[0]);
+
+
+    const month =
+    Number(parts[1]);
+
+
+    const day =
+    Number(parts[2]);
+
+
+
+    const date =
+    new Date(
+        year,
+        month - 1,
+        day
+    );
+
+
+
+    // 잘못된 날짜 검사
     if(
 
-        date.getFullYear()!==y ||
+        date.getFullYear() !== year ||
 
-        date.getMonth()!==m-1 ||
+        date.getMonth() !== month - 1 ||
 
-        date.getDate()!==d
+        date.getDate() !== day
 
     ){
 
@@ -302,7 +414,9 @@ function checkDate(value){
     }
 
 
+
     return date;
+
 
 }
 
@@ -311,34 +425,43 @@ function checkDate(value){
 
 
 
-
-/* =========================
-   Calculate
-========================= */
+/* ==========================
+   Date Calculate
+========================== */
 
 
 calculateButton.onclick=function(){
 
 
-    let start =
-    checkDate(startInput.value);
+
+    const start =
+    parseDate(
+        startInput.value
+    );
 
 
-    let end =
-    checkDate(endInput.value);
+
+    const end =
+    parseDate(
+        endInput.value
+    );
 
 
 
-    let result =
+    const result =
     document.getElementById("result");
+
+
 
 
 
     if(!start || !end){
 
 
-        result.innerHTML=
-        "날짜 형식을 확인해주세요.<br>예: 2026-07-10";
+        result.innerHTML =
+
+        `날짜 형식을 확인해주세요.<br>
+        예: 2026-07-10`;
 
 
         return;
@@ -347,17 +470,27 @@ calculateButton.onclick=function(){
 
 
 
-    let diff =
+
+
+    const oneDay =
+    1000 * 60 * 60 * 24;
+
+
+
+    const diff =
     Math.floor(
-        (end-start)/(1000*60*60*24)
+        (end - start) / oneDay
     );
 
 
 
-    if(diff<0){
 
 
-        result.innerHTML=
+    if(diff < 0){
+
+
+        result.innerHTML =
+
         "종료 날짜가 시작 날짜보다 빠릅니다.";
 
 
@@ -367,15 +500,41 @@ calculateButton.onclick=function(){
 
 
 
-    result.innerHTML=
+
+
+
+    result.innerHTML =
 
     `
 
-    두 날짜 사이<br><br>
+    <h2>
+    D-${diff}
+    </h2>
 
+
+    <p>
+
+    시작일:
+    ${startInput.value}
+
+    <br>
+
+    종료일:
+    ${endInput.value}
+
+    </p>
+
+
+    <p>
+
+    총
     <strong>${diff}일</strong>
+    남았습니다.
+
+    </p>
 
     `;
+
 
 
 };
