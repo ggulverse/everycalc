@@ -8,11 +8,15 @@
 
 .date-input-group{
 
+    position:relative;
+
     display:flex;
+
+    align-items:center;
 
     gap:10px;
 
-    align-items:center;
+    width:100%;
 
 }
 
@@ -28,9 +32,9 @@
 
 .date-input-group button{
 
-    width:50px;
+    width:45px;
 
-    height:50px;
+    height:45px;
 
     border-radius:12px;
 
@@ -46,40 +50,49 @@
 
 
 
-/* ---------- Calendar Area ---------- */
 
 
-.calendar-area{
+/* ---------- Calendar Popup ---------- */
 
-    margin-top:40px;
 
-    display:flex;
+.calendar-popup{
 
-    justify-content:center;
+    position:absolute;
+
+    top:55px;
+
+    left:0;
+
+    z-index:1000;
 
 }
 
 
-
-/* ---------- Calendar ---------- */
 
 
 .calendar{
 
     width:320px;
 
+    max-width:calc(100vw - 40px);
+
     background:var(--surface);
 
     border:1px solid var(--border);
 
-    border-radius:20px;
+    border-radius:18px;
 
-    padding:25px;
+    padding:20px;
 
     box-shadow:var(--shadow);
 
 }
 
+
+
+
+
+/* ---------- Calendar Header ---------- */
 
 
 .calendar-header{
@@ -92,55 +105,67 @@
 
     margin-bottom:20px;
 
-}
-
-
-
-.calendar-header button{
-
-    border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    font-size:1.2rem;
-
-}
-
-
-
-.calendar-title{
-
-    font-size:1.2rem;
-
     font-weight:700;
 
 }
 
 
 
-.calendar-grid{
+.calendar-header button{
 
-    display:grid;
+    width:35px;
 
-    grid-template-columns:repeat(7,1fr);
+    height:35px;
 
-    text-align:center;
+    border-radius:50%;
 
-    gap:8px;
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    cursor:pointer;
 
 }
 
 
 
+
+
+/* ---------- Calendar Grid ---------- */
+
+
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(7,1fr);
+
+    gap:8px;
+
+    text-align:center;
+
+}
+
+
+
+
+.calendar-grid > div{
+
+    padding:8px 0;
+
+}
+
+
+
+
+
 .calendar-day{
 
-    padding:8px;
-
-    border-radius:10px;
-
     cursor:pointer;
+
+    border-radius:50%;
 
 }
 
@@ -156,23 +181,49 @@
 
 
 
-.calendar-week{
 
-    font-weight:700;
 
-    padding-bottom:10px;
+/* ---------- Result Calendar ---------- */
+
+
+.result-calendar-area{
+
+    margin-top:35px;
 
 }
 
 
 
-.calendar-selected{
+
+
+.result-calendar-area h3{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+/* ---------- D-Day ---------- */
+
+
+.dday{
 
     background:var(--primary);
 
     color:white;
 
+    border-radius:50%;
+
+    font-weight:800;
+
 }
+
+
 
 
 
@@ -182,11 +233,32 @@
 @media(max-width:768px){
 
 
-    .calendar{
+    .calendar-popup{
 
-        width:100%;
+        position:fixed;
+
+        top:50%;
+
+        left:50%;
+
+        transform:
+
+        translate(-50%,-50%);
+
+        width:auto;
 
     }
+
+
+
+    .calendar{
+
+        width:calc(100vw - 40px);
+
+        max-width:360px;
+
+    }
+
 
 
 }
