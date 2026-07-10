@@ -603,35 +603,57 @@ function showResultCalendar(date){
     }
 
 
+for(let day=1;day<=last;day++){
+
+
+    const box =
+    document.createElement("div");
+
+
+    box.className="calendar-day";
 
 
 
-    for(let day=1;day<=last;day++){
-
-
-        const box =
-        document.createElement("div");
-
-
-        box.className="calendar-day";
-
-
-        box.textContent=day;
+    const week =
+    new Date(
+        year,
+        month,
+        day
+    ).getDay();
 
 
 
-        if(day===target){
+    if(week===0){
 
-            box.classList.add("dday");
-
-        }
-
-
-        grid.appendChild(box);
-
+        box.classList.add("sunday");
 
     }
 
+
+
+    if(week===6){
+
+        box.classList.add("saturday");
+
+    }
+
+
+
+    box.textContent=day;
+
+
+
+    if(day===target){
+
+        box.classList.add("dday");
+
+    }
+
+
+    grid.appendChild(box);
+
+
+}
 
 
     area.appendChild(calendar);
