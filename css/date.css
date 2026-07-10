@@ -1,14 +1,11 @@
 /* ==================================================
-   EveryCalc - date.css
+   EveryCalc - Date Calculator Style
 ================================================== */
 
 
-/* ---------- Date Input ---------- */
-
+/* 날짜 입력 영역 */
 
 .date-input-group{
-
-    position:relative;
 
     display:flex;
 
@@ -16,7 +13,7 @@
 
     gap:10px;
 
-    width:100%;
+    margin-bottom:20px;
 
 }
 
@@ -25,6 +22,14 @@
 .date-input-group input{
 
     flex:1;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:16px;
 
 }
 
@@ -36,373 +41,22 @@
 
     height:45px;
 
-    border-radius:12px;
+    border:none;
 
-    border:1px solid var(--border);
-
-    background:var(--surface);
+    border-radius:8px;
 
     cursor:pointer;
 
-    font-size:1.2rem;
+    font-size:20px;
 
 }
 
 
 
 
-
-/* ---------- Calendar Popup ---------- */
-
-
-.calendar-popup{
-
-    position:absolute;
-
-    top:55px;
-
-    left:0;
-
-    z-index:1000;
-
-}
-
-
-
-
-.calendar{
-
-    width:320px;
-
-    max-width:calc(100vw - 40px);
-
-    background:var(--surface);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    padding:20px;
-
-    box-shadow:var(--shadow);
-
-}
-
-
-
-
-
-/* ---------- Calendar Header ---------- */
-
-
-.calendar-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
-    font-weight:700;
-
-}
-
-
-
-.calendar-header button{
-
-    width:35px;
-
-    height:35px;
-
-    border-radius:50%;
-
-    border:1px solid var(--border);
-
-    background:var(--surface);
-
-    cursor:pointer;
-
-}
-
-
-
-
-
-/* ---------- Calendar Grid ---------- */
-
-
-.calendar-grid{
-
-    display:grid;
-
-    grid-template-columns:
-
-    repeat(7,1fr);
-
-    gap:8px;
-
-    text-align:center;
-
-}
-
-
-
-
-.calendar-grid > div{
-
-    padding:8px 0;
-
-}
-
-
-
-
-
-.calendar-day{
-
-    cursor:pointer;
-
-    border-radius:50%;
-
-}
-
-
-
-.calendar-day:hover{
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-
-
-
-
-/* ---------- Result Calendar ---------- */
-
-
-.result-calendar-area{
-
-    margin-top:35px;
-
-}
-
-
-
-
-
-.result-calendar-area h3{
-
-    text-align:center;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-
-/* ---------- D-Day ---------- */
-
-
-.dday{
-
-    background:var(--primary);
-
-    color:white;
-
-    border-radius:50%;
-
-    font-weight:800;
-
-}
-
-
-
-
-
-/* ---------- Mobile ---------- */
-
-
-@media(max-width:768px){
-
-
-    .calendar-popup{
-
-        position:fixed;
-
-        top:50%;
-
-        left:50%;
-
-        transform:
-
-        translate(-50%,-50%);
-
-        width:auto;
-
-    }
-
-
-
-    .calendar{
-
-        width:calc(100vw - 40px);
-
-        max-width:360px;
-
-    }
-
-
-
-}
-/* ==================================================
-   Result D-Day Calendar Style
-================================================== */
-
-
-.result-calendar{
-
-    margin:30px auto;
-
-}
-
-
-
-.result-calendar h3{
-
-    text-align:center;
-
-    margin-bottom:20px;
-
-}
-
-
-
-.result-calendar .calendar-day{
-
-    min-height:45px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:2px;
-
-}
-
-
-
-
-.result-calendar .dday{
-
-    background:var(--primary);
-
-    color:white;
-
-    border-radius:50%;
-
-    width:45px;
-
-    height:45px;
-
-    margin:auto;
-
-    font-weight:800;
-
-}
-
-
-
-.result-calendar .dday small{
-
-    display:block;
-
-    font-size:0.65rem;
-
-    white-space:nowrap;
-
-    margin-top:3px;
-
-}
-
-
-
-
-
-/* 모바일 */
-
-@media(max-width:768px){
-
-
-    .result-calendar{
-
-        width:100%;
-
-    }
-
-
-
-    .result-calendar .calendar{
-
-        width:calc(100vw - 40px);
-
-        max-width:360px;
-
-        margin:auto;
-
-    }
-
-
-}
 
 /* ==================================================
-   Calendar Weekend Style
-================================================== */
-
-
-.result-calendar .sunday{
-
-    color:#dc2626;
-
-}
-
-
-
-.result-calendar .saturday{
-
-    color:#2563eb;
-
-}
-
-
-
-/* D-Day가 주말보다 우선 */
-
-.result-calendar .dday{
-
-    background:var(--primary);
-
-    color:white;
-
-    border-radius:50%;
-
-    font-weight:800;
-
-}
-
-/* ==================================================
-   Calendar Center Popup
+   Calendar Popup
 ================================================== */
 
 
@@ -414,9 +68,86 @@
 
     left:50%;
 
-    transform:translate(-50%, -50%);
+    transform:translate(-50%,-50%);
 
-    z-index:1000;
+    z-index:9999;
+
+}
+
+
+
+.calendar{
+
+    width:360px;
+
+    max-width:calc(100vw - 32px);
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+
+}
+
+
+
+
+.calendar-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+    font-weight:bold;
+
+}
+
+
+
+.calendar-header button{
+
+    border:none;
+
+    background:none;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+/* ==================================================
+   Calendar Grid
+================================================== */
+
+
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:6px;
+
+    text-align:center;
+
+}
+
+
+
+.calendar-grid > div{
+
+    min-height:40px;
 
     display:flex;
 
@@ -428,30 +159,112 @@
 
 
 
-.calendar-area .calendar{
+.calendar-day{
 
-    width:360px;
+    cursor:pointer;
 
-    max-width:calc(100vw - 40px);
+    border-radius:50%;
 
-    background:white;
-
-    border-radius:12px;
-
-    padding:20px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    transition:0.2s;
 
 }
 
 
 
-/* 모바일 */
+.calendar-day:hover{
+
+    background:#eee;
+
+}
+
+
+
+
+
+/* 요일 */
+
+.sunday{
+
+    color:#dc2626;
+
+}
+
+
+.saturday{
+
+    color:#2563eb;
+
+}
+
+
+
+
+
+/* ==================================================
+   Result Calendar
+================================================== */
+
+
+.result-calendar-area{
+
+    margin-top:30px;
+
+}
+
+
+
+.result-calendar h3{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.result-calendar .dday{
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+/* ==================================================
+   Result
+================================================== */
+
+
+.calculator-result{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+}
+
+
+
+
+
+/* ==================================================
+   Mobile
+================================================== */
+
 
 @media(max-width:768px){
 
 
-    .calendar-area .calendar{
+    .calendar{
 
         width:calc(100vw - 32px);
 
@@ -460,37 +273,12 @@
     }
 
 
-}
 
+    .calendar-grid > div{
 
+        min-height:36px;
 
-.calendar-area .calendar{
-
-    position:relative;
-
-}
-
-
-
-
-/* 모바일 */
-
-@media(max-width:768px){
-
-
-    .calendar-area{
-
-        justify-content:center;
-
-    }
-
-
-
-    .calendar-area .calendar{
-
-        width:calc(100vw - 40px);
-
-        max-width:360px;
+        font-size:14px;
 
     }
 
