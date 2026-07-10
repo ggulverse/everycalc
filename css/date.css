@@ -1,10 +1,9 @@
 /* ==================================================
-   EveryCalc - Date Calculator
-   Extension Style
+   EveryCalc - Date Calculator CSS
 ================================================== */
 
 
-/* 날짜 입력 영역 */
+/* 날짜 입력 */
 
 .date-input-group{
 
@@ -13,6 +12,8 @@
     align-items:center;
 
     gap:10px;
+
+    margin-bottom:20px;
 
 }
 
@@ -41,11 +42,12 @@
 
     left:50%;
 
-    transform:translate(-50%,-50%);
+    transform:translate(-50%, -50%);
 
     z-index:9999;
 
 }
+
 
 
 
@@ -54,17 +56,22 @@
 
     width:360px;
 
-    max-width:calc(100vw - 32px);
+    max-width:calc(100vw - 40px);
+
 
     padding:20px;
 
-    border-radius:var(--radius);
 
-    background:var(--card-bg);
+    border-radius:15px;
 
-    color:var(--text-color);
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    background:var(--box-color, #ffffff);
+
+
+    color:var(--text-color, #222);
+
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
 
 
 }
@@ -72,15 +79,22 @@
 
 
 
+
+
 .calendar-header{
+
 
     display:flex;
 
+
     justify-content:space-between;
+
 
     align-items:center;
 
+
     margin-bottom:15px;
+
 
 }
 
@@ -89,17 +103,24 @@
 .calendar-header button{
 
 
+    border:none;
+
+
     background:none;
 
-    border:none;
 
     cursor:pointer;
 
+
     font-size:18px;
+
 
     color:inherit;
 
+
 }
+
+
 
 
 
@@ -112,13 +133,18 @@
 
 .calendar-grid{
 
+
     display:grid;
+
 
     grid-template-columns:repeat(7,1fr);
 
+
     gap:5px;
 
+
     text-align:center;
+
 
 }
 
@@ -126,33 +152,49 @@
 
 .calendar-grid > div{
 
-    min-height:40px;
+
+    min-height:38px;
+
 
     display:flex;
 
+
     justify-content:center;
+
 
     align-items:center;
 
+
+    color:inherit;
+
+
 }
+
 
 
 
 .calendar-day{
 
+
     cursor:pointer;
 
-    color:inherit;
 
     border-radius:50%;
 
+
+    color:inherit;
+
+
 }
+
 
 
 
 .calendar-day:hover{
 
+
     background:rgba(128,128,128,0.15);
+
 
 }
 
@@ -160,12 +202,11 @@
 
 
 
-/* 요일 표시 */
-
+/* 요일 */
 
 .sunday{
 
-    color:#e53935;
+    color:#e53935 !important;
 
 }
 
@@ -173,7 +214,7 @@
 
 .saturday{
 
-    color:#1976d2;
+    color:#1976d2 !important;
 
 }
 
@@ -181,18 +222,25 @@
 
 
 
-/* D-Day 표시 */
+
+/* 선택 D-Day */
 
 
 .dday{
 
-    background:var(--primary-color);
 
-    color:white;
+    background:#1976d2;
+
+
+    color:white !important;
+
 
     font-weight:bold;
 
+
 }
+
+
 
 
 
@@ -205,17 +253,26 @@
 
 .result-calendar-area{
 
+
     margin-top:25px;
 
+
+}
+
+
+
+.result-calendar h3{
+
+
+    text-align:center;
+
+
+    margin-bottom:15px;
+
+
 }
 
 
-
-.result-calendar{
-
-    position:relative;
-
-}
 
 
 
@@ -229,10 +286,12 @@
 @media(max-width:768px){
 
 
+
     .calendar{
 
 
-        width:calc(100vw - 40px);
+        width:calc(100vw - 32px);
+
 
         padding:15px;
 
@@ -241,15 +300,18 @@
 
 
 
+
     .calendar-grid > div{
 
 
-        min-height:35px;
+        min-height:34px;
+
 
         font-size:14px;
 
 
     }
+
 
 
 }
