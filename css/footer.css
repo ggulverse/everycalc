@@ -1,1 +1,164 @@
+/* ==================================================
+   EveryCalc - footer.css
+================================================== */
 
+
+/* ---------- Footer ---------- */
+
+.footer{
+
+    background:var(--surface);
+
+    border-top:1px solid var(--border);
+
+    padding:70px 0 30px;
+
+}
+
+
+
+/* ---------- Footer Top ---------- */
+
+.footer-top{
+
+    display:grid;
+
+    grid-template-columns:
+    2fr 1fr 1fr;
+
+    gap:50px;
+
+}
+
+
+
+/* ---------- Footer Logo ---------- */
+
+.footer-logo h2{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+
+    color:var(--primary);
+
+}
+
+
+.footer-logo p{
+
+    color:var(--text-light);
+
+}
+
+
+
+/* ---------- Footer Title ---------- */
+
+.footer h3{
+
+    font-size:1.1rem;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* ---------- Footer Menu ---------- */
+
+.footer ul{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+
+.footer li{
+
+    margin-bottom:12px;
+
+}
+
+
+.footer a{
+
+    text-decoration:none;
+
+    color:var(--text-light);
+
+    transition:.25s;
+
+}
+
+
+.footer a:hover{
+
+    color:var(--primary);
+
+}
+
+
+
+/* ---------- Divider ---------- */
+
+.footer hr{
+
+    margin:45px 0 25px;
+
+    border:none;
+
+    border-top:1px solid var(--border);
+
+}
+
+
+
+/* ---------- Bottom ---------- */
+
+.footer-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:var(--text-light);
+
+    font-size:.9rem;
+
+}
+
+
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:768px){
+
+
+    .footer-top{
+
+        grid-template-columns:1fr;
+
+        gap:35px;
+
+        text-align:center;
+
+    }
+
+
+    .footer-bottom{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        text-align:center;
+
+    }
+
+
+}
