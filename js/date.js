@@ -34,6 +34,7 @@ document.getElementById("calculate");
 
 
 
+
 /* ==========================
    Input Format
 ========================== */
@@ -44,7 +45,7 @@ function formatDateInput(input){
 
     input.addEventListener(
         "input",
-        ()=>{
+        function(){
 
 
             let value =
@@ -56,7 +57,7 @@ function formatDateInput(input){
 
 
 
-            if(value.length >=5){
+            if(value.length >= 5){
 
                 value =
                 value.substring(0,4)
@@ -66,7 +67,8 @@ function formatDateInput(input){
             }
 
 
-            if(value.length >=8){
+
+            if(value.length >= 8){
 
                 value =
                 value.substring(0,7)
@@ -76,18 +78,22 @@ function formatDateInput(input){
             }
 
 
+
             input.value=value;
 
 
         }
     );
 
+
 }
 
 
 
 formatDateInput(startInput);
+
 formatDateInput(endInput);
+
 
 
 
@@ -119,15 +125,6 @@ endButton.onclick=function(){
 
 
 
-function closeCalendar(){
-
-    calendarArea.innerHTML="";
-
-}
-
-
-
-
 
 function openCalendar(){
 
@@ -137,6 +134,14 @@ function openCalendar(){
         currentDate.getMonth()
     );
 
+
+}
+
+
+
+function closeCalendar(){
+
+    calendarArea.innerHTML="";
 
 }
 
@@ -184,6 +189,7 @@ function renderCalendar(year,month){
         ▶
         </button>
 
+
     </div>
 
 
@@ -210,24 +216,34 @@ function renderCalendar(year,month){
 
 
     const firstDay =
-    new Date(year,month,1).getDay();
+    new Date(
+        year,
+        month,
+        1
+    ).getDay();
 
 
 
     const lastDate =
-    new Date(year,month+1,0).getDate();
+    new Date(
+        year,
+        month+1,
+        0
+    ).getDate();
 
 
 
 
 
-    for(let i=0;i<firstDay;i++){
-
+    for(
+        let i=0;
+        i<firstDay;
+        i++
+    ){
 
         grid.appendChild(
             document.createElement("div")
         );
-
 
     }
 
@@ -266,6 +282,7 @@ function renderCalendar(year,month){
         }
 
 
+
         if(week===6){
 
             box.classList.add("saturday");
@@ -300,10 +317,8 @@ function renderCalendar(year,month){
 
 
 
-
     calendarArea.appendChild(calendar);
-
-
+   
 
 
 
@@ -359,6 +374,8 @@ function renderCalendar(year,month){
 
 
 
+
+
 /* ==========================
    Date Check
 ========================== */
@@ -403,9 +420,13 @@ function parseDate(value){
 
 
     if(
+
         date.getFullYear()!==year ||
+
         date.getMonth()!==month-1 ||
+
         date.getDate()!==day
+
     ){
 
         return null;
@@ -453,13 +474,15 @@ calculateButton.onclick=function(){
     if(!start || !end){
 
 
-        result.innerHTML=
+        result.innerHTML =
         "날짜 형식을 확인해주세요.";
 
 
         return;
 
+
     }
+
 
 
 
@@ -474,21 +497,24 @@ calculateButton.onclick=function(){
 
 
 
+
     if(diff<0){
 
 
-        result.innerHTML=
+        result.innerHTML =
         "종료 날짜가 시작 날짜보다 빠릅니다.";
 
 
         return;
+
 
     }
 
 
 
 
-    result.innerHTML=`
+
+    result.innerHTML = `
 
     <h2>
     D-${diff}
@@ -519,6 +545,9 @@ calculateButton.onclick=function(){
 
 
 
+
+
+
 /* ==========================
    Result Calendar
 ========================== */
@@ -534,28 +563,30 @@ function showResultCalendar(date){
     area.innerHTML="";
 
 
+
     const calendar =
     document.createElement("div");
 
 
-    calendar.className=
+    calendar.className =
     "calendar result-calendar";
 
 
 
-    calendar.innerHTML=`
+    calendar.innerHTML = `
 
     <h3>
     ${date.getFullYear()}년 ${date.getMonth()+1}월 D-Day
     </h3>
+
 
     <div class="calendar-grid">
 
         <div>일</div>
         <div>월</div>
         <div>화</div>
-        <div>수</div>
         <div>목</div>
+        <div>수</div>
         <div>금</div>
         <div>토</div>
 
@@ -584,17 +615,31 @@ function showResultCalendar(date){
 
 
     const first =
-    new Date(year,month,1).getDay();
+    new Date(
+        year,
+        month,
+        1
+    ).getDay();
+
 
 
     const last =
-    new Date(year,month+1,0).getDate();
+    new Date(
+        year,
+        month+1,
+        0
+    ).getDate();
 
 
 
 
 
-    for(let i=0;i<first;i++){
+
+    for(
+        let i=0;
+        i<first;
+        i++
+    ){
 
         grid.appendChild(
             document.createElement("div")
@@ -603,57 +648,71 @@ function showResultCalendar(date){
     }
 
 
-for(let day=1;day<=last;day++){
-
-
-    const box =
-    document.createElement("div");
-
-
-    box.className="calendar-day";
 
 
 
-    const week =
-    new Date(
-        year,
-        month,
-        day
-    ).getDay();
+
+
+    for(
+        let day=1;
+        day<=last;
+        day++
+    ){
+
+
+        const box =
+        document.createElement("div");
+
+
+        box.className =
+        "calendar-day";
 
 
 
-    if(week===0){
+        const week =
+        new Date(
+            year,
+            month,
+            day
+        ).getDay();
 
-        box.classList.add("sunday");
+
+
+        if(week===0){
+
+            box.classList.add("sunday");
+
+        }
+
+
+
+        if(week===6){
+
+            box.classList.add("saturday");
+
+        }
+
+
+
+        box.textContent=day;
+
+
+
+
+        if(day===target){
+
+            box.classList.add("dday");
+
+        }
+
+
+
+        grid.appendChild(box);
+
 
     }
 
 
-
-    if(week===6){
-
-        box.classList.add("saturday");
-
-    }
-
-
-
-    box.textContent=day;
-
-
-
-    if(day===target){
-
-        box.classList.add("dday");
-
-    }
-
-
-    grid.appendChild(box);
-
-
-}
 
 
     area.appendChild(calendar);
