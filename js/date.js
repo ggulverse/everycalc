@@ -658,26 +658,58 @@ function showResultCalendar(date){
     ){
 
 
-        const dayBox =
-        document.createElement("div");
+      const dayBox =
+      document.createElement("div");
 
 
-        dayBox.className =
-        "calendar-day";
+      dayBox.className =
+      "calendar-day";
+
+
+
+      const weekDay =
+      new Date(
+          year,
+          month,
+          day
+      ).getDay();
+
+
+
+      if(weekDay === 0){
+
+          dayBox.classList.add(
+              "sunday"
+          );
+
+      }
+
+
+
+      if(weekDay === 6){
+
+          dayBox.classList.add(
+              "saturday"
+          );
+
+      }
+
+
 
       if(day === targetDay){
 
 
-         dayBox.classList.add(
-           "dday"
-       );
+                dayBox.classList.add(
+                    "dday"
+                );
 
 
-   }
+            }
 
 
-dayBox.textContent =
-day;
+
+      dayBox.textContent =
+      day;
 
 
         grid.appendChild(dayBox);
