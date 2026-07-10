@@ -3,14 +3,20 @@
 ================================================== */
 
 
-let currentDate = new Date();
-
 let activeInput = null;
+let activeArea = null;
+
+let viewYear;
+let viewMonth;
 
 
 
-const calendarArea =
-document.getElementById("calendarArea");
+const birthInput =
+document.getElementById("birthDate");
+
+
+const targetInput =
+document.getElementById("targetDate");
 
 
 const birthButton =
@@ -21,12 +27,12 @@ const targetButton =
 document.getElementById("targetCalendarButton");
 
 
-const birthInput =
-document.getElementById("birthDate");
+const birthArea =
+document.getElementById("birthCalendarArea");
 
 
-const targetInput =
-document.getElementById("targetDate");
+const targetArea =
+document.getElementById("targetCalendarArea");
 
 
 const calculateButton =
@@ -41,18 +47,15 @@ document.getElementById("result");
 
 
 /* ==========================
-   Today Default
+   Default Today
 ========================== */
 
 
-const today =
-new Date();
+const today = new Date();
 
 
 targetInput.value =
 `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
-
-
 
 
 
@@ -67,52 +70,57 @@ targetInput.value =
 function formatDateInput(input){
 
 
-    input.addEventListener(
-        "input",
-        ()=>{
+input.addEventListener(
+"input",
+()=>{
 
 
-            let value =
-            input.value.replace(/[^0-9]/g,"");
+let value =
+input.value.replace(/[^0-9]/g,"");
 
 
-            value =
-            value.substring(0,8);
+value =
+value.substring(0,8);
 
 
 
-            if(value.length>=5){
+if(value.length>=5){
 
-                value =
-                value.substring(0,4)
-                + "-"
-                + value.substring(4);
+value =
+value.substring(0,4)
++
+"-"
++
+value.substring(4);
 
-            }
-
-
-            if(value.length>=8){
-
-                value =
-                value.substring(0,7)
-                + "-"
-                + value.substring(7);
-
-            }
+}
 
 
-            input.value=value;
+
+if(value.length>=8){
+
+value =
+value.substring(0,7)
++
+"-"
++
+value.substring(7);
+
+}
 
 
-        }
-    );
+
+input.value=value;
+
+
+});
 
 
 }
 
 
-formatDateInput(birthInput);
 
+formatDateInput(birthInput);
 formatDateInput(targetInput);
 
 
@@ -129,9 +137,12 @@ formatDateInput(targetInput);
 
 birthButton.onclick=function(){
 
-    activeInput=birthInput;
 
-    openCalendar();
+openCalendar(
+birthInput,
+birthArea
+);
+
 
 };
 
@@ -139,9 +150,12 @@ birthButton.onclick=function(){
 
 targetButton.onclick=function(){
 
-    activeInput=targetInput;
 
-    openCalendar();
+openCalendar(
+targetInput,
+targetArea
+);
+
 
 };
 
@@ -150,13 +164,30 @@ targetButton.onclick=function(){
 
 
 
-function openCalendar(){
+
+function openCalendar(input,area){
 
 
-    renderCalendar(
-        currentDate.getFullYear(),
-        currentDate.getMonth()
-    );
+closeCalendar();
+
+
+activeInput=input;
+activeArea=area;
+
+
+const date =
+parseDate(input.value)
+||
+new Date();
+
+
+
+viewYear=date.getFullYear();
+viewMonth=date.getMonth();
+
+
+
+renderYearSelect();
 
 
 }
@@ -165,9 +196,204 @@ function openCalendar(){
 
 
 
+
 function closeCalendar(){
 
-    calendarArea.innerHTML="";
+
+birthArea.innerHTML="";
+targetArea.innerHTML="";
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   Year Select
+========================== */
+
+
+function renderYearSelect(){
+
+
+activeArea.innerHTML="";
+
+
+const box =
+document.createElement("div");
+
+
+box.className="calendar";
+
+
+
+let html=`
+
+
+<div class="calendar-header">
+
+<strong>
+년도 선택
+</strong>
+
+</div>
+
+
+<div class="calendar-grid year-grid">
+
+`;
+
+
+
+for(
+let year=new Date().getFullYear();
+year>=new Date().getFullYear()-100;
+year--
+){
+
+
+html+=`
+
+<div class="calendar-day year-select">
+${year}
+</div>
+
+`;
+
+}
+
+
+html+=`
+
+</div>
+`;
+
+
+
+box.innerHTML=html;
+
+
+activeArea.appendChild(box);
+
+
+
+box.querySelectorAll(".year-select")
+.forEach(item=>{
+
+
+item.onclick=function(){
+
+
+viewYear =
+Number(item.textContent);
+
+
+renderMonthSelect();
+
+
+};
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   Month Select
+========================== */
+
+
+function renderMonthSelect(){
+
+
+activeArea.innerHTML="";
+
+
+const box =
+document.createElement("div");
+
+
+box.className="calendar";
+
+
+
+box.innerHTML=`
+
+
+<div class="calendar-header">
+
+<strong>
+${viewYear}년 월 선택
+</strong>
+
+</div>
+
+
+<div class="calendar-grid">
+
+
+${Array.from(
+{length:12},
+(_,i)=>`
+
+<div class="calendar-day month-select">
+${i+1}월
+</div>
+
+`
+).join("")}
+
+
+</div>
+
+
+`;
+
+
+
+activeArea.appendChild(box);
+
+
+
+
+box.querySelectorAll(".month-select")
+.forEach(item=>{
+
+
+item.onclick=function(){
+
+
+viewMonth =
+Number(item.textContent.replace("월",""))
+-1;
+
+
+renderCalendar(
+viewYear,
+viewMonth
+);
+
+
+};
+
+
+});
+
 
 }
 
@@ -187,225 +413,218 @@ function closeCalendar(){
 function renderCalendar(year,month){
 
 
-    calendarArea.innerHTML="";
+activeArea.innerHTML="";
 
 
+const calendar =
+document.createElement("div");
 
-    const calendar =
-    document.createElement("div");
 
+calendar.className="calendar";
 
-    calendar.className="calendar";
 
 
+calendar.innerHTML=`
 
-    calendar.innerHTML=`
 
+<div class="calendar-header">
 
-    <div class="calendar-header">
 
+<button class="prev">
+◀
+</button>
 
-        <button class="prev-month">
-        ◀
-        </button>
 
+<strong>
+${year}년 ${month+1}월
+</strong>
 
-        <strong>
-        ${year}년 ${month+1}월
-        </strong>
 
+<button class="next">
+▶
+</button>
 
-        <button class="next-month">
-        ▶
-        </button>
 
+</div>
 
-    </div>
 
 
+<div class="calendar-grid">
 
-    <div class="calendar-grid">
 
+<div class="sunday">
+일
+</div>
 
-        <div class="sunday">
-        일
-        </div>
+<div>
+월
+</div>
 
-        <div>
-        월
-        </div>
+<div>
+화
+</div>
 
-        <div>
-        화
-        </div>
+<div>
+수
+</div>
 
-        <div>
-        수
-        </div>
+<div>
+목
+</div>
 
-        <div>
-        목
-        </div>
+<div>
+금
+</div>
 
-        <div>
-        금
-        </div>
+<div class="saturday">
+토
+</div>
 
-        <div class="saturday">
-        토
-        </div>
 
+</div>
 
-    </div>
 
+`;
 
-    `;
 
 
+const grid =
+calendar.querySelector(".calendar-grid");
 
-    const grid =
-    calendar.querySelector(".calendar-grid");
 
 
+const first =
+new Date(year,month,1).getDay();
 
-    const firstDay =
-    new Date(year,month,1).getDay();
 
+const last =
+new Date(year,month+1,0).getDate();
 
 
-    const lastDate =
-    new Date(year,month+1,0).getDate();
 
 
 
+for(let i=0;i<first;i++){
 
+grid.appendChild(
+document.createElement("div")
+);
 
+}
 
-    for(let i=0;i<firstDay;i++){
 
-        grid.appendChild(
-            document.createElement("div")
-        );
 
-    }
 
 
 
+for(let day=1;day<=last;day++){
 
 
+const cell =
+document.createElement("div");
 
-    for(let day=1;day<=lastDate;day++){
 
+cell.className="calendar-day";
 
-        const box =
-        document.createElement("div");
 
+cell.textContent=day;
 
-        box.className="calendar-day";
 
 
+const week =
+new Date(year,month,day).getDay();
 
-        const week =
-        new Date(
-            year,
-            month,
-            day
-        ).getDay();
 
 
+if(week===0)
+cell.classList.add("sunday");
 
 
-        if(week===0){
+if(week===6)
+cell.classList.add("saturday");
 
-            box.classList.add("sunday");
 
-        }
 
+cell.onclick=function(){
 
-        if(week===6){
 
-            box.classList.add("saturday");
+activeInput.value =
+`${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
-        }
 
+closeCalendar();
 
 
+};
 
-        box.textContent=day;
 
 
+grid.appendChild(cell);
 
-        box.onclick=function(){
 
+}
 
-            activeInput.value =
-            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
 
-            closeCalendar();
 
 
-        };
+activeArea.appendChild(calendar);
 
 
 
-        grid.appendChild(box);
 
 
-    }
 
+calendar.querySelector(".prev")
+.onclick=function(){
 
 
+viewMonth--;
 
 
+if(viewMonth<0){
 
-    calendarArea.appendChild(calendar);
+viewMonth=11;
+viewYear--;
 
+}
 
 
+renderCalendar(
+viewYear,
+viewMonth
+);
 
 
+};
 
 
 
-    calendar.querySelector(".prev-month")
-    .onclick=function(){
 
 
-        currentDate.setMonth(
-            currentDate.getMonth()-1
-        );
+calendar.querySelector(".next")
+.onclick=function(){
 
 
-        renderCalendar(
-            currentDate.getFullYear(),
-            currentDate.getMonth()
-        );
+viewMonth++;
 
 
-    };
+if(viewMonth>11){
 
+viewMonth=0;
+viewYear++;
 
+}
 
 
+renderCalendar(
+viewYear,
+viewMonth
+);
 
 
-    calendar.querySelector(".next-month")
-    .onclick=function(){
+};
 
-
-        currentDate.setMonth(
-            currentDate.getMonth()+1
-        );
-
-
-        renderCalendar(
-            currentDate.getFullYear(),
-            currentDate.getMonth()
-        );
-
-
-    };
 
 
 }
@@ -419,31 +638,37 @@ function renderCalendar(year,month){
 
 
 /* ==========================
-   Date Parse
+   Parse Date
 ========================== */
 
 
 function parseDate(value){
 
 
-    const parts =
-    value.split("-");
+const parts =
+value.split("-");
+
+
+if(parts.length!==3)
+return null;
 
 
 
-    if(parts.length!==3){
+const date =
+new Date(
+Number(parts[0]),
+Number(parts[1])-1,
+Number(parts[2])
+);
 
-        return null;
-
-    }
 
 
+if(isNaN(date))
+return null;
 
-    return new Date(
-        Number(parts[0]),
-        Number(parts[1])-1,
-        Number(parts[2])
-    );
+
+
+return date;
 
 
 }
@@ -457,156 +682,86 @@ function parseDate(value){
 
 
 /* ==========================
-   Age Calculate
+   Calculate
 ========================== */
 
 
 calculateButton.onclick=function(){
 
 
-    const birth =
-    parseDate(
-        birthInput.value
-    );
+const birth =
+parseDate(
+birthInput.value
+);
 
 
-    const target =
-    parseDate(
-        targetInput.value
-    );
+const target =
+parseDate(
+targetInput.value
+);
 
 
 
-    if(!birth || !target){
+if(!birth || !target){
 
+result.innerHTML =
+"날짜 형식을 확인해주세요.";
 
-        result.innerHTML =
-        "날짜 형식을 확인해주세요.";
+return;
 
+}
 
-        return;
 
-    }
 
 
+let age =
+target.getFullYear()
+-
+birth.getFullYear();
 
 
-    let age =
-    target.getFullYear()
-    -
-    birth.getFullYear();
 
+const birthday =
+new Date(
+target.getFullYear(),
+birth.getMonth(),
+birth.getDate()
+);
 
 
 
-    const birthday =
-    new Date(
-        target.getFullYear(),
-        birth.getMonth(),
-        birth.getDate()
-    );
+if(target < birthday){
 
+age--;
 
+}
 
-    if(target < birthday){
 
-        age--;
 
-    }
 
+const koreanAge =
+target.getFullYear()
+-
+birth.getFullYear()
++
+1;
 
 
 
+result.innerHTML=`
 
-    const koreanAge =
-    target.getFullYear()
-    -
-    birth.getFullYear()
-    +
-    1;
 
+<h2>
+만 나이 ${age}세
+</h2>
 
 
+<p>
+세는 나이 ${koreanAge}세
+</p>
 
 
-    const nextBirthday =
-    new Date(
-        target.getFullYear(),
-        birth.getMonth(),
-        birth.getDate()
-    );
-
-
-
-    if(nextBirthday <= target){
-
-        nextBirthday.setFullYear(
-            target.getFullYear()+1
-        );
-
-    }
-
-
-
-
-    const remain =
-    Math.ceil(
-        (nextBirthday-target)
-        /
-        (1000*60*60*24)
-    );
-
-
-
-
-
-
-    result.innerHTML=`
-
-
-    <div class="age-result-item">
-
-        <h3>
-        만 나이
-        </h3>
-
-        <div class="age-result-number">
-        ${age}세
-        </div>
-
-    </div>
-
-
-
-    <div class="age-result-item">
-
-        <h3>
-        세는 나이
-        </h3>
-
-        <div class="age-result-number">
-        ${koreanAge}세
-        </div>
-
-    </div>
-
-
-
-
-    <div class="age-result-item">
-
-        <h3>
-        다음 생일까지
-        </h3>
-
-        <div class="age-result-number">
-        ${remain}일
-        </div>
-
-    </div>
-
-
-    `;
+`;
 
 
 };
