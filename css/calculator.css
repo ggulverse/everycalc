@@ -458,3 +458,18 @@ body.dark-mode .saturday{
     color:#60a5fa !important;
 
 }
+
+.year-scroll{
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+}
+
+
+.year-scroll .calendar-grid{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
