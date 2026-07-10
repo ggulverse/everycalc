@@ -1,0 +1,258 @@
+/* ==================================================
+   EveryCalc - calculator.css
+================================================== */
+
+
+/* ---------- Calculator Page ---------- */
+
+.calculator-page{
+
+    padding:80px 0;
+
+}
+
+
+
+/* ---------- Calculator Header ---------- */
+
+.calculator-header{
+
+    text-align:center;
+
+    margin-bottom:45px;
+
+}
+
+
+.calculator-header h1{
+
+    font-size:2.5rem;
+
+    margin-bottom:15px;
+
+    color:var(--text);
+
+}
+
+
+.calculator-header p{
+
+    font-size:1.1rem;
+
+    color:var(--text-light);
+
+}
+
+
+
+/* ---------- Calculator Container ---------- */
+
+.calculator-container{
+
+    max-width:750px;
+
+    margin:auto;
+
+}
+
+
+
+/* ---------- Calculator Card ---------- */
+
+.calculator-box{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow);
+
+}
+
+
+
+/* ---------- Form ---------- */
+
+.calculator-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+.calculator-form label{
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+
+
+.calculator-form input,
+.calculator-form select{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    font-size:1rem;
+
+}
+
+
+
+/* ---------- Button ---------- */
+
+.calculate-button{
+
+    margin-top:10px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.calculate-button:hover{
+
+    background:var(--primary-dark);
+
+}
+
+
+
+/* ---------- Result ---------- */
+
+.calculator-result{
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    background:#eff6ff;
+
+    text-align:center;
+
+    font-size:1.3rem;
+
+    font-weight:700;
+
+}
+
+
+
+/* ---------- Explanation ---------- */
+
+.calculator-info{
+
+    margin-top:50px;
+
+    line-height:1.8;
+
+    color:var(--text-light);
+
+}
+
+
+
+/* ---------- FAQ ---------- */
+
+.calculator-faq{
+
+    margin-top:50px;
+
+}
+
+
+.calculator-faq details{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* ---------- Dark Mode ---------- */
+
+body.dark-mode .calculator-result{
+
+    background:#1e3a8a;
+
+    color:white;
+
+}
+
+
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:768px){
+
+
+    .calculator-page{
+
+        padding:50px 0;
+
+    }
+
+
+    .calculator-box{
+
+        padding:25px;
+
+    }
+
+
+    .calculator-header h1{
+
+        font-size:2rem;
+
+    }
+
+
+}
