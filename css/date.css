@@ -1,5 +1,5 @@
 /* ==================================================
-   EveryCalc - Date Calculator CSS
+   EveryCalc - Date Calculator
 ================================================== */
 
 
@@ -53,29 +53,23 @@
 
 .calendar{
 
-
     width:360px;
 
-    max-width:calc(100vw - 40px);
-
+    max-width:calc(100vw - 32px);
 
     padding:20px;
 
+    border-radius:12px;
 
-    border-radius:15px;
+    background:inherit;
 
+    color:inherit;
 
-    background:var(--box-color, #ffffff);
-
-
-    color:var(--text-color, #222);
-
+    border:1px solid rgba(128,128,128,0.3);
 
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
 
-
 }
-
 
 
 
@@ -83,18 +77,13 @@
 
 .calendar-header{
 
-
     display:flex;
-
 
     justify-content:space-between;
 
-
     align-items:center;
 
-
     margin-bottom:15px;
-
 
 }
 
@@ -102,24 +91,17 @@
 
 .calendar-header button{
 
-
     border:none;
 
-
-    background:none;
-
+    background:transparent;
 
     cursor:pointer;
 
+    color:inherit;
 
     font-size:18px;
 
-
-    color:inherit;
-
-
 }
-
 
 
 
@@ -133,18 +115,13 @@
 
 .calendar-grid{
 
-
     display:grid;
-
 
     grid-template-columns:repeat(7,1fr);
 
-
     gap:5px;
 
-
     text-align:center;
-
 
 }
 
@@ -152,21 +129,15 @@
 
 .calendar-grid > div{
 
-
     min-height:38px;
-
 
     display:flex;
 
+    align-items:center;
 
     justify-content:center;
 
-
-    align-items:center;
-
-
     color:inherit;
-
 
 }
 
@@ -175,26 +146,19 @@
 
 .calendar-day{
 
-
     cursor:pointer;
-
 
     border-radius:50%;
 
-
     color:inherit;
 
-
 }
-
 
 
 
 .calendar-day:hover{
 
-
-    background:rgba(128,128,128,0.15);
-
+    background:rgba(128,128,128,0.2);
 
 }
 
@@ -202,11 +166,11 @@
 
 
 
-/* 요일 */
+/* 주말 */
 
 .sunday{
 
-    color:#e53935 !important;
+    color:#e53935;
 
 }
 
@@ -214,7 +178,7 @@
 
 .saturday{
 
-    color:#1976d2 !important;
+    color:#1976d2;
 
 }
 
@@ -222,21 +186,15 @@
 
 
 
-
-/* 선택 D-Day */
-
+/* D-Day */
 
 .dday{
 
-
     background:#1976d2;
 
-
-    color:white !important;
-
+    color:white;
 
     font-weight:bold;
-
 
 }
 
@@ -247,15 +205,13 @@
 
 
 /* ==================================================
-   Result Calendar
+   결과 달력
 ================================================== */
 
 
 .result-calendar-area{
 
-
     margin-top:25px;
-
 
 }
 
@@ -263,15 +219,9 @@
 
 .result-calendar h3{
 
-
     text-align:center;
 
-
-    margin-bottom:15px;
-
-
 }
-
 
 
 
@@ -286,32 +236,23 @@
 @media(max-width:768px){
 
 
-
     .calendar{
-
 
         width:calc(100vw - 32px);
 
-
         padding:15px;
 
-
     }
-
 
 
 
     .calendar-grid > div{
 
-
         min-height:34px;
-
 
         font-size:14px;
 
-
     }
-
 
 
 }
