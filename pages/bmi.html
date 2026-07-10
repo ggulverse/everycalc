@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+BMI 계산기 | EveryCalc
+</title>
+
+
+<meta name="description"
+content="키와 몸무게를 입력하여 BMI와 비만도를 확인하는 무료 계산기">
+
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/calculator.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/darkmode.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+<a href="../index.html">
+
+<span class="logo-main">
+EveryCalc
+</span>
+
+<span class="logo-sub">
+Every Calculation in One Place
+</span>
+
+</a>
+
+</div>
+
+
+
+<nav class="navigation">
+
+<ul>
+
+<li>
+<a href="../index.html">
+홈
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#popular">
+계산기 목록
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+
+
+<div class="header-buttons">
+
+<button id="darkModeToggle"
+aria-label="다크모드">
+
+🌙
+
+</button>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+
+
+<main>
+
+
+<section class="calculator-page">
+
+
+<div class="container">
+
+
+<div class="calculator-header">
+
+
+<h1>
+BMI 계산기
+</h1>
+
+
+<p>
+키와 몸무게를 입력하여 체질량지수(BMI)를 계산합니다.
+</p>
+
+
+</div>
+
+
+
+
+<div class="calculator-container">
+
+
+<div class="calculator-box">
+
+
+<div class="calculator-form">
+
+
+<label>
+키(cm)
+</label>
+
+
+<input
+id="height"
+type="number"
+placeholder="예: 173">
+
+
+
+<label>
+몸무게(kg)
+</label>
+
+
+<input
+id="weight"
+type="number"
+placeholder="예: 65">
+
+
+
+<button
+id="calculate"
+class="calculate-button">
+
+계산하기
+
+</button>
+
+
+</div>
+
+
+
+
+<div
+id="result"
+class="calculator-result">
+
+결과가 표시됩니다.
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="calculator-info">
+
+
+<h2>
+BMI 계산 기준
+</h2>
+
+
+<p>
+
+BMI는 몸무게(kg)를 키(m)의 제곱으로 나눈 값입니다.
+
+</p>
+
+
+<p>
+
+18.5 미만 : 저체중<br>
+18.5 ~ 24.9 : 정상<br>
+25 ~ 29.9 : 과체중<br>
+30 이상 : 비만
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+
+
+<footer class="footer">
+
+
+<div class="container">
+
+
+<div class="footer-bottom">
+
+
+<p>
+© 2026 EveryCalc. All Rights Reserved.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+<script src="../js/theme.js"></script>
+
+<script src="../js/bmi.js"></script>
+
+
+
+</body>
+
+</html>
