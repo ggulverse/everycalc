@@ -400,24 +400,67 @@
     font-weight:800;
 
 }
+
 /* ==================================================
-   Calendar Area Position Fix
+   Calendar Center Popup
 ================================================== */
 
 
 .calendar-area{
 
-    width:100%;
+    position:fixed;
 
-    margin-top:15px;
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%, -50%);
+
+    z-index:1000;
 
     display:flex;
 
-    justify-content:flex-start;
+    justify-content:center;
+
+    align-items:center;
 
 }
 
 
+
+.calendar-area .calendar{
+
+    width:360px;
+
+    max-width:calc(100vw - 40px);
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+
+}
+
+
+
+/* 모바일 */
+
+@media(max-width:768px){
+
+
+    .calendar-area .calendar{
+
+        width:calc(100vw - 32px);
+
+        padding:15px;
+
+    }
+
+
+}
 
 
 
@@ -426,7 +469,6 @@
     position:relative;
 
 }
-
 
 
 
