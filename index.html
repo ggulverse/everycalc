@@ -2,21 +2,39 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>everycalc | 퍼센트 계산기</title>
+    <title>everycalc | 금융, 일상, 건강 계산기 모음집</title>
     <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #121212; color: #eee; text-align: center; padding: 20px; }
-        .box { background: #1e1e1e; padding: 30px; border-radius: 20px; max-width: 400px; margin: auto; }
-        input { padding: 10px; width: 80px; border-radius: 5px; border: none; margin: 5px; }
-        button { padding: 10px 20px; background-color: #FFCC00; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #121212; color: #fff; margin: 0; padding: 20px; }
+        header { text-align: center; padding: 50px 0; }
+        h1 { color: #FFCC00; font-size: 3rem; }
+        
+        .category-section { max-width: 1000px; margin: 40px auto; }
+        .category-title { border-left: 5px solid #FFCC00; padding-left: 15px; margin-bottom: 20px; font-size: 1.5rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #1e1e1e; padding: 25px; border-radius: 15px; border: 1px solid #333; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>퍼센트 계산기</h1>
-        <input type="number" id="val" placeholder="숫자">의 
-        <input type="number" id="perc" placeholder="%">는?<br><br>
-        <button onclick="document.getElementById('res').innerText = (document.getElementById('val').value * document.getElementById('perc').value / 100)">계산하기</button>
-        <h2>결과: <span id="res">0</span></h2>
-    </div>
+    <header>
+        <h1>everycalc</h1>
+        <p>대한민국에서 가장 많이 찾는 계산기들을 한곳에</p>
+    </header>
+
+    <section class="category-section">
+        <h2 class="category-title">금융/재테크</h2>
+        <div class="grid">
+            <div class="card"><h3>연봉 실수령액</h3><p>세금과 보험료를 반영한 실제 월급 계산</p></div>
+            <div class="card"><h3>적금/예금 이자</h3><p>복리와 이자율을 반영한 수익 확인</p></div>
+        </div>
+    </section>
+
+    <section class="category-section">
+        <h2 class="category-title">일상/수학</h2>
+        <div class="grid">
+            <div class="card"><h3>퍼센트(%) 계산기</h3><p>할인율, 비율, 증감률 계산 도구</p></div>
+            <div class="card"><h3>단위 변환기</h3><p>길이, 무게, 넓이 등 단위 변환</p></div>
+        </div>
+    </section>
 </body>
 </html>
