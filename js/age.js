@@ -62,6 +62,7 @@ targetInput.value =
 
 
 
+
 /* ==========================
    Input Format
 ========================== */
@@ -145,6 +146,7 @@ birthArea
 
 
 };
+
 
 
 
@@ -233,7 +235,7 @@ box.className="calendar";
 
 
 
-let html=`
+box.innerHTML=`
 
 
 <div class="calendar-header">
@@ -245,41 +247,28 @@ let html=`
 </div>
 
 
-<div class="calendar-grid year-grid">
-
-`;
+<div class="year-scroll">
 
 
-
-for(
-let year=new Date().getFullYear();
-year>=new Date().getFullYear()-100;
-year--
-){
+<div class="calendar-grid">
 
 
-html+=`
+${createYears()}
 
-<div class="calendar-day year-select">
-${year}
+
 </div>
 
-`;
-
-}
-
-
-html+=`
 
 </div>
+
+
 `;
 
-
-
-box.innerHTML=html;
 
 
 activeArea.appendChild(box);
+
+
 
 
 
@@ -294,6 +283,7 @@ viewYear =
 Number(item.textContent);
 
 
+
 renderMonthSelect();
 
 
@@ -301,6 +291,48 @@ renderMonthSelect();
 
 
 });
+
+
+
+}
+
+
+
+
+
+function createYears(){
+
+
+let html="";
+
+
+const current =
+new Date().getFullYear();
+
+
+
+for(
+let year=current;
+year>=current-100;
+year--
+){
+
+
+html+=`
+
+<div class="calendar-day year-select">
+
+${year}
+
+</div>
+
+`;
+
+
+}
+
+
+return html;
 
 
 }
@@ -344,6 +376,7 @@ ${viewYear}년 월 선택
 </div>
 
 
+
 <div class="calendar-grid">
 
 
@@ -352,7 +385,9 @@ ${Array.from(
 (_,i)=>`
 
 <div class="calendar-day month-select">
+
 ${i+1}월
+
 </div>
 
 `
@@ -371,6 +406,7 @@ activeArea.appendChild(box);
 
 
 
+
 box.querySelectorAll(".month-select")
 .forEach(item=>{
 
@@ -379,14 +415,18 @@ item.onclick=function(){
 
 
 viewMonth =
-Number(item.textContent.replace("월",""))
+Number(
+item.textContent.replace("월","")
+)
 -1;
+
 
 
 renderCalendar(
 viewYear,
 viewMonth
 );
+
 
 
 };
@@ -396,15 +436,6 @@ viewMonth
 
 
 }
-
-
-
-
-
-
-
-
-
 /* ==========================
    Calendar Render
 ========================== */
@@ -497,6 +528,7 @@ const first =
 new Date(year,month,1).getDay();
 
 
+
 const last =
 new Date(year,month+1,0).getDate();
 
@@ -504,13 +536,17 @@ new Date(year,month+1,0).getDate();
 
 
 
+
 for(let i=0;i<first;i++){
+
 
 grid.appendChild(
 document.createElement("div")
 );
 
+
 }
+
 
 
 
@@ -532,16 +568,27 @@ cell.textContent=day;
 
 
 const week =
-new Date(year,month,day).getDay();
+new Date(
+year,
+month,
+day
+).getDay();
 
 
 
-if(week===0)
+if(week===0){
+
 cell.classList.add("sunday");
 
+}
 
-if(week===6)
+
+if(week===6){
+
 cell.classList.add("saturday");
+
+}
+
 
 
 
@@ -552,6 +599,7 @@ activeInput.value =
 `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
 
+
 closeCalendar();
 
 
@@ -560,6 +608,7 @@ closeCalendar();
 
 
 grid.appendChild(cell);
+
 
 
 }
@@ -575,6 +624,7 @@ activeArea.appendChild(calendar);
 
 
 
+
 calendar.querySelector(".prev")
 .onclick=function(){
 
@@ -584,10 +634,13 @@ viewMonth--;
 
 if(viewMonth<0){
 
+
 viewMonth=11;
 viewYear--;
 
+
 }
+
 
 
 renderCalendar(
@@ -597,6 +650,8 @@ viewMonth
 
 
 };
+
+
 
 
 
@@ -611,10 +666,13 @@ viewMonth++;
 
 if(viewMonth>11){
 
+
 viewMonth=0;
 viewYear++;
 
+
 }
+
 
 
 renderCalendar(
@@ -624,7 +682,6 @@ viewMonth
 
 
 };
-
 
 
 }
@@ -649,22 +706,47 @@ const parts =
 value.split("-");
 
 
-if(parts.length!==3)
+
+if(parts.length!==3){
+
 return null;
+
+}
+
+
+
+
+const year =
+Number(parts[0]);
+
+
+const month =
+Number(parts[1])-1;
+
+
+const day =
+Number(parts[2]);
 
 
 
 const date =
 new Date(
-Number(parts[0]),
-Number(parts[1])-1,
-Number(parts[2])
+year,
+month,
+day
 );
 
 
 
-if(isNaN(date))
+if(
+date.getFullYear()!==year ||
+date.getMonth()!==month ||
+date.getDate()!==day
+){
+
 return null;
+
+}
 
 
 
@@ -695,6 +777,7 @@ birthInput.value
 );
 
 
+
 const target =
 parseDate(
 targetInput.value
@@ -702,14 +785,21 @@ targetInput.value
 
 
 
+
+
 if(!birth || !target){
+
 
 result.innerHTML =
 "날짜 형식을 확인해주세요.";
 
+
 return;
 
+
 }
+
+
 
 
 
@@ -718,6 +808,7 @@ let age =
 target.getFullYear()
 -
 birth.getFullYear();
+
 
 
 
@@ -730,11 +821,15 @@ birth.getDate()
 
 
 
+
 if(target < birthday){
+
 
 age--;
 
+
 }
+
 
 
 
@@ -745,6 +840,9 @@ target.getFullYear()
 birth.getFullYear()
 +
 1;
+
+
+
 
 
 
@@ -762,6 +860,7 @@ result.innerHTML=`
 
 
 `;
+
 
 
 };
