@@ -544,6 +544,14 @@ function showResultCalendar(date){
     document.getElementById("resultCalendar");
 
 
+    if(!area){
+
+        return;
+
+    }
+
+
+
     area.innerHTML = "";
 
 
@@ -562,31 +570,32 @@ function showResultCalendar(date){
 
 
 
+
     const calendar =
     document.createElement("div");
 
 
     calendar.className =
-    "calendar";
+    "calendar result-calendar";
 
 
 
     calendar.innerHTML = `
 
     <h3>
-    ${year}년 ${month+1}월 D-Day
+    ${year}년 ${month + 1}월 D-Day
     </h3>
 
 
     <div class="calendar-grid">
 
-        <div>일</div>
-        <div>월</div>
-        <div>화</div>
-        <div>수</div>
-        <div>목</div>
-        <div>금</div>
-        <div>토</div>
+        <div class="calendar-week">일</div>
+        <div class="calendar-week">월</div>
+        <div class="calendar-week">화</div>
+        <div class="calendar-week">수</div>
+        <div class="calendar-week">목</div>
+        <div class="calendar-week">금</div>
+        <div class="calendar-week">토</div>
 
     </div>
 
@@ -620,6 +629,9 @@ function showResultCalendar(date){
 
 
 
+
+    // 시작 빈칸
+
     for(
         let i=0;
         i<firstDay;
@@ -637,6 +649,8 @@ function showResultCalendar(date){
 
 
 
+    // 날짜 생성
+
     for(
         let day=1;
         day<=lastDate;
@@ -652,10 +666,6 @@ function showResultCalendar(date){
         "calendar-day";
 
 
-        dayBox.textContent =
-        day;
-
-
 
         if(day === targetDay){
 
@@ -663,6 +673,27 @@ function showResultCalendar(date){
             dayBox.classList.add(
                 "dday"
             );
+
+
+            dayBox.innerHTML = `
+
+            <span>
+            ${day}
+            </span>
+
+            <small>
+            D-Day
+            </small>
+
+            `;
+
+
+        }
+        else{
+
+
+            dayBox.textContent =
+            day;
 
 
         }
@@ -682,4 +713,3 @@ function showResultCalendar(date){
 
 
 }
-
