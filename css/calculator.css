@@ -473,3 +473,44 @@ body.dark-mode .saturday{
     grid-template-columns:repeat(3,1fr);
 
 }
+
+.age-result-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+.age-result-card h2{
+
+    font-size:2rem;
+
+    margin-bottom:10px;
+
+}
+
+
+.age-result-item{
+
+    padding:12px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.15);
+
+}
+
+
+.age-result-item strong{
+
+    display:block;
+
+    font-size:1.3rem;
+
+    margin-top:5px;
+
+}
