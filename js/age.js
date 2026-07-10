@@ -842,7 +842,48 @@ birth.getFullYear()
 1;
 
 
+const nextBirthday =
+new Date(
+target.getFullYear(),
+birth.getMonth(),
+birth.getDate()
+);
 
+
+if(nextBirthday < target){
+
+nextBirthday.setFullYear(
+target.getFullYear()+1
+);
+
+}
+
+
+
+const remain =
+Math.ceil(
+(nextBirthday-target)
+/
+(1000*60*60*24)
+);
+
+
+
+const livedDays =
+Math.floor(
+(target-birth)
+/
+(1000*60*60*24)
+);
+
+
+
+const livedMonths =
+(
+(target.getFullYear()-birth.getFullYear())*12
++
+(target.getMonth()-birth.getMonth())
+);
 
 
 
@@ -856,6 +897,21 @@ result.innerHTML=`
 
 <p>
 세는 나이 ${koreanAge}세
+</p>
+
+
+<p>
+🎂 다음 생일까지 D-${remain}일
+</p>
+
+
+<p>
+태어난 후 ${livedDays.toLocaleString()}일 경과
+</p>
+
+
+<p>
+총 ${livedMonths}개월 경과
 </p>
 
 
