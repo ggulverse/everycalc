@@ -262,3 +262,106 @@
 
 
 }
+/* ==================================================
+   Result D-Day Calendar Style
+================================================== */
+
+
+.result-calendar{
+
+    margin:30px auto;
+
+}
+
+
+
+.result-calendar h3{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.result-calendar .calendar-day{
+
+    min-height:45px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:2px;
+
+}
+
+
+
+
+.result-calendar .dday{
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:50%;
+
+    width:45px;
+
+    height:45px;
+
+    margin:auto;
+
+    font-weight:800;
+
+}
+
+
+
+.result-calendar .dday small{
+
+    display:block;
+
+    font-size:0.65rem;
+
+    white-space:nowrap;
+
+    margin-top:3px;
+
+}
+
+
+
+
+
+/* 모바일 */
+
+@media(max-width:768px){
+
+
+    .result-calendar{
+
+        width:100%;
+
+    }
+
+
+
+    .result-calendar .calendar{
+
+        width:calc(100vw - 40px);
+
+        max-width:360px;
+
+        margin:auto;
+
+    }
+
+
+}
