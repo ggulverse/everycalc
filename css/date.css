@@ -400,3 +400,57 @@
     font-weight:800;
 
 }
+/* ==================================================
+   Calendar Area Position Fix
+================================================== */
+
+
+.calendar-area{
+
+    width:100%;
+
+    margin-top:15px;
+
+    display:flex;
+
+    justify-content:flex-start;
+
+}
+
+
+
+
+
+.calendar-area .calendar{
+
+    position:relative;
+
+}
+
+
+
+
+
+/* 모바일 */
+
+@media(max-width:768px){
+
+
+    .calendar-area{
+
+        justify-content:center;
+
+    }
+
+
+
+    .calendar-area .calendar{
+
+        width:calc(100vw - 40px);
+
+        max-width:360px;
+
+    }
+
+
+}
