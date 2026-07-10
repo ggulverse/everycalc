@@ -1,0 +1,42 @@
+ /* ==================================================
+    EveryCalc - age.css
+================================================== */
+
+
+.age-result-item{
+
+    margin-bottom:20px;
+
+}
+
+
+.age-result-item h3{
+
+    font-size:1.1rem;
+
+    margin-bottom:8px;
+
+}
+
+
+.age-result-number{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+
+
+
+/* ---------- Dark Mode ---------- */
+
+
+body.dark-mode .age-result-number{
+
+    color:#60a5fa;
+
+}
