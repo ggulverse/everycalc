@@ -135,12 +135,14 @@ Every Calculation in One Place
 <div class="calculator-form">
 
 
+
 <label>
 시작 날짜
 </label>
 
 
 <div class="date-input-group">
+
 
 <input
 id="startDate"
@@ -156,7 +158,16 @@ id="startCalendarButton">
 
 </button>
 
+
+<div
+id="startCalendarPopup"
+class="calendar-popup">
+
 </div>
+
+
+</div>
+
 
 
 
@@ -167,6 +178,7 @@ id="startCalendarButton">
 
 
 <div class="date-input-group">
+
 
 <input
 id="endDate"
@@ -182,7 +194,16 @@ id="endCalendarButton">
 
 </button>
 
+
+<div
+id="endCalendarPopup"
+class="calendar-popup">
+
 </div>
+
+
+</div>
+
 
 
 
@@ -210,18 +231,17 @@ class="calculator-result">
 
 </div>
 
-<div
-id="resultCalendar">
 
-</div>
 
 
 
 <div
-id="calendarArea"
-class="calendar-area">
+id="resultCalendar"
+class="result-calendar-area">
 
 </div>
+
+
 
 
 
@@ -239,14 +259,14 @@ class="calendar-area">
 
 <p>
 
-날짜를 직접 입력하거나 달력에서 선택하여 두 날짜 사이의 기간을 계산할 수 있습니다.
+날짜를 직접 입력하거나 달력에서 선택하여 두 날짜 사이의 기간과 D-Day를 계산합니다.
 
 </p>
 
 
 <p>
 
-윤년과 월별 날짜 수를 자동으로 적용하여 정확하게 계산합니다.
+윤년과 월별 날짜 수를 자동 적용하여 정확하게 계산합니다.
 
 </p>
 
