@@ -909,34 +909,40 @@ const livedMonths =
 
 result.innerHTML=`
 
+<div class="age-result-card">
 
 <h2>
 만 나이 ${age}세
 </h2>
 
 
-<p>
-세는 나이 ${koreanAge}세
-</p>
+<div class="age-result-item">
+세는 나이
+<strong>${koreanAge}세</strong>
+</div>
 
 
-<p>
-🎂 다음 생일까지 D-${remain}일
-</p>
+<div class="age-result-item">
+🎂 다음 생일까지
+<strong>D-${remain}일</strong>
+</div>
 
 
-<p>
-태어난 후 ${livedDays.toLocaleString()}일 경과
-</p>
+<div class="age-result-item">
+태어난 후
+<strong>${livedDays.toLocaleString()}일</strong>
+</div>
 
 
-<p>
-총 ${livedMonths}개월 경과
-</p>
+<div class="age-result-item">
+총 경과 개월
+<strong>${livedMonths}개월</strong>
+</div>
 
+
+</div>
 
 `;
-
 
 
 };
