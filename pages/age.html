@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+나이 계산기 | EveryCalc
+</title>
+
+
+<meta name="description"
+content="생년월일을 입력하면 만 나이, 세는 나이, 다음 생일까지 계산하는 무료 나이 계산기">
+
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/calculator.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/darkmode.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+<link rel="stylesheet" href="../css/age.css">
+
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+<a href="../index.html">
+
+<span class="logo-main">
+EveryCalc
+</span>
+
+<span class="logo-sub">
+Every Calculation in One Place
+</span>
+
+</a>
+
+</div>
+
+
+
+
+<nav class="navigation">
+
+<ul>
+
+<li>
+<a href="../index.html">
+홈
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#popular">
+계산기 목록
+</a>
+</li>
+
+
+</ul>
+
+</nav>
+
+
+
+
+
+<div class="header-buttons">
+
+<button id="darkModeToggle">
+
+🌙
+
+</button>
+
+</div>
+
+
+
+</div>
+
+</header>
+
+
+
+
+
+
+
+<main>
+
+
+<section class="calculator-page">
+
+
+<div class="container">
+
+
+
+<div class="calculator-header">
+
+
+<h1>
+나이 계산기
+</h1>
+
+
+<p>
+생년월일을 기준으로 만 나이와 다음 생일까지 계산합니다.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="calculator-container">
+
+
+<div class="calculator-box">
+
+
+
+<div class="calculator-form">
+
+
+
+
+
+<label>
+생년월일
+</label>
+
+
+<div class="date-input-group">
+
+
+<input
+id="birthDate"
+type="text"
+placeholder="예: 1990-01-01">
+
+
+<button
+type="button"
+id="birthCalendarButton">
+
+📅
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<label>
+기준 날짜
+</label>
+
+
+<div class="date-input-group">
+
+
+<input
+id="targetDate"
+type="text"
+placeholder="예: 2026-07-10">
+
+
+<button
+type="button"
+id="targetCalendarButton">
+
+📅
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<button
+id="calculate"
+class="calculate-button">
+
+계산하기
+
+</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div
+id="result"
+class="calculator-result">
+
+결과가 표시됩니다.
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="calculator-info">
+
+
+<h2>
+나이 계산기 사용 방법
+</h2>
+
+
+<p>
+생년월일과 기준 날짜를 입력하면 만 나이와 세는 나이를 계산합니다.
+</p>
+
+
+<p>
+다음 생일까지 남은 날짜도 확인할 수 있습니다.
+</p>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+<div class="container">
+
+
+<div class="footer-bottom">
+
+
+<p>
+© 2026 EveryCalc. All Rights Reserved.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+<script src="../js/theme.js"></script>
+
+<script src="../js/age.js"></script>
+
+
+</body>
+
+
+</html>
