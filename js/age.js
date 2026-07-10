@@ -755,10 +755,16 @@ return date;
 
 }
 
+function isLeapYear(year){
 
+return (
+year%4===0 &&
+year%100!==0
+)
+||
+year%400===0;
 
-
-
+}
 
 
 
@@ -810,9 +816,26 @@ target.getFullYear()
 birth.getFullYear();
 
 
+let birthday;
 
 
-const birthday =
+if(
+birth.getMonth()===1 &&
+birth.getDate()===29 &&
+!isLeapYear(target.getFullYear())
+){
+
+birthday =
+new Date(
+target.getFullYear(),
+1,
+28
+);
+
+}else{
+
+
+birthday =
 new Date(
 target.getFullYear(),
 birth.getMonth(),
@@ -820,18 +843,15 @@ birth.getDate()
 );
 
 
-
-
-if(target < birthday){
-
-
-age--;
-
-
 }
 
 
 
+if(target < birthday){
+
+age--;
+
+}
 
 
 const koreanAge =
