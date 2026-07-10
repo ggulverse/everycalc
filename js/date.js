@@ -665,39 +665,19 @@ function showResultCalendar(date){
         dayBox.className =
         "calendar-day";
 
+      if(day === targetDay){
 
 
-        if(day === targetDay){
+         dayBox.classList.add(
+           "dday"
+       );
 
 
-            dayBox.classList.add(
-                "dday"
-            );
+   }
 
 
-            dayBox.innerHTML = `
-
-            <span>
-            ${day}
-            </span>
-
-            <small>
-            D-Day
-            </small>
-
-            `;
-
-
-        }
-        else{
-
-
-            dayBox.textContent =
-            day;
-
-
-        }
-
+dayBox.textContent =
+day;
 
 
         grid.appendChild(dayBox);
