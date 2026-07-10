@@ -1,1 +1,171 @@
+/* ==================================================
+   EveryCalc - darkmode.css
+================================================== */
 
+
+/* ---------- Dark Mode Variables ---------- */
+
+body.dark-mode{
+
+    --background:#0f172a;
+
+    --surface:#1e293b;
+
+    --text:#f8fafc;
+
+    --text-light:#cbd5e1;
+
+    --border:#334155;
+
+    --shadow:
+    0 10px 30px rgba(0,0,0,.35);
+
+}
+
+
+
+/* ---------- Global ---------- */
+
+body.dark-mode{
+
+    background:var(--background);
+
+    color:var(--text);
+
+}
+
+
+
+/* ---------- Header ---------- */
+
+body.dark-mode .header{
+
+    background:var(--surface);
+
+    border-color:var(--border);
+
+}
+
+
+
+/* ---------- Hero ---------- */
+
+body.dark-mode .hero{
+
+    background:
+    linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+}
+
+
+
+/* ---------- Cards ---------- */
+
+body.dark-mode .calculator-card{
+
+    background:var(--surface);
+
+    border-color:var(--border);
+
+}
+
+
+body.dark-mode .calculator-card p{
+
+    color:var(--text-light);
+
+}
+
+
+
+/* ---------- Category ---------- */
+
+body.dark-mode .category-item{
+
+    background:var(--surface);
+
+    color:var(--text);
+
+    border-color:var(--border);
+
+}
+
+
+body.dark-mode .category-item:hover{
+
+    color:white;
+
+}
+
+
+
+/* ---------- About ---------- */
+
+body.dark-mode .about{
+
+    background:var(--background);
+
+}
+
+
+
+/* ---------- FAQ ---------- */
+
+body.dark-mode .faq details{
+
+    background:var(--surface);
+
+    border-color:var(--border);
+
+}
+
+
+
+/* ---------- Footer ---------- */
+
+body.dark-mode .footer{
+
+    background:var(--surface);
+
+    border-color:var(--border);
+
+}
+
+
+
+/* ---------- Input ---------- */
+
+body.dark-mode input{
+
+    background:#334155;
+
+    color:white;
+
+    border-color:#475569;
+
+}
+
+
+body.dark-mode input::placeholder{
+
+    color:#cbd5e1;
+
+}
+
+
+
+/* ---------- Button ---------- */
+
+body.dark-mode .header-buttons button{
+
+    background:var(--surface);
+
+    color:white;
+
+    border-color:var(--border);
+
+}
