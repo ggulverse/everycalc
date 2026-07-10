@@ -365,3 +365,38 @@
 
 
 }
+
+/* ==================================================
+   Calendar Weekend Style
+================================================== */
+
+
+.result-calendar .sunday{
+
+    color:#dc2626;
+
+}
+
+
+
+.result-calendar .saturday{
+
+    color:#2563eb;
+
+}
+
+
+
+/* D-Day가 주말보다 우선 */
+
+.result-calendar .dday{
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:50%;
+
+    font-weight:800;
+
+}
