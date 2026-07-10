@@ -5,7 +5,7 @@ calculateButton.addEventListener("click", function () {
     const input = document.getElementById("numbers").value;
 
     const numbers = input
-        .split(",")
+        .split(/[, ]+/)
         .map(Number)
         .filter(num => !isNaN(num));
 
