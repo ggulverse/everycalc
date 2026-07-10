@@ -534,7 +534,36 @@ calculateButton.onclick=function(){
     </p>
 
     `;
+   
+   showResultCalendar(end);
 
 
 
 };
+
+function showResultCalendar(date){
+
+
+    const area =
+    document.getElementById("resultCalendar");
+
+
+    if(!area){
+
+        return;
+
+    }
+
+
+    area.innerHTML =
+
+    `
+
+    <h3>
+    ${date.getFullYear()}년 ${date.getMonth()+1}월 D-Day
+    </h3>
+
+    `;
+
+
+}
