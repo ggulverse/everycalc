@@ -8,12 +8,9 @@ let currentDate = new Date();
 let activeInput = null;
 
 
-const birthInput =
-document.getElementById("birthDate");
 
-
-const targetInput =
-document.getElementById("targetDate");
+const calendarArea =
+document.getElementById("calendarArea");
 
 
 const birthButton =
@@ -22,6 +19,14 @@ document.getElementById("birthCalendarButton");
 
 const targetButton =
 document.getElementById("targetCalendarButton");
+
+
+const birthInput =
+document.getElementById("birthDate");
+
+
+const targetInput =
+document.getElementById("targetDate");
 
 
 const calculateButton =
@@ -33,27 +38,10 @@ document.getElementById("result");
 
 
 
-/* ==========================
-   Calendar Area 생성
-========================== */
-
-
-const calendarArea =
-document.createElement("div");
-
-
-calendarArea.className =
-"calendar-popup";
-
-
-document.body.appendChild(calendarArea);
-
-
-
 
 
 /* ==========================
-   오늘 날짜 기본 적용
+   Today Default
 ========================== */
 
 
@@ -63,6 +51,7 @@ new Date();
 
 targetInput.value =
 `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
 
 
 
@@ -96,26 +85,20 @@ function formatDateInput(input){
 
                 value =
                 value.substring(0,4)
-                +
-                "-"
-                +
-                value.substring(4);
+                + "-"
+                + value.substring(4);
 
             }
-
 
 
             if(value.length>=8){
 
                 value =
                 value.substring(0,7)
-                +
-                "-"
-                +
-                value.substring(7);
+                + "-"
+                + value.substring(7);
 
             }
-
 
 
             input.value=value;
@@ -128,10 +111,11 @@ function formatDateInput(input){
 }
 
 
-
 formatDateInput(birthInput);
 
 formatDateInput(targetInput);
+
+
 
 
 
@@ -165,10 +149,8 @@ targetButton.onclick=function(){
 
 
 
+
 function openCalendar(){
-
-
-    calendarArea.style.display="block";
 
 
     renderCalendar(
@@ -182,15 +164,14 @@ function openCalendar(){
 
 
 
-function closeCalendar(){
 
+function closeCalendar(){
 
     calendarArea.innerHTML="";
 
-    calendarArea.style.display="none";
-
-
 }
+
+
 
 
 
@@ -220,6 +201,7 @@ function renderCalendar(year,month){
 
     calendar.innerHTML=`
 
+
     <div class="calendar-header">
 
 
@@ -243,6 +225,7 @@ function renderCalendar(year,month){
 
 
     <div class="calendar-grid">
+
 
         <div class="sunday">
         일
@@ -280,7 +263,6 @@ function renderCalendar(year,month){
 
 
 
-
     const grid =
     calendar.querySelector(".calendar-grid");
 
@@ -298,6 +280,7 @@ function renderCalendar(year,month){
 
 
 
+
     for(let i=0;i<firstDay;i++){
 
         grid.appendChild(
@@ -310,20 +293,15 @@ function renderCalendar(year,month){
 
 
 
-    for(
-        let day=1;
-        day<=lastDate;
-        day++
-    ){
+
+    for(let day=1;day<=lastDate;day++){
 
 
         const box =
         document.createElement("div");
 
 
-
-        box.className=
-        "calendar-day";
+        box.className="calendar-day";
 
 
 
@@ -352,6 +330,7 @@ function renderCalendar(year,month){
 
 
 
+
         box.textContent=day;
 
 
@@ -377,6 +356,9 @@ function renderCalendar(year,month){
 
 
 
+
+
+
     calendarArea.appendChild(calendar);
 
 
@@ -384,8 +366,9 @@ function renderCalendar(year,month){
 
 
 
-    calendar
-    .querySelector(".prev-month")
+
+
+    calendar.querySelector(".prev-month")
     .onclick=function(){
 
 
@@ -406,8 +389,8 @@ function renderCalendar(year,month){
 
 
 
-    calendar
-    .querySelector(".next-month")
+
+    calendar.querySelector(".next-month")
     .onclick=function(){
 
 
@@ -434,6 +417,7 @@ function renderCalendar(year,month){
 
 
 
+
 /* ==========================
    Date Parse
 ========================== */
@@ -446,6 +430,7 @@ function parseDate(value){
     value.split("-");
 
 
+
     if(parts.length!==3){
 
         return null;
@@ -453,15 +438,12 @@ function parseDate(value){
     }
 
 
-    const date =
-    new Date(
+
+    return new Date(
         Number(parts[0]),
         Number(parts[1])-1,
         Number(parts[2])
     );
-
-
-    return date;
 
 
 }
@@ -472,8 +454,10 @@ function parseDate(value){
 
 
 
+
+
 /* ==========================
-   Calculate
+   Age Calculate
 ========================== */
 
 
@@ -495,8 +479,10 @@ calculateButton.onclick=function(){
 
     if(!birth || !target){
 
-        result.innerHTML=
+
+        result.innerHTML =
         "날짜 형식을 확인해주세요.";
+
 
         return;
 
@@ -574,7 +560,9 @@ calculateButton.onclick=function(){
 
 
 
+
     result.innerHTML=`
+
 
     <div class="age-result-item">
 
@@ -604,6 +592,7 @@ calculateButton.onclick=function(){
 
 
 
+
     <div class="age-result-item">
 
         <h3>
@@ -615,6 +604,7 @@ calculateButton.onclick=function(){
         </div>
 
     </div>
+
 
     `;
 
