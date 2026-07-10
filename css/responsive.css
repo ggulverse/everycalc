@@ -1,1 +1,156 @@
+/* ==================================================
+   EveryCalc - responsive.css
+================================================== */
 
+
+/* ---------- Tablet ---------- */
+
+@media(max-width:1024px){
+
+
+    .container{
+
+        width:90%;
+
+    }
+
+
+    .calculator-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+    .hero h1{
+
+        font-size:2.6rem;
+
+    }
+
+
+}
+
+
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:768px){
+
+
+    /* Container */
+
+    .container{
+
+        width:92%;
+
+    }
+
+
+
+    /* Header */
+
+    .header .container{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+
+
+    .navigation ul{
+
+        gap:15px;
+
+        justify-content:center;
+
+    }
+
+
+
+    /* Hero */
+
+    .hero h1{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .hero p{
+
+        font-size:1rem;
+
+    }
+
+
+
+    /* Cards */
+
+    .calculator-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .calculator-card{
+
+        padding:25px;
+
+    }
+
+
+
+    /* Category */
+
+    .category-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+
+}
+
+
+
+/* ---------- Small Mobile ---------- */
+
+@media(max-width:480px){
+
+
+    .category-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .popular,
+    .categories,
+    .about,
+    .faq{
+
+        padding:50px 0;
+
+    }
+
+
+    .popular h2,
+    .categories h2,
+    .about h2,
+    .faq h2{
+
+        font-size:1.7rem;
+
+    }
+
+
+}
