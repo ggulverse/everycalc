@@ -1,9 +1,12 @@
 /* ==================================================
-   EveryCalc - Date Calculator
+   EveryCalc - date.css
 ================================================== */
 
 
-/* 날짜 입력 */
+/* ==========================
+   Date Input
+========================== */
+
 
 .date-input-group{
 
@@ -18,7 +21,6 @@
 }
 
 
-
 .date-input-group input{
 
     flex:1;
@@ -27,11 +29,9 @@
 
 
 
-
-
-/* ==================================================
+/* ==========================
    Calendar Popup
-================================================== */
+========================== */
 
 
 .calendar-area{
@@ -50,8 +50,8 @@
 
 
 
-
 .calendar{
+
 
     width:360px;
 
@@ -59,18 +59,21 @@
 
     padding:20px;
 
-    border-radius:12px;
 
-    background:inherit;
+    background:var(--surface);
 
-    color:inherit;
+    color:var(--text);
 
-    border:1px solid rgba(128,128,128,0.3);
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+
+    box-shadow:var(--shadow);
+
 
 }
-
 
 
 
@@ -85,21 +88,26 @@
 
     margin-bottom:15px;
 
+
 }
 
 
 
 .calendar-header button{
 
+
     border:none;
 
     background:transparent;
 
+
+    color:var(--text);
+
+
     cursor:pointer;
 
-    color:inherit;
-
     font-size:18px;
+
 
 }
 
@@ -108,57 +116,78 @@
 
 
 
-/* ==================================================
+
+/* ==========================
    Calendar Grid
-================================================== */
+========================== */
 
 
 .calendar-grid{
 
+
     display:grid;
+
 
     grid-template-columns:repeat(7,1fr);
 
+
     gap:5px;
+
 
     text-align:center;
 
+
 }
+
 
 
 
 .calendar-grid > div{
 
+
     min-height:38px;
+
 
     display:flex;
 
-    align-items:center;
 
     justify-content:center;
 
-    color:inherit;
+
+    align-items:center;
+
+
+    color:var(--text);
+
 
 }
+
 
 
 
 
 .calendar-day{
 
+
     cursor:pointer;
+
 
     border-radius:50%;
 
-    color:inherit;
+
+    color:var(--text);
+
 
 }
+
 
 
 
 .calendar-day:hover{
 
+
     background:rgba(128,128,128,0.2);
+
 
 }
 
@@ -166,11 +195,16 @@
 
 
 
-/* 주말 */
+/* ==========================
+   Weekend
+========================== */
+
 
 .sunday{
 
-    color:#e53935;
+
+    color:#ef4444 !important;
+
 
 }
 
@@ -178,7 +212,9 @@
 
 .saturday{
 
-    color:#1976d2;
+
+    color:#3b82f6 !important;
+
 
 }
 
@@ -186,15 +222,22 @@
 
 
 
-/* D-Day */
+/* ==========================
+   D-Day
+========================== */
+
 
 .dday{
 
-    background:#1976d2;
 
-    color:white;
+    background:var(--primary);
 
-    font-weight:bold;
+
+    color:white !important;
+
+
+    font-weight:700;
+
 
 }
 
@@ -204,22 +247,31 @@
 
 
 
-/* ==================================================
-   결과 달력
-================================================== */
+/* ==========================
+   Result Calendar
+========================== */
 
 
 .result-calendar-area{
 
+
     margin-top:25px;
 
+
 }
+
+
 
 
 
 .result-calendar h3{
 
+
     text-align:center;
+
+
+    color:var(--text);
+
 
 }
 
@@ -228,9 +280,10 @@
 
 
 
-/* ==================================================
+
+/* ==========================
    Mobile
-================================================== */
+========================== */
 
 
 @media(max-width:768px){
@@ -238,9 +291,12 @@
 
     .calendar{
 
+
         width:calc(100vw - 32px);
 
+
         padding:15px;
+
 
     }
 
@@ -248,9 +304,12 @@
 
     .calendar-grid > div{
 
+
         min-height:34px;
 
+
         font-size:14px;
+
 
     }
 
