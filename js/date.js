@@ -278,17 +278,46 @@ function renderCalendar(year, month){
     ){
 
 
-        const dayBox =
-        document.createElement("div");
+const dayBox =
+document.createElement("div");
 
 
-        dayBox.className =
-        "calendar-day";
+dayBox.className =
+"calendar-day";
 
 
-        dayBox.textContent =
-        day;
 
+const weekDay =
+new Date(
+    year,
+    month,
+    day
+).getDay();
+
+
+
+if(weekDay === 0){
+
+    dayBox.classList.add(
+        "sunday"
+    );
+
+}
+
+
+
+if(weekDay === 6){
+
+    dayBox.classList.add(
+        "saturday"
+    );
+
+}
+
+
+
+dayBox.textContent =
+day;
 
 
         dayBox.onclick=function(){
