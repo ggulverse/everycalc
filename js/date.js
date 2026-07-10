@@ -537,7 +537,6 @@ calculateButton.onclick=function(){
    Result Calendar
 ========================== */
 
-
 function showResultCalendar(date){
 
 
@@ -545,15 +544,142 @@ function showResultCalendar(date){
     document.getElementById("resultCalendar");
 
 
-    area.innerHTML = `
+    area.innerHTML = "";
 
+
+
+    const year =
+    date.getFullYear();
+
+
+    const month =
+    date.getMonth();
+
+
+    const targetDay =
+    date.getDate();
+
+
+
+
+    const calendar =
+    document.createElement("div");
+
+
+    calendar.className =
+    "calendar";
+
+
+
+    calendar.innerHTML = `
 
     <h3>
-    ${date.getFullYear()}년 ${date.getMonth()+1}월 D-Day
+    ${year}년 ${month+1}월 D-Day
     </h3>
 
+
+    <div class="calendar-grid">
+
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
+
+    </div>
 
     `;
 
 
+
+
+    const grid =
+    calendar.querySelector(".calendar-grid");
+
+
+
+    const firstDay =
+    new Date(
+        year,
+        month,
+        1
+    ).getDay();
+
+
+
+    const lastDate =
+    new Date(
+        year,
+        month + 1,
+        0
+    ).getDate();
+
+
+
+
+
+    for(
+        let i=0;
+        i<firstDay;
+        i++
+    ){
+
+        grid.appendChild(
+            document.createElement("div")
+        );
+
+    }
+
+
+
+
+
+
+    for(
+        let day=1;
+        day<=lastDate;
+        day++
+    ){
+
+
+        const dayBox =
+        document.createElement("div");
+
+
+        dayBox.className =
+        "calendar-day";
+
+
+        dayBox.textContent =
+        day;
+
+
+
+        if(day === targetDay){
+
+
+            dayBox.classList.add(
+                "dday"
+            );
+
+
+        }
+
+
+
+        grid.appendChild(dayBox);
+
+
+    }
+
+
+
+
+
+    area.appendChild(calendar);
+
+
 }
+
