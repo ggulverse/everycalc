@@ -2,48 +2,21 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>everycalc | GGULVERSE</title>
+    <title>everycalc | 퍼센트 계산기</title>
     <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #121212; color: #eee; margin: 0; padding: 20px; }
-        .header { text-align: center; margin-bottom: 40px; }
-        h1 { color: #FFCC00; font-size: 2.5rem; margin-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
-        .card { background: #1e1e1e; padding: 25px; border-radius: 20px; border: 1px solid #333; transition: 0.3s; }
-        .card:hover { border-color: #FFCC00; transform: translateY(-5px); cursor: pointer; }
-        .card h3 { color: #FFCC00; margin-top: 0; }
-        .badge { display: inline-block; background: #333; padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 10px; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #121212; color: #eee; text-align: center; padding: 20px; }
+        .box { background: #1e1e1e; padding: 30px; border-radius: 20px; max-width: 400px; margin: auto; }
+        input { padding: 10px; width: 80px; border-radius: 5px; border: none; margin: 5px; }
+        button { padding: 10px 20px; background-color: #FFCC00; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>everycalc</h1>
-        <p>GGULVERSE가 제공하는 스마트한 도구 모음집</p>
-    </div>
-
-    <div class="grid">
-        <!-- 금융 카테고리 -->
-        <div class="card">
-            <span class="badge">금융/재테크</span>
-            <h3>연봉 실수령액</h3>
-            <p>세금과 4대 보험을 제외한 내 진짜 월급은?</p>
-        </div>
-        <div class="card">
-            <span class="badge">금융/재테크</span>
-            <h3>적금/예금 이자</h3>
-            <p>목돈 만들 때 얻을 수 있는 이자를 계산하세요.</p>
-        </div>
-        <!-- 일상 카테고리 -->
-        <div class="card">
-            <span class="badge">일상/수학</span>
-            <h3>퍼센트(%) 계산기</h3>
-            <p>할인율, 비율 계산을 가장 빠르게.</p>
-        </div>
-        <!-- 건강 카테고리 -->
-        <div class="card">
-            <span class="badge">건강/신체</span>
-            <h3>BMI 지수 계산</h3>
-            <p>나의 신체질량지수를 확인해 보세요.</p>
-        </div>
+    <div class="box">
+        <h1>퍼센트 계산기</h1>
+        <input type="number" id="val" placeholder="숫자">의 
+        <input type="number" id="perc" placeholder="%">는?<br><br>
+        <button onclick="document.getElementById('res').innerText = (document.getElementById('val').value * document.getElementById('perc').value / 100)">계산하기</button>
+        <h2>결과: <span id="res">0</span></h2>
     </div>
 </body>
 </html>
