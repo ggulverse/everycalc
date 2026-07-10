@@ -2,56 +2,54 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>연봉 실수령액 계산기</title>
+    <title>정밀 연봉 실수령액 계산기</title>
     <style>
-        body { 
-            background: #121212; 
-            color: #fff; 
-            padding: 20px; 
-            text-align: center; 
-            font-family: 'Pretendard', sans-serif; 
-        }
-        .box { 
-            background: #1e1e1e; 
-            padding: 30px; 
-            border-radius: 20px; 
-            max-width: 400px; 
-            margin: auto; 
-            border: 1px solid #333;
-        }
-        input { 
-            padding: 10px; 
-            width: 150px; 
-            border-radius: 5px; 
-            border: none; 
-            margin-bottom: 10px;
-        }
-        button { 
-            padding: 10px 20px; 
-            background: #FFCC00; 
-            border: none; 
-            border-radius: 5px; 
-            font-weight: bold; 
-            cursor: pointer; 
-        }
+        body { background: #121212; color: #fff; padding: 20px; font-family: sans-serif; }
+        .box { background: #1e1e1e; padding: 30px; border-radius: 20px; max-width: 500px; margin: auto; }
+        input { padding: 10px; width: 100%; box-sizing: border-box; margin-bottom: 20px; border-radius: 5px; border: 1px solid #444; background: #2a2a2a; color: #fff; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        td, th { padding: 8px; border-bottom: 1px solid #333; text-align: right; }
+        .total { font-size: 1.2em; font-weight: bold; color: #FFCC00; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h1>연봉 실수령액</h1>
-        <input type="number" id="salary" placeholder="연봉 입력 (만원)">
-        <br>
-        <button onclick="calculate()">계산하기</button>
-        <h2 id="result">월 예상 수령액: 0원</h2>
-        <br>
-        <a href="index.html" style="color: #FFCC00;">메인으로 돌아가기</a>
+        <h1>연봉 실수령액 계산기</h1>
+        <input type="number" id="salary" placeholder="연봉 입력 (만원)" oninput="calculate()">
+        
+        <table id="resultTable">
+            <tr><th>항목</th><th>공제금액</th><th>비율(요율)</th></tr>
+            <tr><td>국민연금</td><td id="pension">0원</td><td>4.5%</td></tr>
+            <tr><td>건강보험</td><td id="health">0원</td><td>3.545%</td></tr>
+            <tr><td>장기요양보험</td><td id="longTerm">0원</td><td>건보료의 12.95%</td></tr>
+            <tr><td>고용보험</td><td id="employ">0원</td><td>0.9%</td></tr>
+            <tr><td>소득세(간이)</td><td id="tax">0원</td><td>추정액</td></tr>
+            <tr class="total"><td>예상 실수령액</td><td id="finalResult" colspan="2">0원</td></tr>
+        </table>
     </div>
 
     <script>
         function calculate() {
-            let salary = document.getElementById('salary').value;
-            let monthly = Math.floor((salary * 10000 / 12) * 0.9);
-            document.getElementById('result').innerText = "월 예상 수령액: " + monthly.toLocaleString() + "원";
+            let annual = document.getElementById('salary').value * 10000;
+            if (annual <= 0) return;
+            let monthly = annual / 12;
+
+            // 1. 공제액 계산 (요율 반영)
+            let pension = Math.min(monthly * 0.045, 265500);
+            let health = monthly * 0.03545;
+            let longTerm = health * 0.1295;
+            let employ = monthly * 0.009;
+            let tax = (monthly * 0.025); // 실시간 간이세액 추정치
+
+            // 2. 화면 반영
+            document.getElementById('pension').innerText = Math.floor(pension).toLocaleString() + "원";
+            document.getElementById('health').innerText = Math.floor(health).toLocaleString() + "원";
+            document.getElementById('longTerm').innerText = Math.floor(longTerm).toLocaleString() + "원";
+            document.getElementById('employ').innerText = Math.floor(employ).toLocaleString() + "원";
+            document.getElementById('tax').innerText = Math.floor(tax).toLocaleString() + "원";
+            
+            let final = monthly - (pension + health + longTerm + employ + tax);
+            document.getElementById('finalResult').innerText = Math.floor(final).toLocaleString() + "원";
         }
     </script>
 </body>
