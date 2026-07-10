@@ -1,1 +1,295 @@
+/* ==================================================
+   EveryCalc - style.css
+   Version 1.0
+================================================== */
 
+/* ---------- Reset ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ---------- Root ---------- */
+
+:root{
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#3b82f6;
+
+    --background:#f5f7fb;
+    --surface:#ffffff;
+
+    --text:#222222;
+    --text-light:#666666;
+
+    --border:#e5e7eb;
+
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+
+    --radius:14px;
+
+    --transition:.25s ease;
+
+    --max-width:1280px;
+
+}
+
+/* ---------- Body ---------- */
+
+body{
+
+    font-family:
+    "Pretendard",
+    "Noto Sans KR",
+    sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    line-height:1.7;
+
+}
+
+/* ---------- Link ---------- */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* ---------- Image ---------- */
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+/* ---------- Container ---------- */
+
+.container{
+
+    width:92%;
+
+    max-width:var(--max-width);
+
+    margin:auto;
+
+}
+
+/* ---------- Header ---------- */
+
+.header{
+
+    background:#ffffff;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+.header .container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    height:78px;
+
+}
+
+/* ---------- Logo ---------- */
+
+.logo-main{
+
+    display:block;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.logo-sub{
+
+    display:block;
+
+    font-size:.75rem;
+
+    color:#888;
+
+    margin-top:2px;
+
+}
+/* ---------- Navigation ---------- */
+
+.navigation ul{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:32px;
+
+}
+
+.navigation a{
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.navigation a:hover{
+
+    color:var(--primary);
+
+}
+
+/* ---------- Header Button ---------- */
+
+.header-buttons button{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f0f4ff;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    font-size:1.1rem;
+
+}
+
+.header-buttons button:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+
+    background:
+    linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6);
+
+    color:white;
+
+    padding:90px 0;
+
+    text-align:center;
+
+}
+
+.hero h1{
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    max-width:720px;
+
+    margin:auto;
+
+    font-size:1.15rem;
+
+    opacity:.95;
+
+}
+/* ---------- Search ---------- */
+
+.hero-search{
+
+    margin-top:45px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+}
+
+.hero-search input{
+
+    width:420px;
+
+    max-width:70%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:0 22px;
+
+    font-size:1rem;
+
+    outline:none;
+
+}
+
+.hero-search button{
+
+    height:55px;
+
+    padding:0 28px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:white;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.hero-search button:hover{
+
+    background:#edf4ff;
+
+}
