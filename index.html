@@ -3,97 +3,168 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <!-- ===========================
+         기본 설정
+    ============================ -->
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <title>EveryCalc | 모든 계산기를 하나로</title>
 
-<title>EveryCalc - 모든 계산기</title>
+    <meta name="description"
+        content="EveryCalc는 BMI 계산기, 환율 계산기, 퍼센트 계산기, 날짜 계산기, 대출 계산기, 복리 계산기 등 다양한 온라인 계산기를 무료로 제공합니다.">
 
-<meta name="description"
-content="환율 계산기, BMI 계산기, 대출 계산기, 퍼센트 계산기, 날짜 계산기 등 다양한 계산기를 무료로 제공합니다.">
+    <meta name="keywords"
+        content="EveryCalc, 계산기, 온라인 계산기, BMI 계산기, 환율 계산기, 날짜 계산기, 퍼센트 계산기, 복리 계산기, 대출 계산기">
 
-<meta name="keywords"
-content="계산기, 계산, 환율계산기, bmi계산기, 퍼센트계산기, 대출계산기, EveryCalc">
+    <meta name="author" content="EveryCalc">
+    <meta name="robots" content="index, follow">
 
-<meta name="author"
-content="EveryCalc">
+    <link rel="canonical"
+        href="https://ggulverse.github.io/EveryCalc/">
 
-<meta name="robots"
-content="index, follow">
+    <!-- ===========================
+         Open Graph
+    ============================ -->
 
-<link rel="canonical"
-href="https://everycalc.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="EveryCalc">
+    <meta property="og:description"
+        content="모든 계산기를 하나의 사이트에서 무료로 이용하세요.">
+    <meta property="og:url"
+        content="https://ggulverse.github.io/EveryCalc/">
+    <meta property="og:image"
+        content="https://ggulverse.github.io/EveryCalc/assets/images/og-image.png">
 
-<link rel="icon"
-href="assets/favicon.ico">
+    <!-- ===========================
+         Twitter Card
+    ============================ -->
 
-<link rel="stylesheet"
-href="css/style.css">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EveryCalc">
+    <meta name="twitter:description"
+        content="무료 온라인 계산기 모음">
+    <meta name="twitter:image"
+        content="https://ggulverse.github.io/EveryCalc/assets/images/og-image.png">
 
-<link rel="stylesheet"
-href="css/header.css">
+    <!-- ===========================
+         Theme Color
+    ============================ -->
 
-<link rel="stylesheet"
-href="css/calculator.css">
+    <meta name="theme-color" content="#2563eb">
 
-<link rel="stylesheet"
-href="css/darkmode.css">
+    <!-- ===========================
+         Favicon
+    ============================ -->
 
-<link rel="stylesheet"
-href="css/responsive.css">
+    <link rel="icon"
+        href="assets/favicon.ico">
+
+    <link rel="apple-touch-icon"
+        href="assets/apple-touch-icon.png">
+
+    <!-- ===========================
+         CSS
+    ============================ -->
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+    <link rel="stylesheet" href="css/responsive.css">
 
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
-<div class="logo">
+    <div class="container">
 
-<a href="#">
+        <div class="logo">
 
-<span class="logo-main">
-EveryCalc
-</span>
+            <a href="index.html">
 
-<span class="logo-sub">
-Every Calculation in One Place
-</span>
+                <span class="logo-main">
 
-</a>
+                    EveryCalc
 
-</div>
+                </span>
 
-<nav>
+                <span class="logo-sub">
 
-<ul>
+                    Every Calculation in One Place
 
-<li><a href="#">홈</a></li>
+                </span>
 
-<li><a href="#">전체 계산기</a></li>
+            </a>
 
-<li><a href="#">인기 계산기</a></li>
+        </div>
 
-<li><a href="#">새 계산기</a></li>
+        <nav class="navigation">
 
-<li><a href="#">문의</a></li>
+            <ul>
 
-</ul>
+                <li>
 
-</nav>
+                    <a href="index.html">
 
-<div class="header-right">
+                        홈
 
-<button id="darkModeBtn">
+                    </a>
 
-🌙
+                </li>
 
-</button>
+                <li>
 
-</div>
+                    <a href="#popular">
+
+                        인기 계산기
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#categories">
+
+                        카테고리
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a href="#about">
+
+                        소개
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="header-buttons">
+
+            <button
+                id="darkModeToggle"
+                aria-label="다크모드">
+
+                🌙
+
+            </button>
+
+        </div>
+
+    </div>
 
 </header>
 
@@ -101,40 +172,48 @@ Every Calculation in One Place
 
 <section class="hero">
 
-<h1>
+    <div class="container">
 
-필요한 계산기를 모두 한 곳에서
+        <h1>
 
-</h1>
+            필요한 모든 계산기를
+            하나의 사이트에서
 
-<p>
+        </h1>
 
-EveryCalc는 일상생활부터 금융, 건강, 프로그래밍,
-공학까지 다양한 계산기를 제공합니다.
+        <p>
 
-</p>
+            EveryCalc는 생활, 금융, 건강,
+            학생, 프로그래밍, 공학 등
+            다양한 계산기를 무료로 제공합니다.
 
-<div class="search-box">
+        </p>
 
-<input
+        <div class="hero-search">
 
-type="text"
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="계산기를 검색하세요">
 
-id="searchInput"
+            <button
+                id="searchButton">
 
-placeholder="원하는 계산기를 검색하세요...">
+                검색
 
-<button>
+            </button>
 
-검색
+        </div>
 
-</button>
-
-</div>
+    </div>
 
 </section>
 
-<section class="popular">
+<section
+id="popular"
+class="popular">
+
+<div class="container">
 
 <h2>
 
@@ -143,3 +222,400 @@ placeholder="원하는 계산기를 검색하세요...">
 </h2>
 
 <div class="calculator-grid">
+          <article class="calculator-card">
+
+            <div class="card-icon">⚖️</div>
+
+            <h3>BMI 계산기</h3>
+
+            <p>
+                키와 몸무게를 입력하여 BMI를 계산합니다.
+            </p>
+
+            <a href="pages/bmi.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">💱</div>
+
+            <h3>환율 계산기</h3>
+
+            <p>
+                실시간 환율을 기준으로 계산합니다.
+            </p>
+
+            <a href="pages/exchange.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">%</div>
+
+            <h3>퍼센트 계산기</h3>
+
+            <p>
+                증가율, 감소율, 할인율을 계산합니다.
+            </p>
+
+            <a href="pages/percent.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">📅</div>
+
+            <h3>날짜 계산기</h3>
+
+            <p>
+                날짜 차이와 특정 날짜를 계산합니다.
+            </p>
+
+            <a href="pages/date.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🏦</div>
+
+            <h3>대출 계산기</h3>
+
+            <p>
+                원리금균등 및 원금균등 상환 계산.
+            </p>
+
+            <a href="pages/loan.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">💰</div>
+
+            <h3>복리 계산기</h3>
+
+            <p>
+                투자의 미래 가치를 계산합니다.
+            </p>
+
+            <a href="pages/compound.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🏠</div>
+
+            <h3>주택담보대출 계산기</h3>
+
+            <p>
+                주택담보대출 월 상환금을 계산합니다.
+            </p>
+
+            <a href="pages/mortgage.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">💵</div>
+
+            <h3>부가세 계산기</h3>
+
+            <p>
+                공급가와 VAT 포함 금액을 계산합니다.
+            </p>
+
+            <a href="pages/vat.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🧾</div>
+
+            <h3>소득세 계산기</h3>
+
+            <p>
+                예상 소득세를 계산합니다.
+            </p>
+
+            <a href="pages/tax.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">📈</div>
+
+            <h3>ROI 계산기</h3>
+
+            <p>
+                투자수익률을 계산합니다.
+            </p>
+
+            <a href="pages/roi.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+         <article class="calculator-card">
+
+            <div class="card-icon">📊</div>
+
+            <h3>평균 계산기</h3>
+
+            <p>
+                여러 숫자의 평균값을 계산합니다.
+            </p>
+
+            <a href="pages/average.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🎓</div>
+
+            <h3>학점 계산기</h3>
+
+            <p>
+                대학 학점(GPA)을 쉽고 빠르게 계산합니다.
+            </p>
+
+            <a href="pages/gpa.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🧮</div>
+
+            <h3>분수 계산기</h3>
+
+            <p>
+                분수의 사칙연산과 약분을 계산합니다.
+            </p>
+
+            <a href="pages/fraction.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">📐</div>
+
+            <h3>삼각형 계산기</h3>
+
+            <p>
+                넓이와 둘레를 계산합니다.
+            </p>
+
+            <a href="pages/triangle.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">⚡</div>
+
+            <h3>전기요금 계산기</h3>
+
+            <p>
+                예상 전기요금을 계산합니다.
+            </p>
+
+            <a href="pages/electric.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">⛽</div>
+
+            <h3>연비 계산기</h3>
+
+            <p>
+                차량 연비와 주행 비용을 계산합니다.
+            </p>
+
+            <a href="pages/fuel.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">👶</div>
+
+            <h3>임신 주수 계산기</h3>
+
+            <p>
+                임신 주수와 예정일을 계산합니다.
+            </p>
+
+            <a href="pages/pregnancy.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">💹</div>
+
+            <h3>주식 수익률 계산기</h3>
+
+            <p>
+                매수·매도 수익률을 계산합니다.
+            </p>
+
+            <a href="pages/stock.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🪙</div>
+
+            <h3>코인 수익률 계산기</h3>
+
+            <p>
+                암호화폐 투자 수익률을 계산합니다.
+            </p>
+
+            <a href="pages/crypto.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+        <article class="calculator-card">
+
+            <div class="card-icon">🌍</div>
+
+            <h3>시차 계산기</h3>
+
+            <p>
+                국가별 현재 시차를 계산합니다.
+            </p>
+
+            <a href="pages/timezone.html" class="card-button">
+                사용하기
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+<section id="categories" class="categories">
+
+    <div class="container">
+
+        <h2>
+
+            계산기 카테고리
+
+        </h2>
+
+        <div class="category-grid">
+
+            <a href="#" class="category-item">
+                💰 금융 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                ❤️ 건강 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                📅 날짜 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                📚 학생 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                🧮 수학 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                💻 개발 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                ⚙️ 공학 계산기
+            </a>
+
+            <a href="#" class="category-item">
+                🌎 생활 계산기
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="about" class="about">
+
+    <div class="container">
+
+        <h2>
+
+            EveryCalc 소개
+
+        </h2>
+
+        <p>
+
+            EveryCalc는 누구나 무료로 사용할 수 있는 온라인 계산기 플랫폼입니다.
+
+            회원가입 없이 이용 가능하며 PC와 모바일을 모두 지원합니다.
+
+            지속적으로 새로운 계산기를 추가하여 하나의 사이트에서
+            필요한 모든 계산을 해결할 수 있도록 만드는 것이 목표입니다.
+
+        </p>
+
+    </div>
+
+</section>
