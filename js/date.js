@@ -6,7 +6,6 @@
 let currentDate = new Date();
 
 let activeInput = null;
-let activePopup = null;
 
 
 
@@ -22,16 +21,16 @@ const endButton =
 document.getElementById("endCalendarButton");
 
 
-const calculateButton =
-document.getElementById("calculate");
-
-
 const startInput =
 document.getElementById("startDate");
 
 
 const endInput =
 document.getElementById("endDate");
+
+
+const calculateButton =
+document.getElementById("calculate");
 
 
 
@@ -45,23 +44,19 @@ function formatDateInput(input){
 
     input.addEventListener(
         "input",
-        function(){
+        ()=>{
 
 
             let value =
             input.value.replace(/[^0-9]/g,"");
 
 
-            if(value.length > 8){
-
-                value =
-                value.substring(0,8);
-
-            }
+            value =
+            value.substring(0,8);
 
 
 
-            if(value.length >= 5){
+            if(value.length >=5){
 
                 value =
                 value.substring(0,4)
@@ -71,8 +66,7 @@ function formatDateInput(input){
             }
 
 
-
-            if(value.length >= 8){
+            if(value.length >=8){
 
                 value =
                 value.substring(0,7)
@@ -88,8 +82,8 @@ function formatDateInput(input){
         }
     );
 
-
 }
+
 
 
 formatDateInput(startInput);
@@ -100,45 +94,36 @@ formatDateInput(endInput);
 
 
 /* ==========================
-   Calendar Control
+   Calendar Open
 ========================== */
-
-
-function closeCalendar(){
-
-
-    calendarArea.innerHTML="";
-
-
-}
-
-
 
 
 startButton.onclick=function(){
 
-
     activeInput=startInput;
-
 
     openCalendar();
 
-
 };
-
 
 
 
 endButton.onclick=function(){
 
-
     activeInput=endInput;
-
 
     openCalendar();
 
-
 };
+
+
+
+
+function closeCalendar(){
+
+    calendarArea.innerHTML="";
+
+}
 
 
 
@@ -154,6 +139,7 @@ function openCalendar(){
 
 
 }
+
 
 
 
@@ -176,31 +162,27 @@ function renderCalendar(year,month){
     document.createElement("div");
 
 
-    calendar.className =
-    "calendar";
+    calendar.className="calendar";
 
 
 
-    calendar.innerHTML = `
-
+    calendar.innerHTML=`
 
     <div class="calendar-header">
-
 
         <button class="prev-month">
         ◀
         </button>
 
 
-        <div>
+        <strong>
         ${year}년 ${month+1}월
-        </div>
+        </strong>
 
 
         <button class="next-month">
         ▶
         </button>
-
 
     </div>
 
@@ -218,9 +200,7 @@ function renderCalendar(year,month){
 
     </div>
 
-
     `;
-
 
 
 
@@ -230,20 +210,12 @@ function renderCalendar(year,month){
 
 
     const firstDay =
-    new Date(
-        year,
-        month,
-        1
-    ).getDay();
+    new Date(year,month,1).getDay();
 
 
 
     const lastDate =
-    new Date(
-        year,
-        month+1,
-        0
-    ).getDate();
+    new Date(year,month+1,0).getDate();
 
 
 
@@ -270,16 +242,15 @@ function renderCalendar(year,month){
     ){
 
 
-        const dayBox =
+        const box =
         document.createElement("div");
 
 
-        dayBox.className =
-        "calendar-day";
+        box.className="calendar-day";
 
 
 
-        const weekDay =
+        const week =
         new Date(
             year,
             month,
@@ -288,39 +259,30 @@ function renderCalendar(year,month){
 
 
 
-        if(weekDay===0){
+        if(week===0){
 
-            dayBox.classList.add(
-                "sunday"
-            );
+            box.classList.add("sunday");
+
+        }
+
+
+        if(week===6){
+
+            box.classList.add("saturday");
 
         }
 
 
 
-        if(weekDay===6){
-
-            dayBox.classList.add(
-                "saturday"
-            );
-
-        }
+        box.textContent=day;
 
 
 
-        dayBox.textContent =
-        day;
-
-
-
-
-        dayBox.onclick=function(){
+        box.onclick=function(){
 
 
             activeInput.value =
-
             `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-
 
 
             closeCalendar();
@@ -330,10 +292,11 @@ function renderCalendar(year,month){
 
 
 
-        grid.appendChild(dayBox);
+        grid.appendChild(box);
 
 
     }
+
 
 
 
@@ -367,6 +330,7 @@ function renderCalendar(year,month){
 
 
 
+
     calendar
     .querySelector(".next-month")
     .onclick=function(){
@@ -386,6 +350,7 @@ function renderCalendar(year,month){
     };
 
 
+
 }
 
 
@@ -395,19 +360,11 @@ function renderCalendar(year,month){
 
 
 /* ==========================
-   Date Validation
+   Date Check
 ========================== */
 
 
 function parseDate(value){
-
-
-    if(!value){
-
-        return null;
-
-    }
-
 
 
     const parts =
@@ -446,11 +403,9 @@ function parseDate(value){
 
 
     if(
-
         date.getFullYear()!==year ||
         date.getMonth()!==month-1 ||
         date.getDate()!==day
-
     ){
 
         return null;
@@ -498,7 +453,7 @@ calculateButton.onclick=function(){
     if(!start || !end){
 
 
-        result.innerHTML =
+        result.innerHTML=
         "날짜 형식을 확인해주세요.";
 
 
@@ -510,7 +465,6 @@ calculateButton.onclick=function(){
 
 
     const diff =
-
     Math.floor(
         (end-start)
         /
@@ -523,7 +477,7 @@ calculateButton.onclick=function(){
     if(diff<0){
 
 
-        result.innerHTML =
+        result.innerHTML=
         "종료 날짜가 시작 날짜보다 빠릅니다.";
 
 
@@ -534,9 +488,7 @@ calculateButton.onclick=function(){
 
 
 
-
-    result.innerHTML = `
-
+    result.innerHTML=`
 
     <h2>
     D-${diff}
@@ -552,7 +504,6 @@ calculateButton.onclick=function(){
     총 <strong>${diff}일</strong> 남았습니다.
     </p>
 
-
     `;
 
 
@@ -561,7 +512,6 @@ calculateButton.onclick=function(){
 
 
 };
-
 
 
 
@@ -581,54 +531,33 @@ function showResultCalendar(date){
     document.getElementById("resultCalendar");
 
 
-    if(!area){
-
-        return;
-
-    }
-
-
     area.innerHTML="";
-
-
-    const year =
-    date.getFullYear();
-
-
-    const month =
-    date.getMonth();
-
-
-    const targetDay =
-    date.getDate();
-
 
 
     const calendar =
     document.createElement("div");
 
 
-    calendar.className =
+    calendar.className=
     "calendar result-calendar";
 
 
 
-    calendar.innerHTML = `
+    calendar.innerHTML=`
 
     <h3>
-    ${year}년 ${month+1}월 D-Day
+    ${date.getFullYear()}년 ${date.getMonth()+1}월 D-Day
     </h3>
-
 
     <div class="calendar-grid">
 
-    <div>일</div>
-    <div>월</div>
-    <div>화</div>
-    <div>수</div>
-    <div>목</div>
-    <div>금</div>
-    <div>토</div>
+        <div>일</div>
+        <div>월</div>
+        <div>화</div>
+        <div>수</div>
+        <div>목</div>
+        <div>금</div>
+        <div>토</div>
 
     </div>
 
@@ -641,17 +570,31 @@ function showResultCalendar(date){
 
 
 
-    const firstDay =
+    const year =
+    date.getFullYear();
+
+
+    const month =
+    date.getMonth();
+
+
+    const target =
+    date.getDate();
+
+
+
+    const first =
     new Date(year,month,1).getDay();
 
 
-    const lastDate =
+    const last =
     new Date(year,month+1,0).getDate();
 
 
 
 
-    for(let i=0;i<firstDay;i++){
+
+    for(let i=0;i<first;i++){
 
         grid.appendChild(
             document.createElement("div")
@@ -662,57 +605,26 @@ function showResultCalendar(date){
 
 
 
-    for(
-        let day=1;
-        day<=lastDate;
-        day++
-    ){
+
+    for(let day=1;day<=last;day++){
 
 
         const box =
         document.createElement("div");
 
 
-        box.className =
-        "calendar-day";
+        box.className="calendar-day";
+
+
+        box.textContent=day;
 
 
 
-        const weekDay =
-        new Date(
-            year,
-            month,
-            day
-        ).getDay();
-
-
-
-        if(weekDay===0){
-
-            box.classList.add("sunday");
-
-        }
-
-
-        if(weekDay===6){
-
-            box.classList.add("saturday");
-
-        }
-
-
-
-        if(day===targetDay){
+        if(day===target){
 
             box.classList.add("dday");
 
         }
-
-
-
-        box.textContent =
-        day;
-
 
 
         grid.appendChild(box);
