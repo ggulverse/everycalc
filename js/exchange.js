@@ -839,7 +839,7 @@ startDate.toISOString()
 let response =
 await fetch(
 
-`https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&symbols=${toCurrency}&from=${start}&to=${end}`
+`https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&quotes=${toCurrency}&from=${start}&to=${end}`
 
 );
 
