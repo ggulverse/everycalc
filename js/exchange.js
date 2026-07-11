@@ -28,8 +28,6 @@ document.getElementById("exchangeInfo");
 
 
 
-
-
 /* ==========================
    Load Currency List
 ========================== */
@@ -41,26 +39,25 @@ function loadCurrencies(){
     currencies.forEach(currency=>{
 
 
-        const option =
+        const fromOption =
         document.createElement("option");
 
 
-        option.value =
+        fromOption.value =
         currency.code;
 
 
-        option.textContent =
+        fromOption.textContent =
         `${currency.flag} ${currency.code} (${currency.name})`;
 
 
-        fromCurrency.appendChild(
-            option.cloneNode(true)
-        );
+        const toOption =
+        fromOption.cloneNode(true);
 
 
-        toCurrency.appendChild(
-            option
-        );
+        fromCurrency.appendChild(fromOption);
+
+        toCurrency.appendChild(toOption);
 
 
     });
@@ -82,29 +79,69 @@ function loadCurrencies(){
 
 
 /* ==========================
-   Get Exchange Rate
+   Cache
 ========================== */
 
 
-async function getExchangeRates(){
+function saveCache(key,data){
 
 
-    const response =
-    await fetch(
-        "https://api.frankfurter.dev/v2/rates?base=EUR"
+    localStorage.setItem(
+
+        key,
+
+        JSON.stringify({
+
+            time:Date.now(),
+
+            data:data
+
+        })
+
     );
 
 
-    if(!response.ok){
+}
 
-        throw new Error(
-            "API 오류"
-        );
+
+
+function getCache(key){
+
+
+    const saved =
+    localStorage.getItem(key);
+
+
+
+    if(!saved){
+
+        return null;
 
     }
 
 
-    return await response.json();
+
+    const parsed =
+    JSON.parse(saved);
+
+
+
+    const tenMinutes =
+    10 * 60 * 1000;
+
+
+
+    if(Date.now() - parsed.time > tenMinutes){
+
+        localStorage.removeItem(key);
+
+        return null;
+
+    }
+
+
+
+    return parsed.data;
 
 
 }
@@ -113,9 +150,68 @@ async function getExchangeRates(){
 
 
 
+
+
 /* ==========================
-   Convert Data
+   Exchange API
 ========================== */
+
+
+async function getExchangeRates(){
+
+
+    const cached =
+    getCache("exchangeRates");
+
+
+
+    if(cached){
+
+        return cached;
+
+    }
+
+
+
+    const response =
+    await fetch(
+
+        "https://api.frankfurter.dev/v2/rates?base=EUR"
+
+    );
+
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "환율 API 오류"
+        );
+
+    }
+
+
+
+    const data =
+    await response.json();
+
+
+
+    saveCache(
+        "exchangeRates",
+        data
+    );
+
+
+    return data;
+
+
+}
+
+
+
+
+
 
 
 function createRateObject(data){
@@ -128,6 +224,7 @@ function createRateObject(data){
     };
 
 
+
     data.forEach(item=>{
 
 
@@ -138,10 +235,12 @@ function createRateObject(data){
     });
 
 
+
     return rates;
 
 
 }
+
 
 
 
@@ -159,10 +258,8 @@ async function calculateExchange(){
     try{
 
 
-        let amount =
-        Number(
-            amountInput.value.replace(/,/g,"")
-        );
+        const amount =
+        Number(amountInput.value);
 
 
 
@@ -175,7 +272,21 @@ async function calculateExchange(){
 
             return;
 
+
         }
+
+
+
+
+
+        const from =
+        fromCurrency.value;
+
+
+
+        const to =
+        toCurrency.value;
+
 
 
 
@@ -191,26 +302,18 @@ async function calculateExchange(){
 
 
 
-        const from =
-        fromCurrency.value;
-
-
-        const to =
-        toCurrency.value;
-
-
-
 
         if(!rates[from] || !rates[to]){
 
 
             result.innerHTML =
-            "현재 금/은 가격 데이터는 준비 중입니다.";
+            "지원하지 않는 통화입니다.";
 
 
             return;
 
         }
+
 
 
 
@@ -227,9 +330,7 @@ async function calculateExchange(){
 
 
 
-
         result.innerHTML = `
-
 
         <h2>
 
@@ -248,12 +349,9 @@ async function calculateExchange(){
 
         ${to}
 
-
         </h2>
 
-
         `;
-
 
 
 
@@ -264,12 +362,13 @@ async function calculateExchange(){
 
 
 
-        exchangeInfo.innerHTML = `
 
+
+        exchangeInfo.innerHTML = `
 
         <p>
 
-        현재 환율
+        적용 환율
 
         <br>
 
@@ -286,21 +385,16 @@ async function calculateExchange(){
 
         ${to}
 
-
         </p>
-
 
 
         <p>
 
-        데이터 출처
+        데이터 기준
 
         <br>
 
-        Frankfurter API
-
-        (ECB 공개 환율 데이터)
-
+        Frankfurter 공개 환율 데이터
 
         </p>
 
@@ -318,14 +412,12 @@ async function calculateExchange(){
         console.error(error);
 
 
-
         result.innerHTML =
         "환율 데이터를 불러오지 못했습니다.";
 
 
-
         exchangeInfo.innerHTML =
-        "API 연결 오류";
+        "API 연결을 확인해주세요.";
 
 
     }
@@ -340,12 +432,24 @@ async function calculateExchange(){
 
 
 /* ==========================
-   Button
+   Event
 ========================== */
 
 
 calculateButton.onclick =
 calculateExchange;
+
+
+
+
+
+fromCurrency.onchange =
+calculateExchange;
+
+
+toCurrency.onchange =
+calculateExchange;
+
 
 
 
