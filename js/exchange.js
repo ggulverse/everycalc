@@ -23,11 +23,31 @@ document.getElementById("exchangeInfo");
 
 
 
-
-
 /* ==========================
    Currency Select Generate
 ========================== */
+
+
+function createCurrencyOption(currency){
+
+
+    const option =
+    document.createElement("option");
+
+
+    option.value =
+    currency.code;
+
+
+    option.textContent =
+    `${currency.code} (${currency.name})`;
+
+
+    return option;
+
+}
+
+
 
 
 function loadCurrencies(){
@@ -36,36 +56,25 @@ function loadCurrencies(){
     currencies.forEach(currency=>{
 
 
-        const optionFrom =
-        document.createElement("option");
+        fromCurrency.appendChild(
+            createCurrencyOption(currency)
+        );
 
 
-        optionFrom.value =
-        currency.code;
-
-
-        optionFrom.textContent =
-        `${currency.code} (${currency.name})`;
-
-
-
-        const optionTo =
-        optionFrom.cloneNode(true);
-
-
-
-        fromCurrency.appendChild(optionFrom);
-
-        toCurrency.appendChild(optionTo);
+        toCurrency.appendChild(
+            createCurrencyOption(currency)
+        );
 
 
     });
 
 
+    fromCurrency.value =
+    "USD";
 
-    fromCurrency.value = "USD";
 
-    toCurrency.value = "KRW";
+    toCurrency.value =
+    "KRW";
 
 
 }
@@ -99,11 +108,7 @@ async function getExchangeRates(){
     }
 
 
-    const data =
-    await response.json();
-
-
-    return data;
+    return await response.json();
 
 
 }
@@ -163,7 +168,7 @@ async function calculateExchange(){
 
         const amount =
         Number(
-            amountInput.value
+            amountInput.value.replace(/,/g,"")
         );
 
 
@@ -177,8 +182,8 @@ async function calculateExchange(){
 
             return;
 
-        }
 
+        }
 
 
 
@@ -189,7 +194,6 @@ async function calculateExchange(){
 
         const rates =
         createRateObject(data);
-
 
 
 
@@ -217,14 +221,12 @@ async function calculateExchange(){
 
 
 
-
         const euroAmount =
         amount / rates[from];
 
 
         const converted =
         euroAmount * rates[to];
-
 
 
 
@@ -254,9 +256,6 @@ async function calculateExchange(){
 
 
         `;
-
-
-
 
 
 
@@ -290,7 +289,6 @@ async function calculateExchange(){
         </p>
 
 
-
         <p>
 
         환율 기준
@@ -302,14 +300,13 @@ async function calculateExchange(){
         </p>
 
 
-
         <p>
 
         데이터 출처
 
         <br>
 
-        European Central Bank(ECB) 기준
+        Frankfurter API
 
         </p>
 
@@ -353,6 +350,38 @@ async function calculateExchange(){
 
 calculateButton.onclick =
 calculateExchange;
+
+
+
+
+
+
+
+/* ==========================
+   Amount Format
+========================== */
+
+
+amountInput.addEventListener(
+"input",
+()=>{
+
+
+    let value =
+    amountInput.value.replace(/,/g,"");
+
+
+    if(value){
+
+
+        amountInput.value =
+        Number(value).toLocaleString();
+
+
+    }
+
+
+});
 
 
 
