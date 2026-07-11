@@ -293,17 +293,31 @@ loadHistory();
 }
 );
 
+function updateMetalChartUnit(){
 
+    const unit =
+    document.getElementById("metalChartUnit");
+
+
+    if(unit){
+
+        unit.innerText =
+        `1 트로이온스(oz)당 ${currencySelect.value}`;
+
+    }
+
+}
 
 currencySelect.addEventListener(
 "change",
 ()=>{
 
-loadHistory();
+    updateMetalChartUnit();
+
+    loadHistory();
 
 }
 );
-
 
 
 async function loadHistory(){
@@ -605,7 +619,7 @@ loadHistory();
 
 };
 
-
+updateMetalChartUnit();
 
 loadHistory();
 
