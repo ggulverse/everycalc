@@ -2,13 +2,22 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>환율 계산기 - EveryCalc</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/calculator.css">
+<title>EveryCalc | 환율 계산기</title>
+
+<meta name="description"
+content="EveryCalc 실시간 환율 계산기">
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/calculator.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/darkmode.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
 
 </head>
 
@@ -16,54 +25,130 @@
 <body>
 
 
-<header class="site-header">
+<header class="header">
 
-    <h1>
-        EveryCalc
-    </h1>
+<div class="container">
 
-    <p>
-        실시간 환율 계산기
-    </p>
+
+<div class="logo">
+
+<a href="../index.html">
+
+<span class="logo-main">
+EveryCalc
+</span>
+
+<span class="logo-sub">
+Every Calculation in One Place
+</span>
+
+</a>
+
+</div>
+
+
+
+<nav class="navigation">
+
+<ul>
+
+<li>
+<a href="../index.html">
+홈
+</a>
+</li>
+
+<li>
+<a href="../index.html#popular">
+인기 계산기
+</a>
+</li>
+
+<li>
+<a href="../index.html#categories">
+카테고리
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+
+
+<div class="header-buttons">
+
+<button id="darkModeToggle">
+
+🌙
+
+</button>
+
+</div>
+
+
+</div>
 
 </header>
 
 
 
-<main class="calculator-container">
 
 
-<section class="calculator-box">
+<main>
 
 
-<h2>
-환율 계산기
-</h2>
+<section class="calculator-page">
+
+
+<div class="container">
 
 
 
-<!-- 금액 입력 -->
+<div class="calculator-header">
 
-<div class="input-group">
 
-<label>
-금액
-</label>
+<h1>
+💱 환율 계산기
+</h1>
 
-<input 
-id="amount"
-type="number"
-value="1"
-min="0">
+
+<p>
+실시간 환율 기준으로 원하는 통화를 변환합니다.
+</p>
+
 
 </div>
 
 
 
 
-<!-- 출발 통화 -->
 
-<div class="currency-selector">
+
+
+<section class="calculator-box">
+
+
+
+<div class="calculator-form">
+
+
+
+<label>
+금액
+</label>
+
+
+<input
+id="amount"
+type="number"
+value="1"
+min="0">
+
+
+
+
+
 
 
 <label>
@@ -71,24 +156,33 @@ min="0">
 </label>
 
 
-<div 
-class="selected-currency"
-id="fromSelected">
+<div class="currency-selector">
 
-<span id="fromIcon"></span>
+
+<div
+id="fromSelected"
+class="selected-currency">
+
+
+<span id="fromFlag">
+🇺🇸
+</span>
+
 
 <span id="fromText">
 USD - 미국 달러
 </span>
+
 
 </div>
 
 
 
 <input
-type="text"
 id="fromSearch"
+type="text"
 placeholder="통화 검색">
+
 
 
 <div
@@ -104,13 +198,15 @@ class="currency-options">
 
 
 
-<!-- 교환 버튼 -->
 
-<button 
+
+
+
+<button
 id="swapButton"
-class="swap-button">
+type="button">
 
-⇄
+⇅ 통화 변경
 
 </button>
 
@@ -119,9 +215,6 @@ class="swap-button">
 
 
 
-<!-- 도착 통화 -->
-
-<div class="currency-selector">
 
 
 <label>
@@ -129,12 +222,17 @@ class="swap-button">
 </label>
 
 
-<div 
-class="selected-currency"
-id="toSelected">
+<div class="currency-selector">
 
 
-<span id="toIcon"></span>
+<div
+id="toSelected"
+class="selected-currency">
+
+
+<span id="toFlag">
+🇰🇷
+</span>
 
 
 <span id="toText">
@@ -146,11 +244,11 @@ KRW - 대한민국 원
 
 
 
-
 <input
-type="text"
 id="toSearch"
+type="text"
 placeholder="통화 검색">
+
 
 
 <div
@@ -179,37 +277,46 @@ class="calculate-button">
 
 
 
-
-
-
-<!-- 결과 -->
-
-<div 
-id="result"
-class="result-box">
-
 </div>
+
+
+
 
 
 
 <div
-id="exchangeInfo"
-class="exchange-info">
+id="result"
+class="calculator-result">
 
 </div>
 
 
 
 
+<div
+id="exchangeInfo">
+
+</div>
 
 
-<!-- 즐겨찾기 -->
 
-<section class="favorite-section">
+
+<button
+id="favoriteButton">
+
+⭐ 즐겨찾기 추가
+
+</button>
+
+
+
+
+
+<section>
 
 
 <h3>
-즐겨찾기 환율
+즐겨찾기
 </h3>
 
 
@@ -226,18 +333,15 @@ class="exchange-info">
 
 
 
-<!-- 최근 환율 -->
-
-<section class="history-section">
+<section>
 
 
 <h3>
-최근 환율 정보
+최근 환율
 </h3>
 
 
-<div
-id="recentRate">
+<div id="recentRate">
 
 </div>
 
@@ -249,24 +353,17 @@ id="recentRate">
 
 
 
-
-
-
-<!-- 차트 -->
-
-<section class="chart-section">
+<section>
 
 
 <h3>
-7일 환율 변화
+최근 7일 환율 변화
 </h3>
 
 
-<canvas
-id="chart7">
+<canvas id="chart7">
 
 </canvas>
-
 
 
 </section>
@@ -275,24 +372,31 @@ id="chart7">
 
 
 
-<section class="chart-section">
+<section>
 
 
 <h3>
-30일 환율 변화
+최근 30일 환율 변화
 </h3>
 
 
-<canvas
-id="chart30">
+<canvas id="chart30">
 
 </canvas>
+
+
+</section>
+
+
+
 
 
 
 </section>
 
 
+
+</div>
 
 
 </section>
@@ -306,11 +410,33 @@ id="chart30">
 
 
 
-<footer>
+
+
+
+<footer class="footer">
+
+
+<div class="container">
+
+
+<div class="footer-bottom">
+
 
 <p>
-© EveryCalc
+© 2026 EveryCalc. All Rights Reserved.
 </p>
+
+
+<p>
+Developed for GitHub Pages
+</p>
+
+
+</div>
+
+
+</div>
+
 
 </footer>
 
@@ -320,23 +446,17 @@ id="chart30">
 
 
 
-<!-- Chart.js -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-
-
-<!-- 통화 데이터 -->
-
 <script src="../js/currencies.js"></script>
 
 
-
-<!-- 환율 계산기 -->
-
 <script src="../js/exchange.js"></script>
 
+
+<script src="../js/theme.js"></script>
 
 
 </body>
