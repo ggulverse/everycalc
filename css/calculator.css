@@ -676,11 +676,13 @@ body.dark-mode .currency-options{
 
     height:50px;
 
-    border-radius:50%;
+    border-radius:50px;
 
     border:1px solid var(--border);
 
     background:var(--surface);
+
+    color:var(--text);
 
     display:flex;
 
