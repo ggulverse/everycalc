@@ -641,3 +641,67 @@ body.dark-mode .currency-options{
     border-color:var(--border);
 
 }
+/* ==================================================
+   Exchange Calculator Layout
+================================================== */
+
+
+.exchange-currency-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    width:100%;
+
+    gap:15px;
+
+}
+
+
+
+.currency-side{
+
+    width:100%;
+
+}
+
+
+
+.swap-button{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.5rem;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.swap-button:hover{
+
+    color:var(--primary);
+
+    transform:rotate(180deg);
+
+}
