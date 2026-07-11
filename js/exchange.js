@@ -6,22 +6,17 @@
 const amountInput =
 document.getElementById("amount");
 
-
 const fromCurrency =
 document.getElementById("fromCurrency");
-
 
 const toCurrency =
 document.getElementById("toCurrency");
 
-
 const calculateButton =
 document.getElementById("calculate");
 
-
 const result =
 document.getElementById("result");
-
 
 const exchangeInfo =
 document.getElementById("exchangeInfo");
@@ -31,7 +26,7 @@ document.getElementById("exchangeInfo");
 
 
 /* ==========================
-   Currency API
+   Get Exchange Rate
 ========================== */
 
 
@@ -40,8 +35,17 @@ async function getExchangeRates(){
 
     const response =
     await fetch(
-        "https://api.frankfurter.app/latest?from=EUR"
+        "https://api.frankfurter.dev/v2/rates?base=EUR"
     );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "API 응답 오류"
+        );
+
+    }
 
 
     const data =
@@ -57,34 +61,74 @@ async function getExchangeRates(){
 
 
 
+
+
 /* ==========================
-   Calculate Exchange
+   Convert Data
+========================== */
+
+
+function createRateObject(data){
+
+
+    const rates = {
+
+        EUR:1
+
+    };
+
+
+    data.forEach(item=>{
+
+
+        rates[item.currency] =
+        item.rate;
+
+
+    });
+
+
+    return rates;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   Calculate
 ========================== */
 
 
 async function calculateExchange(){
 
 
-    const amount =
-    Number(amountInput.value);
-
-
-
-    if(!amount || amount <= 0){
-
-
-        result.innerHTML =
-        "금액을 입력해주세요.";
-
-
-        return;
-
-
-    }
-
-
-
     try{
+
+
+        const amount =
+        Number(
+            amountInput.value
+        );
+
+
+
+        if(!amount || amount<=0){
+
+
+            result.innerHTML =
+            "금액을 입력해주세요.";
+
+
+            return;
+
+        }
+
+
 
 
         const data =
@@ -93,22 +137,9 @@ async function calculateExchange(){
 
 
         const rates =
-        data.rates;
+        createRateObject(data);
 
 
-
-        const baseDate =
-        data.date;
-
-
-
-        /*
-            Frankfurter는 EUR 기준 제공
-
-            EUR = 1
-            다른 통화 = rates 값
-
-        */
 
 
         const from =
@@ -120,42 +151,29 @@ async function calculateExchange(){
 
 
 
-        let resultValue;
+
+        if(!rates[from] || !rates[to]){
 
 
-
-        if(from === "EUR"){
-
-
-            resultValue =
-            amount * rates[to];
+            result.innerHTML =
+            "지원하지 않는 통화입니다.";
 
 
-        }
-
-
-        else if(to === "EUR"){
-
-
-            resultValue =
-            amount / rates[from];
+            return;
 
 
         }
 
 
-        else{
 
 
-            const euroValue =
-            amount / rates[from];
+        const euroAmount =
+        amount / rates[from];
 
 
-            resultValue =
-            euroValue * rates[to];
+        const converted =
+        euroAmount * rates[to];
 
-
-        }
 
 
 
@@ -167,11 +185,12 @@ async function calculateExchange(){
         <h2>
 
         ${amount.toLocaleString()}
+
         ${from}
 
         =
 
-        ${resultValue.toLocaleString(
+        ${converted.toLocaleString(
             undefined,
             {
                 maximumFractionDigits:2
@@ -188,37 +207,10 @@ async function calculateExchange(){
 
 
 
-        let oneRate;
 
 
-
-        if(from === "EUR"){
-
-
-            oneRate =
-            rates[to];
-
-
-        }
-
-        else if(to === "EUR"){
-
-
-            oneRate =
-            1 / rates[from];
-
-
-        }
-
-        else{
-
-
-            oneRate =
-            rates[to] / rates[from];
-
-
-        }
-
+        const unitRate =
+        rates[to] / rates[from];
 
 
 
@@ -235,7 +227,7 @@ async function calculateExchange(){
 
         =
 
-        ${oneRate.toLocaleString(
+        ${unitRate.toLocaleString(
             undefined,
             {
                 maximumFractionDigits:6
@@ -250,11 +242,11 @@ async function calculateExchange(){
 
         <p>
 
-        환율 기준일
+        환율 기준
 
         <br>
 
-        ${baseDate}
+        최신 ECB 기준 공개 환율 데이터
 
         </p>
 
@@ -266,7 +258,7 @@ async function calculateExchange(){
 
         <br>
 
-        유럽중앙은행(ECB) 기준 공개 환율 데이터
+        European Central Bank(ECB) 기준
 
         </p>
 
@@ -281,22 +273,22 @@ async function calculateExchange(){
     catch(error){
 
 
+        console.error(error);
+
+
         result.innerHTML =
         "환율 데이터를 불러오지 못했습니다.";
 
 
         exchangeInfo.innerHTML =
-        "잠시 후 다시 시도해주세요.";
-
-
-        console.error(error);
+        "환율 API 연결을 확인해주세요.";
 
 
     }
 
 
-
 }
+
 
 
 
@@ -316,8 +308,9 @@ calculateExchange;
 
 
 
+
 /* ==========================
-   Initial
+   First Load
 ========================== */
 
 
