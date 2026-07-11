@@ -12,7 +12,7 @@
 
 
 <meta name="description"
-content="통화 환율과 금·은 시세를 계산하는 무료 계산기">
+content="주요 국가 통화의 실시간 환율을 계산하는 무료 환율 계산기">
 
 
 <link rel="stylesheet" href="../css/style.css">
@@ -51,6 +51,7 @@ Every Calculation in One Place
 </div>
 
 
+
 <nav class="navigation">
 
 <ul>
@@ -71,6 +72,7 @@ Every Calculation in One Place
 </ul>
 
 </nav>
+
 
 
 <div class="header-buttons">
@@ -108,8 +110,9 @@ Every Calculation in One Place
 
 
 <p>
-최신 공개 환율 데이터와 국제 금속 가격 기준으로 계산합니다.
+주요 국가 통화의 환율을 빠르고 간편하게 계산합니다.
 </p>
+
 
 </div>
 
@@ -135,9 +138,10 @@ Every Calculation in One Place
 
 <input
 id="amount"
-type="number"
+type="text"
 value="1"
 placeholder="금액 입력">
+
 
 
 
@@ -148,9 +152,39 @@ placeholder="금액 입력">
 </label>
 
 
-<select id="fromCurrency">
+<div class="currency-selector"
+id="fromSelector">
 
-</select>
+
+<div class="selected-currency">
+
+
+<span id="fromIcon">
+🇺🇸
+</span>
+
+
+<span id="fromText">
+USD 미국 달러
+</span>
+
+
+<span>
+▼
+</span>
+
+
+</div>
+
+
+
+<div class="currency-options"
+id="fromOptions">
+
+</div>
+
+
+</div>
 
 
 
@@ -162,9 +196,40 @@ placeholder="금액 입력">
 </label>
 
 
-<select id="toCurrency">
+<div class="currency-selector"
+id="toSelector">
 
-</select>
+
+<div class="selected-currency">
+
+
+<span id="toIcon">
+🇰🇷
+</span>
+
+
+<span id="toText">
+KRW 대한민국 원
+</span>
+
+
+<span>
+▼
+</span>
+
+
+</div>
+
+
+
+<div class="currency-options"
+id="toOptions">
+
+</div>
+
+
+</div>
+
 
 
 
@@ -179,6 +244,7 @@ class="calculate-button">
 </button>
 
 
+
 </div>
 
 
@@ -186,8 +252,8 @@ class="calculate-button">
 
 
 
-<div
-id="result"
+
+<div id="result"
 class="calculator-result">
 
 결과가 표시됩니다.
@@ -198,8 +264,8 @@ class="calculator-result">
 
 
 
-<div
-id="exchangeInfo"
+
+<div id="exchangeInfo"
 class="calculator-info">
 
 환율 정보를 불러오는 중입니다.
@@ -219,25 +285,18 @@ class="calculator-info">
 
 
 <p>
-변환할 금액과 통화를 선택하면 공개 환율 데이터를 기준으로 계산합니다.
+변환할 금액과 원하는 통화를 선택하면 공개 환율 데이터를 기준으로 계산합니다.
 </p>
 
 
 <p>
-금(XAU)과 은(XAG)은 국제 귀금속 단위 기준으로 계산됩니다.
-</p>
-
-
-<p>
-실제 은행 환전 및 거래 가격과 차이가 있을 수 있습니다.
+실제 은행 환전 시 적용되는 환율과는 수수료 등으로 차이가 발생할 수 있습니다.
 </p>
 
 
 </div>
 
 
-
-</div>
 
 
 </div>
@@ -250,6 +309,8 @@ class="calculator-info">
 
 
 </main>
+
+
 
 
 
@@ -281,11 +342,13 @@ class="calculator-info">
 
 
 
+
 <script src="../js/theme.js"></script>
 
 <script src="../js/currencies.js"></script>
 
 <script src="../js/exchange.js"></script>
+
 
 
 </body>
