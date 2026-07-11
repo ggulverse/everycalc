@@ -998,38 +998,41 @@ chartTextColor
 
 scales:{
 
-
 x:{
-
 
 ticks:{
 
-
 color:
 chartTextColor
-
-
-}
-
 
 },
 
+grid:{
+
+color:
+chartTextColor + "33"
+
+}
+
+},
 
 y:{
 
-
 ticks:{
-
 
 color:
 chartTextColor
 
+},
+
+grid:{
+
+color:
+chartTextColor + "33"
 
 }
 
-
 }
-
 
 }
 
@@ -1102,38 +1105,41 @@ chartTextColor
 
 scales:{
 
-
 x:{
-
 
 ticks:{
 
-
 color:
 chartTextColor
-
-
-}
-
 
 },
 
+grid:{
+
+color:
+chartTextColor + "33"
+
+}
+
+},
 
 y:{
 
-
 ticks:{
-
 
 color:
 chartTextColor
 
+},
+
+grid:{
+
+color:
+chartTextColor + "33"
 
 }
 
-
 }
-
 
 }
 
