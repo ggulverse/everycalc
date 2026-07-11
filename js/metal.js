@@ -406,14 +406,10 @@ item=>item.rate
 );
 
 
-
-let textColor =
-document.body.classList.contains("dark-mode")
-?
-"#ffffff"
-:
-"#222222";
-
+let chartTextColor =
+getComputedStyle(document.body)
+.getPropertyValue("--text")
+.trim();
 
 
 chart7 =
@@ -452,7 +448,7 @@ legend:{
 
 labels:{
 
-color:textColor
+color:chartTextColor
 
 }
 
@@ -466,7 +462,7 @@ x:{
 
 ticks:{
 
-color:textColor
+color:chartTextColor
 
 }
 
@@ -476,7 +472,7 @@ y:{
 
 ticks:{
 
-color:textColor
+color:chartTextColor
 
 }
 
@@ -528,7 +524,7 @@ legend:{
 
 labels:{
 
-color:textColor
+color:chartTextColor
 
 }
 
@@ -542,7 +538,7 @@ x:{
 
 ticks:{
 
-color:textColor
+color:chartTextColor
 
 }
 
@@ -552,7 +548,7 @@ y:{
 
 ticks:{
 
-color:textColor
+color:chartTextColor
 
 }
 
