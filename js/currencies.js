@@ -17,20 +17,20 @@ const currencyGroups = [
 
             {
 
-                code: "KRW",
-                name: "대한민국 원",
-                flag: "🇰🇷"
-
-            },
-
-            {
-
                 code: "USD",
                 name: "미국 달러",
                 flag: "🇺🇸"
 
             },
 
+            {
+
+                code: "KRW",
+                name: "대한민국 원",
+                flag: "🇰🇷"
+
+            },
+           
             {
 
                 code: "EUR",
