@@ -716,14 +716,14 @@ body.dark-mode .currency-options{
 
     font-weight:700;
 
-    padding:12px 10px 8px;
+    padding:14px 10px 10px;
 
-    font-size:0.9rem;
+    font-size:1rem;
 
-    color:var(--primary);
+    color:var(--text);
 
     border-bottom:1px solid var(--border);
 
-    margin-top:8px;
+    margin-top:10px;
 
 }
