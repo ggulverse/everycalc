@@ -1,4 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* ==================================================
+   EveryCalc - exchange.js
+   Currency Converter
+================================================== */
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
 
 const amount =
@@ -9,13 +17,8 @@ const calculate =
 document.getElementById("calculate");
 
 
-const swapButton =
+const swap =
 document.getElementById("swapButton");
-
-
-const favoriteButton =
-document.getElementById("favoriteButton");
-
 
 
 const result =
@@ -26,24 +29,12 @@ const exchangeInfo =
 document.getElementById("exchangeInfo");
 
 
-const recentRate =
-document.getElementById("recentRate");
 
+const fromSelected =
+document.getElementById("fromSelected");
 
-
-const fromText =
-document.getElementById("fromText");
-
-const toText =
-document.getElementById("toText");
-
-
-
-const fromFlag =
-document.getElementById("fromFlag");
-
-const toFlag =
-document.getElementById("toFlag");
+const toSelected =
+document.getElementById("toSelected");
 
 
 
@@ -63,48 +54,103 @@ document.getElementById("toOptions");
 
 
 
+const fromText =
+document.getElementById("fromText");
+
+const toText =
+document.getElementById("toText");
+
+
+
+const fromIcon =
+document.getElementById("fromIcon");
+
+const toIcon =
+document.getElementById("toIcon");
+
+
+
 const favoriteList =
 document.getElementById("favoriteList");
 
 
-
-let fromCurrency = "USD";
-
-let toCurrency = "KRW";
-
-
-let chart7;
-
-let chart30;
+const recentRate =
+document.getElementById("recentRate");
 
 
 
+let fromCurrency =
+"USD";
+
+
+let toCurrency =
+"KRW";
+
+
+
+let chart7 = null;
+
+let chart30 = null;
 
 
 
 
-/* =========================
-   통화 선택 메뉴
-========================= */
+
+/*
+====================================
+통화 선택 메뉴
+지역별 그룹 표시
+====================================
+*/
 
 
-function showCurrencyList(
-target,
+function renderCurrencyMenu(
+element,
 keyword,
 callback
 ){
 
 
-target.innerHTML="";
-
-
-const search =
-keyword.toLowerCase();
+element.innerHTML="";
 
 
 
-currencies
-.filter(currency => {
+let search =
+keyword
+.toLowerCase()
+.trim();
+
+
+
+
+currencyGroups.forEach(group=>{
+
+
+let groupBox =
+document.createElement("div");
+
+
+let title =
+document.createElement("div");
+
+
+title.className =
+"currency-group-title";
+
+
+title.innerText =
+group.group;
+
+
+
+groupBox.appendChild(title);
+
+
+
+
+
+group.currencies
+.filter(currency=>{
 
 
 return (
@@ -116,18 +162,19 @@ currency.code
 ||
 
 currency.name
+.toLowerCase()
 .includes(search)
 
 );
 
 
 })
-.forEach(currency => {
+.forEach(currency=>{
 
 
-
-const item =
+let item =
 document.createElement("div");
+
 
 
 item.className =
@@ -138,38 +185,33 @@ item.className =
 item.innerHTML = `
 
 <span>
-
 ${currency.flag}
-
 </span>
 
-
 <span>
-
 ${currency.code}
 -
 ${currency.name}
-
 </span>
 
 `;
 
 
 
-item.onclick = () => {
+item.onclick = ()=>{
 
 
 callback(currency);
 
 
-target.style.display="none";
+element.style.display =
+"none";
 
 
 };
 
 
-
-target.appendChild(item);
+groupBox.appendChild(item);
 
 
 
@@ -177,11 +219,23 @@ target.appendChild(item);
 
 
 
-target.style.display="block";
+element.appendChild(groupBox);
 
+
+
+});
+
+
+
+if(element.children.length){
+
+element.style.display =
+"block";
 
 }
 
+
+}
 
 
 
@@ -195,13 +249,18 @@ fromCurrency =
 currency.code;
 
 
+
 fromText.innerText =
 `${currency.code} - ${currency.name}`;
 
 
-fromFlag.innerText =
+fromIcon.innerText =
 currency.flag;
 
+
+
+fromOptions.style.display =
+"none";
 
 
 loadHistory();
@@ -219,13 +278,18 @@ toCurrency =
 currency.code;
 
 
+
 toText.innerText =
 `${currency.code} - ${currency.name}`;
 
 
-toFlag.innerText =
+toIcon.innerText =
 currency.flag;
 
+
+
+toOptions.style.display =
+"none";
 
 
 loadHistory();
@@ -238,120 +302,107 @@ loadHistory();
 
 
 
-fromSearch.addEventListener(
-"input",
-()=>{
+fromSelected.onclick=()=>{
 
 
-showCurrencyList(
+renderCurrencyMenu(
+fromOptions,
+"",
+setFrom
+);
+
+
+};
+
+
+
+
+
+toSelected.onclick=()=>{
+
+
+renderCurrencyMenu(
+toOptions,
+"",
+setTo
+);
+
+
+};
+
+
+
+
+
+fromSearch.oninput=()=>{
+
+
+renderCurrencyMenu(
 fromOptions,
 fromSearch.value,
 setFrom
 );
 
 
-});
+};
 
 
 
-toSearch.addEventListener(
-"input",
-()=>{
 
 
-showCurrencyList(
+toSearch.oninput=()=>{
+
+
+renderCurrencyMenu(
 toOptions,
 toSearch.value,
 setTo
 );
 
 
-});
-
-
-
-
-
-
-fromText.parentElement.onclick =
-()=>{
-
-
-showCurrencyList(
-fromOptions,
-"",
-setFrom
-);
-
-
 };
-
-
-
-
-
-toText.parentElement.onclick =
-()=>{
-
-
-showCurrencyList(
-toOptions,
-"",
-setTo
-);
-
-
-};
-
-
-
-
-
-
-
-
-
-
-/* =========================
-   환율 API
-========================= */
+====================================
+환율 API
+Frankfurter
+캐시 적용
+====================================
+*/
 
 
 async function getRate(){
 
 
-
-const key =
-`rate_${fromCurrency}_${toCurrency}`;
+const cacheKey =
+`exchange_${fromCurrency}_${toCurrency}`;
 
 
 
 const saved =
-localStorage.getItem(key);
+localStorage.getItem(cacheKey);
 
 
 
 if(saved){
 
 
-const data =
+const cache =
 JSON.parse(saved);
 
 
+
 if(
-Date.now()-data.time
+Date.now()-cache.time
 <
 3600000
 ){
 
-
-return data.rate;
-
+return cache.rate;
 
 }
 
 
 }
+
 
 
 
@@ -365,37 +416,52 @@ await fetch(
 
 
 
-const data =
-await response.json();
-
-
-
-if(
-!data[0]
-){
-
+if(!response.ok){
 
 throw new Error(
-"환율 정보를 찾을 수 없습니다."
+"환율 서버 연결 실패"
 );
-
 
 }
 
 
 
+const data =
+await response.json();
+
+
+
+
+
+if(
+!data.rates ||
+!data.rates[toCurrency]
+){
+
+throw new Error(
+"지원하지 않는 환율입니다."
+);
+
+}
+
+
+
+
+
 const rate =
-data[0].rate;
+data.rates[toCurrency];
+
+
 
 
 
 localStorage.setItem(
 
-key,
+cacheKey,
 
 JSON.stringify({
 
-rate,
+rate:rate,
 
 time:Date.now()
 
@@ -416,11 +482,11 @@ return rate;
 
 
 
-
-
-/* =========================
-   계산
-========================= */
+/*
+====================================
+계산
+====================================
+*/
 
 
 async function calculateExchange(){
@@ -434,8 +500,23 @@ Number(amount.value);
 
 
 
+if(
+isNaN(value)
+){
+
+throw new Error(
+"금액을 입력하세요."
+);
+
+}
+
+
+
+
+
 const rate =
 await getRate();
+
 
 
 
@@ -444,9 +525,11 @@ value * rate;
 
 
 
+
+
 result.innerHTML = `
 
-<h2>
+<strong>
 
 ${value.toLocaleString()}
 ${fromCurrency}
@@ -459,18 +542,17 @@ undefined,
 maximumFractionDigits:2
 }
 )}
-
 ${toCurrency}
 
-</h2>
+</strong>
 
 `;
 
 
 
-exchangeInfo.innerHTML =
 
-`
+
+exchangeInfo.innerHTML = `
 
 1 ${fromCurrency}
 
@@ -483,7 +565,13 @@ ${toCurrency}
 <br>
 
 업데이트:
-${new Date().toLocaleString()}
+
+${new Date()
+.toLocaleString()}
+
+<br>
+
+⭐ 클릭하면 즐겨찾기 추가
 
 `;
 
@@ -495,14 +583,16 @@ ${new Date().toLocaleString()}
 catch(error){
 
 
-result.innerText =
+result.innerHTML =
 error.message;
 
 
+
+}
+
 }
 
 
-}
 
 
 
@@ -514,130 +604,32 @@ calculateExchange;
 
 
 
+/*
+====================================
+즐겨찾기
+====================================
+*/
 
 
-
-/* =========================
-   스왑
-========================= */
+function loadFavorites(){
 
 
-swapButton.onclick = ()=>{
-
-
-const temp =
-fromCurrency;
-
-
-fromCurrency =
-toCurrency;
-
-
-toCurrency =
-temp;
-
-
-
-const text =
-fromText.innerText;
-
-
-fromText.innerText =
-toText.innerText;
-
-
-toText.innerText =
-text;
-
-
-
-const flag =
-fromFlag.innerText;
-
-
-fromFlag.innerText =
-toFlag.innerText;
-
-
-toFlag.innerText =
-flag;
-
-
-
-loadHistory();
-
-
-};
-
-
-
-
-
-
-
-
-
-/* =========================
-   즐겨찾기
-========================= */
-
-
-favoriteButton.onclick = ()=>{
-
-
-let favorites =
+const favorites =
 JSON.parse(
-localStorage.getItem("favorites")
+
+localStorage.getItem(
+"exchangeFavorites"
 )
-|| [];
 
-
-
-const pair =
-`${fromCurrency}/${toCurrency}`;
-
-
-
-if(
-!favorites.includes(pair)
-){
-
-
-favorites.push(pair);
-
-
-localStorage.setItem(
-"favorites",
-JSON.stringify(favorites)
-);
-
-
-}
-
-
-
-renderFavorites();
-
-
-};
-
-
-
-
-
-
-function renderFavorites(){
-
-
-let favorites =
-JSON.parse(
-localStorage.getItem("favorites")
 )
-|| [];
+||
+[];
+
 
 
 
 favoriteList.innerHTML="";
+
 
 
 
@@ -653,23 +645,48 @@ pair;
 
 
 
-button.onclick = ()=>{
+button.onclick=()=>{
 
 
-const split =
+const data =
 pair.split("/");
 
 
-fromCurrency =
-split[0];
 
+fromCurrency =
+data[0];
 
 toCurrency =
-split[1];
+data[1];
 
 
 
-loadHistory();
+const from =
+currencies.find(
+c=>c.code===fromCurrency
+);
+
+
+const to =
+currencies.find(
+c=>c.code===toCurrency
+);
+
+
+
+if(from){
+
+setFrom(from);
+
+}
+
+
+if(to){
+
+setTo(to);
+
+}
+
 
 
 };
@@ -688,15 +705,143 @@ favoriteList.appendChild(button);
 
 
 
- 
+
+
+function addFavorite(){
+
+
+const favorites =
+JSON.parse(
+
+localStorage.getItem(
+"exchangeFavorites"
+)
+
+)
+||
+[];
+
+
+
+
+const pair =
+`${fromCurrency}/${toCurrency}`;
+
+
+
+if(
+!favorites.includes(pair)
+){
+
+favorites.push(pair);
+
+
+localStorage.setItem(
+
+"exchangeFavorites",
+
+JSON.stringify(favorites)
+
+);
+
+
+}
+
+
+
+loadFavorites();
+
+
+
+}
+
+
+
+
+exchangeInfo.onclick =
+addFavorite;
 
 
 
 
 
-/* =========================
-   차트
-========================= */
+
+
+/*
+====================================
+스왑
+====================================
+*/
+
+
+swap.onclick=()=>{
+
+
+const old =
+fromCurrency;
+
+
+fromCurrency =
+toCurrency;
+
+
+toCurrency =
+old;
+
+
+
+
+
+const from =
+currencies.find(
+c=>c.code===fromCurrency
+);
+
+
+const to =
+currencies.find(
+c=>c.code===toCurrency
+);
+
+
+
+
+if(from){
+
+fromText.innerText =
+`${from.code} - ${from.name}`;
+
+fromIcon.innerText =
+from.flag;
+
+}
+
+
+
+if(to){
+
+toText.innerText =
+`${to.code} - ${to.name}`;
+
+toIcon.innerText =
+to.flag;
+
+}
+
+
+
+
+loadHistory();
+
+
+
+};
+/*
+====================================
+최근 환율 데이터
+7일 / 30일 차트
+====================================
+*/
 
 
 async function loadHistory(){
@@ -720,16 +865,25 @@ end.getDate()-30
 
 
 
-const format =
-date =>
-date.toISOString()
-.substring(0,10);
+
+const formatDate =
+(date)=>
+
+date
+.toISOString()
+.split("T")[0];
+
+
+
 
 
 
 const url =
 
-`https://api.frankfurter.dev/v2/rates?from=${format(start)}&to=${format(end)}&base=${fromCurrency}&symbols=${toCurrency}`;
+`https://api.frankfurter.dev/v2/rates?from=${formatDate(start)}&to=${formatDate(end)}&base=${fromCurrency}&symbols=${toCurrency}`;
+
+
+
 
 
 
@@ -738,39 +892,64 @@ await fetch(url);
 
 
 
+
+
+if(!response.ok){
+
+throw new Error();
+
+}
+
+
+
+
+
 const data =
 await response.json();
+
+
 
 
 
 const rates =
 data.map(item=>({
 
-
 date:item.date,
 
+rate:item.rates[toCurrency]
 
-rate:item.rate
-
-
-}));
-
+}))
+.filter(item=>item.rate);
 
 
 
-recentRate.innerHTML =
 
-`
+
+if(!rates.length){
+
+recentRate.innerText =
+"최근 환율 데이터 없음";
+
+return;
+
+}
+
+
+
+
+
+recentRate.innerHTML = `
 
 1 ${fromCurrency}
 
 =
 
-${rates.at(-1)?.rate ?? "-"}
+${rates[rates.length-1].rate}
 
 ${toCurrency}
 
 `;
+
 
 
 
@@ -779,7 +958,6 @@ drawCharts(rates);
 
 
 }
-
 
 catch(error){
 
@@ -793,8 +971,6 @@ recentRate.innerText =
 
 
 }
-
-
 
 
 
@@ -821,26 +997,54 @@ item=>item.rate
 
 
 
-if(chart7)
+
+
+if(chart7){
+
 chart7.destroy();
 
+}
 
-if(chart30)
+
+
+if(chart30){
+
 chart30.destroy();
 
+}
 
+
+
+
+
+const canvas7 =
+document
+.getElementById("chart7");
+
+
+
+const canvas30 =
+document
+.getElementById("chart30");
+
+
+
+
+
+
+if(canvas7){
 
 
 
 chart7 =
 new Chart(
 
-document
-.getElementById("chart7"),
+canvas7,
 
 {
 
 type:"line",
+
 
 data:{
 
@@ -852,10 +1056,13 @@ labels.slice(-7),
 datasets:[{
 
 
-label:"7일 환율",
+label:
+"최근 7일 환율",
+
 
 data:
 values.slice(-7)
+
 
 
 }]
@@ -863,26 +1070,40 @@ values.slice(-7)
 
 }
 
+
 }
 
 );
 
 
 
+}
+
+
+
+
+
+
+
+if(canvas30){
 
 
 
 chart30 =
 new Chart(
 
-document
-.getElementById("chart30"),
+canvas30,
 
 {
 
+
 type:"line",
 
+
 data:{
+
+
+labels:
 
 
 labels,
@@ -891,15 +1112,20 @@ labels,
 datasets:[{
 
 
-label:"30일 환율",
+label:
+"최근 30일 환율",
 
-data:values
+
+data:
+values
+
 
 
 }]
 
 
 }
+
 
 }
 
@@ -912,12 +1138,26 @@ data:values
 
 
 
+}
 
 
 
-renderFavorites();
+
+
+
+/*
+====================================
+초기 실행
+====================================
+*/
+
+
+loadFavorites();
+
 
 loadHistory();
+
+
 
 
 
