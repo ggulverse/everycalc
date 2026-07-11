@@ -1092,6 +1092,12 @@ item=>item.rate
 
 
 
+let chartTextColor =
+getComputedStyle(document.body)
+.getPropertyValue("--text")
+.trim();
+
+
 
 chart7 =
 new Chart(
@@ -1118,11 +1124,81 @@ values.slice(-7)
 
 }]
 
-}
+},
+
+
+options:{
+
+
+plugins:{
+
+
+legend:{
+
+
+labels:{
+
+
+color:
+chartTextColor
+
 
 }
+
+
+}
+
+
+},
+
+
+scales:{
+
+
+x:{
+
+
+ticks:{
+
+
+color:
+chartTextColor
+
+
+}
+
+
+},
+
+
+y:{
+
+
+ticks:{
+
+
+color:
+chartTextColor
+
+
+}
+
+
+}
+
+
+}
+
+
+
+}
+
+
+}
+
 
 );
+
 
 
 
@@ -1152,16 +1228,83 @@ data:values
 
 }]
 
-}
+},
+
+
+options:{
+
+
+plugins:{
+
+
+legend:{
+
+
+labels:{
+
+
+color:
+chartTextColor
+
 
 }
+
+
+}
+
+
+},
+
+
+scales:{
+
+
+x:{
+
+
+ticks:{
+
+
+color:
+chartTextColor
+
+
+}
+
+
+},
+
+
+y:{
+
+
+ticks:{
+
+
+color:
+chartTextColor
+
+
+}
+
+
+}
+
+
+}
+
+
+
+}
+
+
+}
+
 
 );
 
 
-
 }
-
 
 
 
