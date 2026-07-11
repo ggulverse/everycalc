@@ -448,7 +448,7 @@ legend:{
 
 labels:{
 
-color:chartTextColor
+color:textColor
 
 }
 
@@ -462,7 +462,7 @@ x:{
 
 ticks:{
 
-color:chartTextColor
+color:textColor
 
 }
 
@@ -472,7 +472,7 @@ y:{
 
 ticks:{
 
-color:chartTextColor
+color:textColor
 
 }
 
@@ -524,7 +524,7 @@ legend:{
 
 labels:{
 
-color:chartTextColor
+color:textColor
 
 }
 
@@ -538,7 +538,7 @@ x:{
 
 ticks:{
 
-color:chartTextColor
+color:textColor
 
 }
 
@@ -548,7 +548,7 @@ y:{
 
 ticks:{
 
-color:chartTextColor
+color:textColor
 
 }
 
