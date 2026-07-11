@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>환율 계산기 | EveryCalc</title>
+
+
+<meta name="description"
+content="최신 공개 환율 데이터를 기준으로 원하는 국가의 통화를 변환하는 무료 환율 계산기">
+
+
+<meta name="keywords"
+content="환율 계산기, 환율 변환, 달러 환율, 엔화 환율, 원달러 환율">
+
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/calculator.css">
+<link rel="stylesheet" href="../css/footer.css">
+<link rel="stylesheet" href="../css/darkmode.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+<a href="../index.html">
+
+<span class="logo-main">
+EveryCalc
+</span>
+
+<span class="logo-sub">
+Every Calculation in One Place
+</span>
+
+</a>
+
+</div>
+
+
+
+<nav class="navigation">
+
+<ul>
+
+<li>
+<a href="../index.html">
+홈
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#popular">
+인기 계산기
+</a>
+</li>
+
+
+</ul>
+
+</nav>
+
+
+
+<div class="header-buttons">
+
+<button id="darkModeToggle">
+🌙
+</button>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+
+
+<main>
+
+
+<section class="calculator-page">
+
+
+<div class="container">
+
+
+
+<div class="calculator-header">
+
+
+<h1>
+환율 계산기
+</h1>
+
+
+<p>
+최신 공개 환율 데이터를 기준으로 통화를 변환합니다.
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="calculator-container">
+
+
+<div class="calculator-box">
+
+
+
+<div class="calculator-form">
+
+
+<label>
+금액
+</label>
+
+
+<input
+id="amount"
+type="number"
+placeholder="변환할 금액 입력"
+value="1">
+
+
+
+
+
+<label>
+변환 전 통화
+</label>
+
+
+<select id="fromCurrency">
+
+
+<option value="USD">
+🇺🇸 USD (미국 달러)
+</option>
+
+
+<option value="KRW">
+🇰🇷 KRW (대한민국 원)
+</option>
+
+
+<option value="JPY">
+🇯🇵 JPY (일본 엔)
+</option>
+
+
+<option value="EUR">
+🇪🇺 EUR (유로)
+</option>
+
+
+<option value="CNY">
+🇨🇳 CNY (중국 위안)
+</option>
+
+
+<option value="GBP">
+🇬🇧 GBP (영국 파운드)
+</option>
+
+
+</select>
+
+
+
+
+
+
+<label>
+변환 후 통화
+</label>
+
+
+<select id="toCurrency">
+
+
+<option value="KRW">
+🇰🇷 KRW (대한민국 원)
+</option>
+
+
+<option value="USD">
+🇺🇸 USD (미국 달러)
+</option>
+
+
+<option value="JPY">
+🇯🇵 JPY (일본 엔)
+</option>
+
+
+<option value="EUR">
+🇪🇺 EUR (유로)
+</option>
+
+
+<option value="CNY">
+🇨🇳 CNY (중국 위안)
+</option>
+
+
+<option value="GBP">
+🇬🇧 GBP (영국 파운드)
+</option>
+
+
+</select>
+
+
+
+
+
+
+<button
+id="calculate"
+class="calculate-button">
+
+계산하기
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<div
+id="result"
+class="calculator-result">
+
+결과가 표시됩니다.
+
+</div>
+
+
+
+
+<div
+id="exchangeInfo"
+class="calculator-info">
+
+환율 정보를 불러오는 중입니다.
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="calculator-info">
+
+
+<h2>
+환율 계산기 사용 방법
+</h2>
+
+
+<p>
+변환할 금액과 기준 통화를 선택하면 최신 공개 환율 데이터를 기준으로 환산 결과를 제공합니다.
+</p>
+
+
+<p>
+환율 데이터는 공개 환율 정보를 기반으로 하며 실제 은행 환전 시 적용되는 환율과 차이가 있을 수 있습니다.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+
+
+<footer class="footer">
+
+
+<div class="container">
+
+
+<div class="footer-bottom">
+
+
+<p>
+© 2026 EveryCalc. All Rights Reserved.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<script src="../js/theme.js"></script>
+
+<script src="../js/exchange.js"></script>
+
+
+</body>
+
+
+</html>
