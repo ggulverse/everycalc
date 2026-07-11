@@ -81,7 +81,7 @@ function createRateObject(data){
     data.forEach(item=>{
 
 
-        rates[item.currency] =
+        rates[item.quote] =
         item.rate;
 
 
@@ -92,11 +92,6 @@ function createRateObject(data){
 
 
 }
-
-
-
-
-
 
 
 /* ==========================
