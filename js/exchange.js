@@ -12,6 +12,36 @@ document.getElementById("fromCurrency");
 const toCurrency =
 document.getElementById("toCurrency");
 
+function loadCurrencies(){
+
+    currencies.forEach(currency=>{
+
+        const option =
+        document.createElement("option");
+
+        option.value =
+        currency.code;
+
+        option.textContent =
+        `${currency.flag} ${currency.code} (${currency.name})`;
+
+        fromCurrency.appendChild(
+            option.cloneNode(true)
+        );
+
+        toCurrency.appendChild(
+            option
+        );
+
+    });
+
+
+    fromCurrency.value = "USD";
+
+    toCurrency.value = "KRW";
+
+}
+
 const calculateButton =
 document.getElementById("calculate");
 
@@ -308,5 +338,6 @@ calculateExchange;
    First Load
 ========================== */
 
+loadCurrencies();
 
 calculateExchange();
