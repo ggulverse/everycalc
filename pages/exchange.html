@@ -9,7 +9,7 @@
 <title>환율 계산기 - EveryCalc</title>
 
 <meta name="description"
-content="EveryCalc 실시간 환율 계산기. 주요 국가 통화 변환과 환율 차트를 제공합니다.">
+content="EveryCalc 실시간 환율 계산기. 다양한 국가 통화 변환과 환율 추이를 제공합니다.">
 
 
 <link rel="stylesheet" href="../css/style.css">
@@ -59,17 +59,20 @@ Every Calculation in One Place
 </a>
 </li>
 
+
 <li>
 <a href="../index.html#popular">
 인기 계산기
 </a>
 </li>
 
+
 <li>
 <a href="../index.html#categories">
 카테고리
 </a>
 </li>
+
 
 </ul>
 
@@ -94,10 +97,7 @@ Every Calculation in One Place
 
 
 
-<main>
-
-
-<section class="calculator-page">
+<main class="calculator-page">
 
 
 <div class="container">
@@ -125,9 +125,7 @@ Every Calculation in One Place
 <section class="calculator-box">
 
 
-
 <div class="calculator-form">
-
 
 
 <label>
@@ -143,8 +141,6 @@ min="0">
 
 
 
-
-
 <label>
 변환 전 통화
 </label>
@@ -153,7 +149,8 @@ min="0">
 <div class="currency-selector">
 
 
-<div id="fromSelected"
+<div
+id="fromSelected"
 class="selected-currency">
 
 
@@ -176,245 +173,11 @@ type="text"
 placeholder="통화 검색">
 
 
-<div id="fromOptions"
+<div
+id="fromOptions"
 class="currency-options">
 
 </div>
 
 
 </div>
-
-
-
-
-
-
-
-<button
-id="swapButton"
-class="swap-button">
-
-⇄
-
-</button>
-
-
-
-
-
-
-
-<label>
-변환 후 통화
-</label>
-
-
-<div class="currency-selector">
-
-
-<div id="toSelected"
-class="selected-currency">
-
-
-<span id="toIcon">
-🇰🇷
-</span>
-
-
-<span id="toText">
-KRW - 대한민국 원
-</span>
-
-
-</div>
-
-
-<input
-id="toSearch"
-type="text"
-placeholder="통화 검색">
-
-
-<div id="toOptions"
-class="currency-options">
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<button
-id="calculate"
-class="calculate-button">
-
-계산하기
-
-</button>
-
-
-
-
-
-
-
-<div
-id="result"
-class="calculator-result">
-
-</div>
-
-
-
-
-<div
-id="exchangeInfo"
-class="calculator-result">
-
-</div>
-
-
-
-
-
-<section class="favorite-section">
-
-
-<h3>
-⭐ 즐겨찾기
-</h3>
-
-
-<div id="favoriteList">
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section>
-
-<h3>
-최근 환율
-</h3>
-
-
-<div id="recentRate">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-
-<h3>
-최근 7일 환율 변화
-</h3>
-
-
-<canvas id="chart7"></canvas>
-
-
-</section>
-
-
-
-
-
-
-<section>
-
-
-<h3>
-최근 30일 환율 변화
-</h3>
-
-
-<canvas id="chart30"></canvas>
-
-
-</section>
-
-
-
-
-</div>
-
-
-
-</section>
-
-
-</div>
-
-
-</section>
-
-
-</main>
-
-
-
-
-
-
-
-<footer class="footer">
-
-
-<div class="container">
-
-
-<div class="footer-bottom">
-
-
-<p>
-© 2026 EveryCalc.
-All Rights Reserved.
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</footer>
-
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-<script src="../js/currencies.js"></script>
-
-<script src="../js/exchange.js"></script>
-
-
-<script src="../js/theme.js"></script>
-
-
-</body>
-
-
-</html>
