@@ -812,3 +812,33 @@ body.dark-mode .currency-options{
     background:rgba(128,128,128,0.15);
 
 }
+
+/* ==========================
+   Exchange Result
+========================== */
+
+#result{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    font-size:1.1rem;
+
+    line-height:1.6;
+
+}
+
+
+
+#result strong{
+
+    font-size:1.25rem;
+
+}
