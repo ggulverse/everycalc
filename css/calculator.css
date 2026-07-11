@@ -702,7 +702,7 @@ body.dark-mode .currency-options{
 
 .swap-button:hover{
 
-    color:var(--primary);
+    color:var(--text);
 
     transform:rotate(180deg);
 
