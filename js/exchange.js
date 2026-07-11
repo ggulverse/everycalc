@@ -935,9 +935,11 @@ item=>item.rate
 
 
 let chartTextColor =
-getComputedStyle(document.body)
-.getPropertyValue("--text")
-.trim();
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222";
 
 
 
