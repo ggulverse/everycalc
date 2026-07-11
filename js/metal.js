@@ -223,8 +223,16 @@ ${currencySelect.value}
 
 metalInfo.innerHTML = `
 
-1 ${metalSelect.value} 기준 국제 시세:
+<h3>
+${metalSelect.options[metalSelect.selectedIndex].text}
+국제 시세
+</h3>
 
+
+<p>
+
+1 트로이온스(oz)
+=
 ${rate.toLocaleString(
 undefined,
 {
@@ -233,13 +241,24 @@ maximumFractionDigits:2
 )}
 ${currencySelect.value}
 
+</p>
+
+
+<p>
+
+환산 기준
+
 <br>
 
-차트 기준:
-1oz (트로이온스)
+1 oz = 31.1035g
+
+<br>
+
+1 돈 = 3.75g
+
+</p>
 
 `;
-
 
 
 loadHistory();
