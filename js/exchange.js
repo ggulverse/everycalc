@@ -331,7 +331,7 @@ fromText.innerText =
 fromIcon.innerText =
 currency.flag || "";
 
-
+updateExchangeChartUnit();
 
 loadHistory();
 
@@ -356,14 +356,27 @@ toText.innerText =
 toIcon.innerText =
 currency.flag || "";
 
-
+updateExchangeChartUnit();
 
 loadHistory();
 
 
 }
 
+function updateExchangeChartUnit(){
 
+    const unit =
+    document.getElementById("exchangeChartUnit");
+
+
+    if(unit){
+
+        unit.innerText =
+        `1 ${fromCurrency}당 ${toCurrency}`;
+
+    }
+
+}
 
 
 
@@ -781,7 +794,7 @@ toIcon.innerText;
 toIcon.innerText =
 iconTemp;
 
-
+updateExchangeChartUnit();
 
 loadHistory();
 
@@ -1167,6 +1180,7 @@ window.updateCharts = function(){
    시작
 ========================== */
 
+updateExchangeChartUnit();
 
 loadHistory();
 
