@@ -1,11 +1,18 @@
 /* ==================================================
    EveryCalc - exchange.js
-   Custom Currency Selector Version
 ================================================== */
 
 
 const amountInput =
 document.getElementById("amount");
+
+
+const fromCurrency =
+document.getElementById("fromCurrency");
+
+
+const toCurrency =
+document.getElementById("toCurrency");
 
 
 const calculateButton =
@@ -21,159 +28,38 @@ document.getElementById("exchangeInfo");
 
 
 
-const fromSelector =
-document.getElementById("fromSelector");
-
-
-const toSelector =
-document.getElementById("toSelector");
-
-
-const fromOptions =
-document.getElementById("fromOptions");
-
-
-const toOptions =
-document.getElementById("toOptions");
-
-
-const fromIcon =
-document.getElementById("fromIcon");
-
-
-const toIcon =
-document.getElementById("toIcon");
-
-
-const fromText =
-document.getElementById("fromText");
-
-
-const toText =
-document.getElementById("toText");
-
-
-
-let fromCurrency =
-"USD";
-
-
-let toCurrency =
-"KRW";
-
-
-
 
 
 /* ==========================
-   Currency List Create
+   Load Currency List
 ========================== */
-
-
-function createOption(currency, target){
-
-
-    const item =
-    document.createElement("div");
-
-
-    item.className =
-    "currency-option";
-
-
-
-    item.innerHTML = `
-
-        <img src="../images/${currency.icon}"
-        alt="${currency.code}">
-
-        <span>
-        ${currency.code}
-        (${currency.name})
-        </span>
-
-    `;
-
-
-
-    item.onclick = ()=>{
-
-
-        if(target==="from"){
-
-
-            fromCurrency =
-            currency.code;
-
-
-            fromIcon.src =
-            "../images/" + currency.icon;
-
-
-            fromText.textContent =
-            `${currency.code} (${currency.name})`;
-
-
-            fromOptions.style.display =
-            "none";
-
-
-        }
-        else{
-
-
-            toCurrency =
-            currency.code;
-
-
-            toIcon.src =
-            "../images/" + currency.icon;
-
-
-            toText.textContent =
-            `${currency.code} (${currency.name})`;
-
-
-            toOptions.style.display =
-            "none";
-
-
-        }
-
-
-    };
-
-
-
-    target==="from"
-    ?
-    fromOptions.appendChild(item)
-    :
-    toOptions.appendChild(item);
-
-
-}
-
-
-
 
 
 function loadCurrencies(){
 
 
-
     currencies.forEach(currency=>{
 
 
-        createOption(
-            currency,
-            "from"
+        const option =
+        document.createElement("option");
+
+
+        option.value =
+        currency.code;
+
+
+        option.textContent =
+        `${currency.flag} ${currency.code} (${currency.name})`;
+
+
+        fromCurrency.appendChild(
+            option.cloneNode(true)
         );
 
 
-        createOption(
-            currency,
-            "to"
+        toCurrency.appendChild(
+            option
         );
 
 
@@ -181,25 +67,12 @@ function loadCurrencies(){
 
 
 
-    const usd =
-    currencies.find(
-        c=>c.code==="USD"
-    );
+    fromCurrency.value =
+    "USD";
 
 
-    const krw =
-    currencies.find(
-        c=>c.code==="KRW"
-    );
-
-
-
-    fromIcon.src =
-    "../images/" + usd.icon;
-
-
-    toIcon.src =
-    "../images/" + krw.icon;
+    toCurrency.value =
+    "KRW";
 
 
 }
@@ -208,47 +81,8 @@ function loadCurrencies(){
 
 
 
-
 /* ==========================
-   Selector Open
-========================== */
-
-
-fromSelector.onclick = ()=>{
-
-
-    fromOptions.style.display =
-    fromOptions.style.display==="block"
-    ?
-    "none"
-    :
-    "block";
-
-
-};
-
-
-
-toSelector.onclick = ()=>{
-
-
-    toOptions.style.display =
-    toOptions.style.display==="block"
-    ?
-    "none"
-    :
-    "block";
-
-
-};
-
-
-
-
-
-
-/* ==========================
-   Get API Data
+   Get Exchange Rate
 ========================== */
 
 
@@ -257,14 +91,14 @@ async function getExchangeRates(){
 
     const response =
     await fetch(
-    "https://api.frankfurter.dev/v2/rates?base=EUR"
+        "https://api.frankfurter.dev/v2/rates?base=EUR"
     );
 
 
     if(!response.ok){
 
         throw new Error(
-        "API Error"
+            "API 오류"
         );
 
     }
@@ -279,6 +113,10 @@ async function getExchangeRates(){
 
 
 
+/* ==========================
+   Convert Data
+========================== */
+
 
 function createRateObject(data){
 
@@ -288,7 +126,6 @@ function createRateObject(data){
         EUR:1
 
     };
-
 
 
     data.forEach(item=>{
@@ -301,12 +138,10 @@ function createRateObject(data){
     });
 
 
-
     return rates;
 
 
 }
-
 
 
 
@@ -321,147 +156,179 @@ function createRateObject(data){
 async function calculateExchange(){
 
 
-try{
+    try{
 
 
-    const amount =
-    Number(
-        amountInput.value.replace(/,/g,"")
-    );
+        let amount =
+        Number(
+            amountInput.value.replace(/,/g,"")
+        );
 
 
 
-    if(!amount || amount<=0){
+        if(!amount || amount <=0){
 
 
-        result.innerHTML =
-        "금액을 입력해주세요.";
+            result.innerHTML =
+            "금액을 입력해주세요.";
 
 
-        return;
+            return;
+
+        }
+
+
+
+
+        const data =
+        await getExchangeRates();
+
+
+
+        const rates =
+        createRateObject(data);
+
+
+
+
+        const from =
+        fromCurrency.value;
+
+
+        const to =
+        toCurrency.value;
+
+
+
+
+        if(!rates[from] || !rates[to]){
+
+
+            result.innerHTML =
+            "현재 금/은 가격 데이터는 준비 중입니다.";
+
+
+            return;
+
+        }
+
+
+
+
+        const euroAmount =
+        amount / rates[from];
+
+
+
+        const converted =
+        euroAmount * rates[to];
+
+
+
+
+
+
+        result.innerHTML = `
+
+
+        <h2>
+
+        ${amount.toLocaleString()}
+
+        ${from}
+
+        =
+
+        ${converted.toLocaleString(
+            undefined,
+            {
+                maximumFractionDigits:2
+            }
+        )}
+
+        ${to}
+
+
+        </h2>
+
+
+        `;
+
+
+
+
+
+
+        const unitRate =
+        rates[to] / rates[from];
+
+
+
+        exchangeInfo.innerHTML = `
+
+
+        <p>
+
+        현재 환율
+
+        <br>
+
+        1 ${from}
+
+        =
+
+        ${unitRate.toLocaleString(
+            undefined,
+            {
+                maximumFractionDigits:6
+            }
+        )}
+
+        ${to}
+
+
+        </p>
+
+
+
+        <p>
+
+        데이터 출처
+
+        <br>
+
+        Frankfurter API
+
+        (ECB 공개 환율 데이터)
+
+
+        </p>
+
+
+        `;
+
+
 
     }
 
 
-
-    const data =
-    await getExchangeRates();
+    catch(error){
 
 
+        console.error(error);
 
-    const rates =
-    createRateObject(data);
-
-
-
-    if(!rates[fromCurrency] ||
-       !rates[toCurrency]){
 
 
         result.innerHTML =
-        "지원하지 않는 통화입니다.";
+        "환율 데이터를 불러오지 못했습니다.";
 
 
-        return;
+
+        exchangeInfo.innerHTML =
+        "API 연결 오류";
+
 
     }
-
-
-
-    const euroAmount =
-    amount / rates[fromCurrency];
-
-
-
-    const converted =
-    euroAmount * rates[toCurrency];
-
-
-
-
-    result.innerHTML = `
-
-    <h2>
-    ${amount.toLocaleString()}
-    ${fromCurrency}
-    =
-    ${converted.toLocaleString(
-        undefined,
-        {
-        maximumFractionDigits:2
-        }
-    )}
-    ${toCurrency}
-    </h2>
-
-    `;
-
-
-
-
-    const unitRate =
-    rates[toCurrency] /
-    rates[fromCurrency];
-
-
-
-
-    const today =
-    data[0].date;
-
-
-
-    exchangeInfo.innerHTML = `
-
-    <p>
-    적용 환율
-    <br>
-
-    1 ${fromCurrency}
-    =
-    ${unitRate.toLocaleString(
-        undefined,
-        {
-        maximumFractionDigits:6
-        }
-    )}
-    ${toCurrency}
-
-    </p>
-
-
-    <p>
-    기준일
-    <br>
-    ${today}
-    </p>
-
-
-    <p>
-    데이터 출처
-    <br>
-    Frankfurter API
-    </p>
-
-
-    `;
-
-
-
-}
-
-catch(error){
-
-
-    console.error(error);
-
-
-    result.innerHTML =
-    "환율 데이터를 불러오지 못했습니다.";
-
-
-}
-
 
 
 }
@@ -473,35 +340,8 @@ catch(error){
 
 
 /* ==========================
-   Number Format
+   Button
 ========================== */
-
-
-amountInput.addEventListener(
-"input",
-()=>{
-
-
-    let value =
-    amountInput.value.replace(/,/g,"");
-
-
-    if(value){
-
-
-        amountInput.value =
-        Number(value).toLocaleString();
-
-
-    }
-
-
-});
-
-
-
-
-
 
 
 calculateButton.onclick =
@@ -512,6 +352,12 @@ calculateExchange;
 
 
 
+/* ==========================
+   Start
+========================== */
+
+
 loadCurrencies();
+
 
 calculateExchange();
