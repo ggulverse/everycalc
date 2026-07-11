@@ -223,7 +223,7 @@ ${currencySelect.value}
 
 metalInfo.innerHTML = `
 
-1 XAU 기준 국제 시세:
+1 ${metalSelect.value} 기준 국제 시세:
 
 ${rate.toLocaleString(
 undefined,
@@ -232,6 +232,11 @@ maximumFractionDigits:2
 }
 )}
 ${currencySelect.value}
+
+<br>
+
+차트 기준:
+1oz (트로이온스)
 
 `;
 
@@ -261,7 +266,20 @@ error.message;
 calculateBtn.onclick =
 calculate;
 
+metalSelect.addEventListener(
+"change",
+()=>{
+    loadHistory();
+}
+);
 
+
+currencySelect.addEventListener(
+"change",
+()=>{
+    loadHistory();
+}
+);
 
 async function loadHistory(){
 
@@ -395,7 +413,8 @@ labels.slice(-7),
 
 datasets:[{
 
-label:"7일 귀금속 시세",
+label:
+`7일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세 (1oz 기준)`,
 
 data:
 values.slice(-7)
@@ -471,7 +490,8 @@ labels,
 
 datasets:[{
 
-label:"30일 귀금속 시세",
+label:
+`30일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세 (1oz 기준)`,
 
 data:values
 
