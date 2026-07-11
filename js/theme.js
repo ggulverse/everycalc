@@ -31,6 +31,12 @@ function refreshCharts(){
 
     }
 
+
+    if(window.updateMetalCharts){
+
+        window.updateMetalCharts();
+    }
+
 }
 
 
