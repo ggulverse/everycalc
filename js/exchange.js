@@ -1,15 +1,53 @@
 /* ==================================================
    EveryCalc - exchange.js
-   Currency + Metal Exchange
+   Currency Exchange Calculator
 ================================================== */
 
 
-const amountInput = document.getElementById("amount");
-const fromCurrency = document.getElementById("fromCurrency");
-const toCurrency = document.getElementById("toCurrency");
-const calculateButton = document.getElementById("calculate");
-const result = document.getElementById("result");
-const exchangeInfo = document.getElementById("exchangeInfo");
+const amountInput =
+document.getElementById("amount");
+
+
+const fromOptions =
+document.getElementById("fromOptions");
+
+
+const toOptions =
+document.getElementById("toOptions");
+
+
+const fromText =
+document.getElementById("fromText");
+
+
+const toText =
+document.getElementById("toText");
+
+
+const fromIcon =
+document.getElementById("fromIcon");
+
+
+const toIcon =
+document.getElementById("toIcon");
+
+
+const calculateButton =
+document.getElementById("calculate");
+
+
+const result =
+document.getElementById("result");
+
+
+const exchangeInfo =
+document.getElementById("exchangeInfo");
+
+
+
+let selectedFrom="USD";
+let selectedTo="KRW";
+
 
 
 
@@ -18,12 +56,12 @@ const exchangeInfo = document.getElementById("exchangeInfo");
 ========================== */
 
 
-function saveCache(key, data){
+function saveCache(key,data){
 
     localStorage.setItem(
         key,
         JSON.stringify({
-            time: Date.now(),
+            time:Date.now(),
             data:data
         })
     );
@@ -34,24 +72,28 @@ function saveCache(key, data){
 
 function getCache(key){
 
-    const saved =
+    const cache =
     localStorage.getItem(key);
 
 
-    if(!saved){
+    if(!cache){
         return null;
     }
 
 
     const parsed =
-    JSON.parse(saved);
+    JSON.parse(cache);
 
 
-    const limit =
+    const tenMinutes =
     10 * 60 * 1000;
 
 
-    if(Date.now() - parsed.time > limit){
+    if(
+        Date.now()-parsed.time
+        >
+        tenMinutes
+    ){
 
         localStorage.removeItem(key);
 
@@ -69,46 +111,143 @@ function getCache(key){
 
 
 /* ==========================
-   Currency Select
+   Currency Menu
 ========================== */
 
 
-function loadCurrencies(){
+function createCurrencyMenu(target){
 
 
-    currencies.forEach(item=>{
+    target.innerHTML="";
 
 
-        const option1 =
-        document.createElement("option");
-
-
-        option1.value =
-        item.code;
-
-
-        option1.textContent =
-        `${item.flag} ${item.code} (${item.name})`;
+    const groups={};
 
 
 
-        const option2 =
-        option1.cloneNode(true);
+    currencies.forEach(currency=>{
 
 
+        if(!groups[currency.group]){
 
-        fromCurrency.appendChild(option1);
+            groups[currency.group]=[];
 
-        toCurrency.appendChild(option2);
+        }
+
+
+        groups[currency.group]
+        .push(currency);
 
 
     });
 
 
 
-    fromCurrency.value="USD";
+    Object.keys(groups)
+    .forEach(group=>{
 
-    toCurrency.value="KRW";
+
+        const wrapper =
+        document.createElement("div");
+
+
+        const title =
+        document.createElement("div");
+
+
+        title.textContent =
+        group;
+
+
+        title.style.fontWeight="bold";
+
+
+        title.style.padding="10px";
+
+
+        wrapper.appendChild(title);
+
+
+
+        groups[group].forEach(currency=>{
+
+
+            const item =
+            document.createElement("div");
+
+
+            item.className =
+            "currency-option";
+
+
+            item.innerHTML = `
+
+            <span>
+            ${currency.flag}
+            ${currency.code}
+            ${currency.name}
+            </span>
+
+            `;
+
+
+
+            item.onclick=function(){
+
+
+                if(target===fromOptions){
+
+                    selectedFrom =
+                    currency.code;
+
+
+                    fromText.textContent =
+                    `${currency.code} ${currency.name}`;
+
+                    fromIcon.textContent =
+                    currency.flag;
+
+
+                }
+                else{
+
+
+                    selectedTo =
+                    currency.code;
+
+
+                    toText.textContent =
+                    `${currency.code} ${currency.name}`;
+
+                    toIcon.textContent =
+                    currency.flag;
+
+
+                }
+
+
+
+                target.style.display="none";
+
+
+                calculateExchange();
+
+
+            };
+
+
+
+            wrapper.appendChild(item);
+
+
+        });
+
+
+
+        target.appendChild(wrapper);
+
+
+    });
 
 
 }
@@ -118,22 +257,21 @@ function loadCurrencies(){
 
 
 
-
 /* ==========================
-   Frankfurter
+   Frankfurter API
 ========================== */
 
 
-async function getExchangeRates(){
+async function getRates(){
 
 
-    const cached =
+    const cache =
     getCache("exchangeRates");
 
 
-    if(cached){
+    if(cache){
 
-        return cached;
+        return cache;
 
     }
 
@@ -141,7 +279,7 @@ async function getExchangeRates(){
 
     const response =
     await fetch(
-        "https://api.frankfurter.dev/v2/rates?base=EUR"
+    "https://api.frankfurter.dev/v2/rates?base=EUR"
     );
 
 
@@ -158,6 +296,7 @@ async function getExchangeRates(){
 
     return data;
 
+
 }
 
 
@@ -168,18 +307,21 @@ function makeRates(data){
 
 
     const rates={
+
         EUR:1
+
     };
+
 
 
     data.forEach(item=>{
 
 
-        rates[item.quote]=item.rate;
+        rates[item.quote]=
+        item.rate;
 
 
     });
-
 
 
     return rates;
@@ -194,163 +336,7 @@ function makeRates(data){
 
 
 /* ==========================
-   XAUS Metal API
-========================== */
-
-
-async function getMetalData(){
-
-
-    const cached =
-    getCache("metalData");
-
-
-    if(cached){
-
-        return cached;
-
-    }
-
-
-
-    const response =
-    await fetch(
-        "https://xaus.com/api/v1/spot"
-    );
-
-
-    const data =
-    await response.json();
-
-
-
-    saveCache(
-        "metalData",
-        data
-    );
-
-
-    return data;
-
-
-}
-
-
-
-
-
-
-
-
-/* ==========================
-   Metal Calculate
-========================== */
-
-
-async function calculateMetal(amount, from, to){
-
-
-    const data =
-    await getMetalData();
-
-
-
-    const krwRate =
-    data.fx_rates.KRW;
-
-
-
-    let usdPrice;
-
-
-
-    if(from==="XAU"){
-
-        usdPrice =
-        data.per_gram_usd;
-
-    }
-
-
-    if(from==="XAG"){
-
-        usdPrice =
-        data.silver_usd_oz / 31.1035;
-
-    }
-
-
-
-
-    const krwPerGram =
-    usdPrice * krwRate;
-
-
-
-    const don =
-    krwPerGram * 3.75;
-
-
-
-    result.innerHTML = `
-
-    <h2>
-
-    ${amount} ${from}
-
-    </h2>
-
-    <p>
-
-    1g =
-    ${Math.round(krwPerGram).toLocaleString()}
-    원
-
-    </p>
-
-
-    <p>
-
-    1돈(3.75g) =
-    ${Math.round(don).toLocaleString()}
-    원
-
-    </p>
-
-    `;
-
-
-
-    exchangeInfo.innerHTML = `
-
-    <p>
-
-    기준:
-    XAUS API
-
-    </p>
-
-    <p>
-
-    업데이트:
-    ${new Date(data.updated_at)
-    .toLocaleString()}
-
-    </p>
-
-    `;
-
-
-}
-
-
-
-
-
-
-
-/* ==========================
-   Main Calculate
+   Calculate
 ========================== */
 
 
@@ -361,47 +347,13 @@ try{
 
 
     const amount =
-    Number(amountInput.value);
-
-
-
-    const from =
-    fromCurrency.value;
-
-
-
-    const to =
-    toCurrency.value;
-
-
-
-    const fromInfo =
-    currencies.find(
-        c=>c.code===from
+    Number(
+        amountInput.value.replace(/,/g,"")
     );
 
 
 
-    const toInfo =
-    currencies.find(
-        c=>c.code===to
-    );
-
-
-
-
-
-    if(
-        fromInfo.type==="metal"
-        ||
-        toInfo.type==="metal"
-    ){
-
-        await calculateMetal(
-            amount,
-            from,
-            to
-        );
+    if(!amount){
 
         return;
 
@@ -409,12 +361,8 @@ try{
 
 
 
-
-
-
-
     const data =
-    await getExchangeRates();
+    await getRates();
 
 
 
@@ -423,13 +371,13 @@ try{
 
 
 
-    const eur =
-    amount / rates[from];
+    const euro =
+    amount / rates[selectedFrom];
 
 
 
     const converted =
-    eur * rates[to];
+    euro * rates[selectedTo];
 
 
 
@@ -438,7 +386,7 @@ try{
     <h2>
 
     ${amount.toLocaleString()}
-    ${from}
+    ${selectedFrom}
 
     =
 
@@ -449,7 +397,7 @@ try{
         }
     )}
 
-    ${to}
+    ${selectedTo}
 
     </h2>
 
@@ -460,10 +408,14 @@ try{
     exchangeInfo.innerHTML = `
 
     <p>
-
     기준:
     Frankfurter API
+    </p>
 
+    <p>
+    마지막 업데이트:
+    ${new Date()
+    .toLocaleString()}
     </p>
 
     `;
@@ -472,7 +424,6 @@ try{
 
 }
 
-
 catch(error){
 
 
@@ -480,7 +431,7 @@ catch(error){
 
 
     result.innerHTML =
-    "계산 중 오류가 발생했습니다.";
+    "환율 정보를 불러오지 못했습니다.";
 
 
 }
@@ -499,23 +450,66 @@ catch(error){
 ========================== */
 
 
+fromOptions.previousElementSibling
+.onclick=function(){
+
+    fromOptions.style.display =
+    fromOptions.style.display==="block"
+    ?
+    "none"
+    :
+    "block";
+
+};
+
+
+
+toOptions.previousElementSibling
+.onclick=function(){
+
+    toOptions.style.display =
+    toOptions.style.display==="block"
+    ?
+    "none"
+    :
+    "block";
+
+};
+
+
+
+
 calculateButton.onclick =
 calculateExchange;
 
 
-fromCurrency.onchange =
-calculateExchange;
+
+/* ==========================
+   Start
+========================== */
 
 
-toCurrency.onchange =
-calculateExchange;
+createCurrencyMenu(fromOptions);
+
+createCurrencyMenu(toOptions);
 
 
 
+fromText.textContent =
+"USD 미국 달러";
 
 
-/* Start */
+toText.textContent =
+"KRW 대한민국 원";
 
-loadCurrencies();
+
+fromIcon.textContent =
+"🇺🇸";
+
+
+toIcon.textContent =
+"🇰🇷";
+
+
 
 calculateExchange();
