@@ -1,80 +1,15 @@
 /* ==================================================
    EveryCalc - exchange.js
+   Currency + Metal Exchange
 ================================================== */
 
 
-const amountInput =
-document.getElementById("amount");
-
-
-const fromCurrency =
-document.getElementById("fromCurrency");
-
-
-const toCurrency =
-document.getElementById("toCurrency");
-
-
-const calculateButton =
-document.getElementById("calculate");
-
-
-const result =
-document.getElementById("result");
-
-
-const exchangeInfo =
-document.getElementById("exchangeInfo");
-
-
-
-/* ==========================
-   Load Currency List
-========================== */
-
-
-function loadCurrencies(){
-
-
-    currencies.forEach(currency=>{
-
-
-        const fromOption =
-        document.createElement("option");
-
-
-        fromOption.value =
-        currency.code;
-
-
-        fromOption.textContent =
-        `${currency.flag} ${currency.code} (${currency.name})`;
-
-
-        const toOption =
-        fromOption.cloneNode(true);
-
-
-        fromCurrency.appendChild(fromOption);
-
-        toCurrency.appendChild(toOption);
-
-
-    });
-
-
-
-    fromCurrency.value =
-    "USD";
-
-
-    toCurrency.value =
-    "KRW";
-
-
-}
-
-
+const amountInput = document.getElementById("amount");
+const fromCurrency = document.getElementById("fromCurrency");
+const toCurrency = document.getElementById("toCurrency");
+const calculateButton = document.getElementById("calculate");
+const result = document.getElementById("result");
+const exchangeInfo = document.getElementById("exchangeInfo");
 
 
 
@@ -83,23 +18,15 @@ function loadCurrencies(){
 ========================== */
 
 
-function saveCache(key,data){
-
+function saveCache(key, data){
 
     localStorage.setItem(
-
         key,
-
         JSON.stringify({
-
-            time:Date.now(),
-
+            time: Date.now(),
             data:data
-
         })
-
     );
-
 
 }
 
@@ -107,31 +34,24 @@ function saveCache(key,data){
 
 function getCache(key){
 
-
     const saved =
     localStorage.getItem(key);
 
 
-
     if(!saved){
-
         return null;
-
     }
-
 
 
     const parsed =
     JSON.parse(saved);
 
 
-
-    const tenMinutes =
+    const limit =
     10 * 60 * 1000;
 
 
-
-    if(Date.now() - parsed.time > tenMinutes){
+    if(Date.now() - parsed.time > limit){
 
         localStorage.removeItem(key);
 
@@ -140,8 +60,55 @@ function getCache(key){
     }
 
 
-
     return parsed.data;
+
+}
+
+
+
+
+
+/* ==========================
+   Currency Select
+========================== */
+
+
+function loadCurrencies(){
+
+
+    currencies.forEach(item=>{
+
+
+        const option1 =
+        document.createElement("option");
+
+
+        option1.value =
+        item.code;
+
+
+        option1.textContent =
+        `${item.flag} ${item.code} (${item.name})`;
+
+
+
+        const option2 =
+        option1.cloneNode(true);
+
+
+
+        fromCurrency.appendChild(option1);
+
+        toCurrency.appendChild(option2);
+
+
+    });
+
+
+
+    fromCurrency.value="USD";
+
+    toCurrency.value="KRW";
 
 
 }
@@ -153,7 +120,7 @@ function getCache(key){
 
 
 /* ==========================
-   Exchange API
+   Frankfurter
 ========================== */
 
 
@@ -162,7 +129,6 @@ async function getExchangeRates(){
 
     const cached =
     getCache("exchangeRates");
-
 
 
     if(cached){
@@ -175,21 +141,8 @@ async function getExchangeRates(){
 
     const response =
     await fetch(
-
         "https://api.frankfurter.dev/v2/rates?base=EUR"
-
     );
-
-
-
-    if(!response.ok){
-
-        throw new Error(
-            "환율 API 오류"
-        );
-
-    }
-
 
 
     const data =
@@ -205,31 +158,24 @@ async function getExchangeRates(){
 
     return data;
 
-
 }
 
 
 
 
 
+function makeRates(data){
 
 
-function createRateObject(data){
-
-
-    const rates = {
-
+    const rates={
         EUR:1
-
     };
-
 
 
     data.forEach(item=>{
 
 
-        rates[item.quote] =
-        item.rate;
+        rates[item.quote]=item.rate;
 
 
     });
@@ -248,179 +194,151 @@ function createRateObject(data){
 
 
 /* ==========================
-   Calculate
+   XAUS Metal API
 ========================== */
 
 
-async function calculateExchange(){
+async function getMetalData(){
 
 
-    try{
+    const cached =
+    getCache("metalData");
 
 
-        const amount =
-        Number(amountInput.value);
+    if(cached){
 
-
-
-        if(!amount || amount <=0){
-
-
-            result.innerHTML =
-            "금액을 입력해주세요.";
-
-
-            return;
-
-
-        }
-
-
-
-
-
-        const from =
-        fromCurrency.value;
-
-
-
-        const to =
-        toCurrency.value;
-
-
-
-
-
-        const data =
-        await getExchangeRates();
-
-
-
-        const rates =
-        createRateObject(data);
-
-
-
-
-
-        if(!rates[from] || !rates[to]){
-
-
-            result.innerHTML =
-            "지원하지 않는 통화입니다.";
-
-
-            return;
-
-        }
-
-
-
-
-
-        const euroAmount =
-        amount / rates[from];
-
-
-
-        const converted =
-        euroAmount * rates[to];
-
-
-
-
-
-        result.innerHTML = `
-
-        <h2>
-
-        ${amount.toLocaleString()}
-
-        ${from}
-
-        =
-
-        ${converted.toLocaleString(
-            undefined,
-            {
-                maximumFractionDigits:2
-            }
-        )}
-
-        ${to}
-
-        </h2>
-
-        `;
-
-
-
-
-
-        const unitRate =
-        rates[to] / rates[from];
-
-
-
-
-
-        exchangeInfo.innerHTML = `
-
-        <p>
-
-        적용 환율
-
-        <br>
-
-        1 ${from}
-
-        =
-
-        ${unitRate.toLocaleString(
-            undefined,
-            {
-                maximumFractionDigits:6
-            }
-        )}
-
-        ${to}
-
-        </p>
-
-
-        <p>
-
-        데이터 기준
-
-        <br>
-
-        Frankfurter 공개 환율 데이터
-
-        </p>
-
-
-        `;
-
-
+        return cached;
 
     }
 
 
-    catch(error){
+
+    const response =
+    await fetch(
+        "https://xaus.com/api/v1/spot"
+    );
 
 
-        console.error(error);
+    const data =
+    await response.json();
 
 
-        result.innerHTML =
-        "환율 데이터를 불러오지 못했습니다.";
+
+    saveCache(
+        "metalData",
+        data
+    );
 
 
-        exchangeInfo.innerHTML =
-        "API 연결을 확인해주세요.";
+    return data;
 
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   Metal Calculate
+========================== */
+
+
+async function calculateMetal(amount, from, to){
+
+
+    const data =
+    await getMetalData();
+
+
+
+    const krwRate =
+    data.fx_rates.KRW;
+
+
+
+    let usdPrice;
+
+
+
+    if(from==="XAU"){
+
+        usdPrice =
+        data.per_gram_usd;
 
     }
+
+
+    if(from==="XAG"){
+
+        usdPrice =
+        data.silver_usd_oz / 31.1035;
+
+    }
+
+
+
+
+    const krwPerGram =
+    usdPrice * krwRate;
+
+
+
+    const don =
+    krwPerGram * 3.75;
+
+
+
+    result.innerHTML = `
+
+    <h2>
+
+    ${amount} ${from}
+
+    </h2>
+
+    <p>
+
+    1g =
+    ${Math.round(krwPerGram).toLocaleString()}
+    원
+
+    </p>
+
+
+    <p>
+
+    1돈(3.75g) =
+    ${Math.round(don).toLocaleString()}
+    원
+
+    </p>
+
+    `;
+
+
+
+    exchangeInfo.innerHTML = `
+
+    <p>
+
+    기준:
+    XAUS API
+
+    </p>
+
+    <p>
+
+    업데이트:
+    ${new Date(data.updated_at)
+    .toLocaleString()}
+
+    </p>
+
+    `;
 
 
 }
@@ -432,15 +350,157 @@ async function calculateExchange(){
 
 
 /* ==========================
-   Event
+   Main Calculate
+========================== */
+
+
+async function calculateExchange(){
+
+
+try{
+
+
+    const amount =
+    Number(amountInput.value);
+
+
+
+    const from =
+    fromCurrency.value;
+
+
+
+    const to =
+    toCurrency.value;
+
+
+
+    const fromInfo =
+    currencies.find(
+        c=>c.code===from
+    );
+
+
+
+    const toInfo =
+    currencies.find(
+        c=>c.code===to
+    );
+
+
+
+
+
+    if(
+        fromInfo.type==="metal"
+        ||
+        toInfo.type==="metal"
+    ){
+
+        await calculateMetal(
+            amount,
+            from,
+            to
+        );
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    const data =
+    await getExchangeRates();
+
+
+
+    const rates =
+    makeRates(data);
+
+
+
+    const eur =
+    amount / rates[from];
+
+
+
+    const converted =
+    eur * rates[to];
+
+
+
+    result.innerHTML = `
+
+    <h2>
+
+    ${amount.toLocaleString()}
+    ${from}
+
+    =
+
+    ${converted.toLocaleString(
+        undefined,
+        {
+            maximumFractionDigits:2
+        }
+    )}
+
+    ${to}
+
+    </h2>
+
+    `;
+
+
+
+    exchangeInfo.innerHTML = `
+
+    <p>
+
+    기준:
+    Frankfurter API
+
+    </p>
+
+    `;
+
+
+
+}
+
+
+catch(error){
+
+
+    console.error(error);
+
+
+    result.innerHTML =
+    "계산 중 오류가 발생했습니다.";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   Events
 ========================== */
 
 
 calculateButton.onclick =
 calculateExchange;
-
-
-
 
 
 fromCurrency.onchange =
@@ -454,14 +514,8 @@ calculateExchange;
 
 
 
-
-
-/* ==========================
-   Start
-========================== */
-
+/* Start */
 
 loadCurrencies();
-
 
 calculateExchange();
