@@ -168,11 +168,22 @@ placeholder="예: 100">
 
 
 
+<!-- ==========================
+     환율 선택 영역
+========================== -->
+
+
+<div class="exchange-currency-area">
+
+
+
+<div class="currency-side">
 
 
 <label>
 출발 국가
 </label>
+
 
 
 <div class="currency-selector">
@@ -218,12 +229,34 @@ class="currency-options">
 </div>
 
 
+</div>
 
+
+
+
+
+
+<button
+id="swapButton"
+type="button"
+class="swap-button">
+
+⇄
+
+</button>
+
+
+
+
+
+
+<div class="currency-side">
 
 
 <label>
 도착 국가
 </label>
+
 
 
 <div class="currency-selector">
@@ -269,16 +302,11 @@ class="currency-options">
 </div>
 
 
+</div>
 
 
 
-<button
-id="swapButton"
-type="button">
-
-⇄
-
-</button>
+</div>
 
 
 
@@ -297,6 +325,11 @@ class="calculate-button">
 
 
 </div>
+
+
+
+
+
 <div
 id="result"
 class="calculator-result">
@@ -308,10 +341,12 @@ class="calculator-result">
 
 
 
+
 <div
 id="exchangeInfo">
 
 </div>
+
 
 
 
@@ -359,6 +394,8 @@ id="recentRate">
 
 
 
+
+
 <div class="chart-container">
 
 
@@ -370,7 +407,9 @@ id="recentRate">
 
 
 
+
 <br>
+
 
 
 
@@ -386,6 +425,8 @@ id="recentRate">
 
 
 </div>
+
+
 
 
 
@@ -433,6 +474,7 @@ id="recentRate">
 
 
 
+
 <footer class="footer">
 
 
@@ -460,6 +502,9 @@ id="recentRate">
 
 
 
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
@@ -470,6 +515,7 @@ id="recentRate">
 
 
 <script src="../js/exchange.js"></script>
+
 
 
 
