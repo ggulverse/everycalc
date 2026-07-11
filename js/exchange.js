@@ -1150,7 +1150,11 @@ chartTextColor
 
 }
 
+window.updateCharts = function(){
 
+    loadHistory();
+
+};
 
 
 /* ==========================
