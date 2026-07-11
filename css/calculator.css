@@ -727,3 +727,27 @@ body.dark-mode .currency-options{
     margin-top:10px;
 
 }
+
+/* ==========================
+   Currency Dropdown Scroll
+========================== */
+
+.currency-options{
+
+    max-height:420px;
+
+    overflow-y:auto;
+
+}
+
+
+
+@media(max-width:768px){
+
+    .currency-options{
+
+        max-height:300px;
+
+    }
+
+}
