@@ -4,12 +4,15 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>환율 계산기 - EveryCalc</title>
+
+<title>환율 계산기 | EveryCalc</title>
+
 
 <meta name="description"
-content="EveryCalc 실시간 환율 계산기. 다양한 국가 통화 변환과 환율 추이를 제공합니다.">
+content="실시간 환율 변환과 최근 환율 변화를 확인하는 무료 환율 계산기">
 
 
 <link rel="stylesheet" href="../css/style.css">
@@ -62,14 +65,7 @@ Every Calculation in One Place
 
 <li>
 <a href="../index.html#popular">
-인기 계산기
-</a>
-</li>
-
-
-<li>
-<a href="../index.html#categories">
-카테고리
+계산기 목록
 </a>
 </li>
 
@@ -83,7 +79,9 @@ Every Calculation in One Place
 <div class="header-buttons">
 
 <button id="darkModeToggle">
+
 🌙
+
 </button>
 
 </div>
@@ -97,7 +95,10 @@ Every Calculation in One Place
 
 
 
-<main class="calculator-page">
+<main>
+
+
+<section class="calculator-page">
 
 
 <div class="container">
@@ -106,13 +107,14 @@ Every Calculation in One Place
 
 <div class="calculator-header">
 
+
 <h1>
-💱 환율 계산기
+환율 계산기
 </h1>
 
 
 <p>
-실시간 환율 API 기반 통화 변환
+실시간 환율 기준으로 통화를 변환합니다.
 </p>
 
 
@@ -122,10 +124,16 @@ Every Calculation in One Place
 
 
 
-<section class="calculator-box">
+
+<div class="calculator-container">
+
+
+<div class="calculator-box">
+
 
 
 <div class="calculator-form">
+
 
 
 <label>
@@ -141,6 +149,9 @@ min="0">
 
 
 
+
+
+
 <label>
 변환 전 통화
 </label>
@@ -153,16 +164,13 @@ min="0">
 id="fromSelected"
 class="selected-currency">
 
-
 <span id="fromIcon">
 🇺🇸
 </span>
 
-
 <span id="fromText">
 USD - 미국 달러
 </span>
-
 
 </div>
 
@@ -184,13 +192,18 @@ class="currency-options">
 
 
 
+
+
+
 <button
 id="swapButton"
-class="swap-button">
+type="button">
 
 ⇄
 
 </button>
+
+
 
 
 
@@ -222,7 +235,6 @@ KRW - 대한민국 원
 </div>
 
 
-
 <input
 id="toSearch"
 type="text"
@@ -244,6 +256,7 @@ class="currency-options">
 
 
 
+
 <button
 id="calculate"
 class="calculate-button">
@@ -254,20 +267,30 @@ class="calculate-button">
 
 
 
+</div>
+
+
+
+
+
 
 
 <div
 id="result"
 class="calculator-result">
 
+결과가 표시됩니다.
+
 </div>
+
+
 
 
 
 
 <div
 id="exchangeInfo"
-class="calculator-result">
+class="calculator-info">
 
 </div>
 
@@ -276,13 +299,12 @@ class="calculator-result">
 
 
 
+<div class="calculator-info">
 
-<section class="favorite-section">
 
-
-<h3>
-⭐ 즐겨찾기 환율
-</h3>
+<h2>
+즐겨찾기 환율
+</h2>
 
 
 <div id="favoriteList">
@@ -290,20 +312,19 @@ class="calculator-result">
 </div>
 
 
-</section>
+</div>
 
 
 
 
 
 
+<div class="calculator-info">
 
-<section class="history-section">
 
-
-<h3>
+<h2>
 최근 환율 정보
-</h3>
+</h2>
 
 
 <div id="recentRate">
@@ -311,7 +332,7 @@ class="calculator-result">
 </div>
 
 
-</section>
+</div>
 
 
 
@@ -319,43 +340,44 @@ class="calculator-result">
 
 
 
-<section class="chart-section">
+
+<div class="calculator-info">
 
 
-<h3>
-최근 7일 환율 변화
-</h3>
+<h2>
+7일 환율 변화
+</h2>
 
 
-<canvas
-id="chart7">
-
-</canvas>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="chart-section">
-
-
-<h3>
-최근 30일 환율 변화
-</h3>
-
-
-<canvas
-id="chart30">
+<canvas id="chart7">
 
 </canvas>
 
 
-</section>
+</div>
+
+
+
+
+
+
+<div class="calculator-info">
+
+
+<h2>
+30일 환율 변화
+</h2>
+
+
+<canvas id="chart30">
+
+</canvas>
+
+
+</div>
+
+
+
 
 
 
@@ -363,14 +385,47 @@ id="chart30">
 </div>
 
 
-</section>
+
+
+
+<div class="calculator-info">
+
+
+<h2>
+환율 계산기 사용 방법
+</h2>
+
+
+<p>
+
+금액과 변환할 통화를 선택하면 현재 환율 기준으로 계산합니다.
+
+</p>
+
+
+<p>
+
+자주 사용하는 통화 조합은 즐겨찾기에 저장할 수 있습니다.
+
+</p>
+
+
+</div>
+
 
 
 
 </div>
+
+
+</div>
+
+
+</section>
 
 
 </main>
+
 
 
 
@@ -404,19 +459,19 @@ id="chart30">
 
 
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-<script src="../js/currencies.js"></script>
-
-<script src="../js/exchange.js"></script>
 
 <script src="../js/theme.js"></script>
 
 
+<script src="../js/currencies.js"></script>
+
+
+<script src="../js/exchange.js"></script>
+
+
+
 </body>
 
-
 </html>
-
