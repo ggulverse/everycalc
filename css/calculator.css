@@ -707,3 +707,23 @@ body.dark-mode .currency-options{
     transform:rotate(180deg);
 
 }
+
+/* ==========================
+   Currency Dropdown Group
+========================== */
+
+.currency-group-title{
+
+    font-weight:700;
+
+    padding:12px 10px 8px;
+
+    font-size:0.9rem;
+
+    color:var(--primary);
+
+    border-bottom:1px solid var(--border);
+
+    margin-top:8px;
+
+}
