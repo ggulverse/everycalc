@@ -1,41 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
 
 
-const amountInput = document.getElementById("amount");
+const amount =
+document.getElementById("amount");
 
-const calculateBtn =
+
+const calculate =
 document.getElementById("calculate");
 
-const swapBtn =
+
+const swapButton =
 document.getElementById("swapButton");
+
+
+const favoriteButton =
+document.getElementById("favoriteButton");
+
+
 
 const result =
 document.getElementById("result");
+
 
 const exchangeInfo =
 document.getElementById("exchangeInfo");
 
 
+const recentRate =
+document.getElementById("recentRate");
 
-const fromSelected =
-document.getElementById("fromSelected");
-
-const toSelected =
-document.getElementById("toSelected");
-
-
-const fromSearch =
-document.getElementById("fromSearch");
-
-const toSearch =
-document.getElementById("toSearch");
-
-
-const fromOptions =
-document.getElementById("fromOptions");
-
-const toOptions =
-document.getElementById("toOptions");
 
 
 const fromText =
@@ -45,21 +38,33 @@ const toText =
 document.getElementById("toText");
 
 
-const fromIcon =
-document.getElementById("fromIcon");
 
-const toIcon =
-document.getElementById("toIcon");
+const fromFlag =
+document.getElementById("fromFlag");
+
+const toFlag =
+document.getElementById("toFlag");
+
+
+
+const fromSearch =
+document.getElementById("fromSearch");
+
+const toSearch =
+document.getElementById("toSearch");
+
+
+
+const fromOptions =
+document.getElementById("fromOptions");
+
+const toOptions =
+document.getElementById("toOptions");
 
 
 
 const favoriteList =
 document.getElementById("favoriteList");
-
-
-const recentRate =
-document.getElementById("recentRate");
-
 
 
 
@@ -68,34 +73,32 @@ let fromCurrency = "USD";
 let toCurrency = "KRW";
 
 
+let chart7;
 
-let chart7 = null;
-
-let chart30 = null;
-
+let chart30;
 
 
 
 
 
-/*
-==========================
-통화 목록 생성
-==========================
-*/
 
 
-function renderCurrencies(
-container,
+/* =========================
+   통화 선택 메뉴
+========================= */
+
+
+function showCurrencyList(
+target,
 keyword,
 callback
 ){
 
 
-container.innerHTML="";
+target.innerHTML="";
 
 
-let search =
+const search =
 keyword.toLowerCase();
 
 
@@ -113,7 +116,6 @@ currency.code
 ||
 
 currency.name
-.toLowerCase()
 .includes(search)
 
 );
@@ -124,25 +126,30 @@ currency.name
 
 
 
-let item =
+const item =
 document.createElement("div");
 
 
 item.className =
-"currency-item";
+"currency-option";
 
 
 
 item.innerHTML = `
 
 <span>
-${currency.icon || ""}
+
+${currency.flag}
+
 </span>
 
+
 <span>
+
 ${currency.code}
 -
 ${currency.name}
+
 </span>
 
 `;
@@ -151,20 +158,26 @@ ${currency.name}
 
 item.onclick = () => {
 
+
 callback(currency);
 
-container.innerHTML="";
+
+target.style.display="none";
+
 
 };
 
 
 
-container.appendChild(item);
+target.appendChild(item);
 
 
 
 });
 
+
+
+target.style.display="block";
 
 
 }
@@ -174,7 +187,8 @@ container.appendChild(item);
 
 
 
-function selectFrom(currency){
+
+function setFrom(currency){
 
 
 fromCurrency =
@@ -185,8 +199,9 @@ fromText.innerText =
 `${currency.code} - ${currency.name}`;
 
 
-fromIcon.innerText =
-currency.icon || "";
+fromFlag.innerText =
+currency.flag;
+
 
 
 loadHistory();
@@ -197,8 +212,7 @@ loadHistory();
 
 
 
-
-function selectTo(currency){
+function setTo(currency){
 
 
 toCurrency =
@@ -209,15 +223,15 @@ toText.innerText =
 `${currency.code} - ${currency.name}`;
 
 
-toIcon.innerText =
-currency.icon || "";
+toFlag.innerText =
+currency.flag;
+
 
 
 loadHistory();
 
 
 }
-
 
 
 
@@ -229,16 +243,14 @@ fromSearch.addEventListener(
 ()=>{
 
 
-renderCurrencies(
+showCurrencyList(
 fromOptions,
 fromSearch.value,
-selectFrom
+setFrom
 );
 
 
 });
-
-
 
 
 
@@ -247,10 +259,10 @@ toSearch.addEventListener(
 ()=>{
 
 
-renderCurrencies(
+showCurrencyList(
 toOptions,
 toSearch.value,
-selectTo
+setTo
 );
 
 
@@ -261,14 +273,14 @@ selectTo
 
 
 
+fromText.parentElement.onclick =
+()=>{
 
-fromSelected.onclick=()=>{
 
-
-renderCurrencies(
+showCurrencyList(
 fromOptions,
 "",
-selectFrom
+setFrom
 );
 
 
@@ -277,13 +289,15 @@ selectFrom
 
 
 
-toSelected.onclick=()=>{
+
+toText.parentElement.onclick =
+()=>{
 
 
-renderCurrencies(
+showCurrencyList(
 toOptions,
 "",
-selectTo
+setTo
 );
 
 
@@ -295,37 +309,37 @@ selectTo
 
 
 
-/*
-==========================
-환율 계산
-==========================
-*/
+
+
+
+/* =========================
+   환율 API
+========================= */
 
 
 async function getRate(){
 
 
-let cacheKey =
-`${fromCurrency}_${toCurrency}`;
+
+const key =
+`rate_${fromCurrency}_${toCurrency}`;
 
 
 
-let cache =
-localStorage.getItem(cacheKey);
+const saved =
+localStorage.getItem(key);
 
 
 
-if(cache){
+if(saved){
 
 
-let data =
-JSON.parse(cache);
+const data =
+JSON.parse(saved);
 
 
 if(
-Date.now()
--
-data.time
+Date.now()-data.time
 <
 3600000
 ){
@@ -342,8 +356,7 @@ return data.rate;
 
 
 
-
-let response =
+const response =
 await fetch(
 
 `https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&symbols=${toCurrency}`
@@ -352,21 +365,18 @@ await fetch(
 
 
 
-let data =
+const data =
 await response.json();
 
 
 
-
-
 if(
-!data.rates ||
-!data.rates[toCurrency]
+!data[0]
 ){
 
 
 throw new Error(
-"지원하지 않는 환율입니다."
+"환율 정보를 찾을 수 없습니다."
 );
 
 
@@ -374,20 +384,18 @@ throw new Error(
 
 
 
-
-
-let rate =
-data.rates[toCurrency];
+const rate =
+data[0].rate;
 
 
 
 localStorage.setItem(
 
-cacheKey,
+key,
 
 JSON.stringify({
 
-rate:rate,
+rate,
 
 time:Date.now()
 
@@ -410,48 +418,51 @@ return rate;
 
 
 
-async function calculate(){
+/* =========================
+   계산
+========================= */
+
+
+async function calculateExchange(){
 
 
 try{
 
 
-let amount =
-Number(amountInput.value);
+const value =
+Number(amount.value);
 
 
 
-let rate =
+const rate =
 await getRate();
 
 
 
-let value =
-amount * rate;
+const resultValue =
+value * rate;
 
 
 
 result.innerHTML = `
 
-<strong>
+<h2>
 
-${amount.toLocaleString()}
-
+${value.toLocaleString()}
 ${fromCurrency}
 
 =
 
-${value.toLocaleString(
+${resultValue.toLocaleString(
 undefined,
 {
 maximumFractionDigits:2
 }
-
 )}
 
 ${toCurrency}
 
-</strong>
+</h2>
 
 `;
 
@@ -462,8 +473,11 @@ exchangeInfo.innerHTML =
 `
 
 1 ${fromCurrency}
+
 =
+
 ${rate}
+
 ${toCurrency}
 
 <br>
@@ -475,14 +489,13 @@ ${new Date().toLocaleString()}
 
 
 
-
 }
 
 
 catch(error){
 
 
-result.innerHTML =
+result.innerText =
 error.message;
 
 
@@ -493,12 +506,8 @@ error.message;
 
 
 
-
-
-
-
-calculateBtn.onclick =
-calculate;
+calculate.onclick =
+calculateExchange;
 
 
 
@@ -508,17 +517,15 @@ calculate;
 
 
 
-/*
-==========================
-스왑
-==========================
-*/
+/* =========================
+   스왑
+========================= */
 
 
-swapBtn.onclick=()=>{
+swapButton.onclick = ()=>{
 
 
-let temp =
+const temp =
 fromCurrency;
 
 
@@ -531,7 +538,7 @@ temp;
 
 
 
-let tempText =
+const text =
 fromText.innerText;
 
 
@@ -540,7 +547,20 @@ toText.innerText;
 
 
 toText.innerText =
-tempText;
+text;
+
+
+
+const flag =
+fromFlag.innerText;
+
+
+fromFlag.innerText =
+toFlag.innerText;
+
+
+toFlag.innerText =
+flag;
 
 
 
@@ -557,92 +577,23 @@ loadHistory();
 
 
 
-/*
-==========================
-즐겨찾기
-==========================
-*/
+/* =========================
+   즐겨찾기
+========================= */
 
 
-function loadFavorites(){
-
-
-let favorites =
-JSON.parse(
-
-localStorage.getItem(
-"favorites"
-)
-
-)||[];
-
-
-
-favoriteList.innerHTML="";
-
-
-
-favorites.forEach(pair=>{
-
-
-let button =
-document.createElement("button");
-
-
-
-button.innerText =
-pair;
-
-
-
-button.onclick=()=>{
-
-
-let arr =
-pair.split("/");
-
-
-fromCurrency =
-arr[0];
-
-toCurrency =
-arr[1];
-
-
-
-loadHistory();
-
-
-};
-
-
-
-favoriteList.appendChild(button);
-
-
-});
-
-
-
-}
-
-
-
-function addFavorite(){
+favoriteButton.onclick = ()=>{
 
 
 let favorites =
 JSON.parse(
-
-localStorage.getItem(
-"favorites"
+localStorage.getItem("favorites")
 )
-
-)||[];
-
+|| [];
 
 
-let pair =
+
+const pair =
 `${fromCurrency}/${toCurrency}`;
 
 
@@ -650,6 +601,7 @@ let pair =
 if(
 !favorites.includes(pair)
 ){
+
 
 favorites.push(pair);
 
@@ -663,34 +615,88 @@ JSON.stringify(favorites)
 }
 
 
-loadFavorites();
+
+renderFavorites();
+
+
+};
+
+
+
+
+
+
+function renderFavorites(){
+
+
+let favorites =
+JSON.parse(
+localStorage.getItem("favorites")
+)
+|| [];
+
+
+
+favoriteList.innerHTML="";
+
+
+
+favorites.forEach(pair=>{
+
+
+const button =
+document.createElement("button");
+
+
+button.innerText =
+pair;
+
+
+
+button.onclick = ()=>{
+
+
+const split =
+pair.split("/");
+
+
+fromCurrency =
+split[0];
+
+
+toCurrency =
+split[1];
+
+
+
+loadHistory();
+
+
+};
+
+
+
+favoriteList.appendChild(button);
+
+
+
+});
+
 
 
 }
 
 
 
-
-
-
-document
-.getElementById("exchangeInfo")
-.onclick =
-addFavorite;
+ 
 
 
 
 
 
-
-
-
-
-/*
-==========================
-차트 데이터
-==========================
-*/
+/* =========================
+   차트
+========================= */
 
 
 async function loadHistory(){
@@ -699,11 +705,12 @@ async function loadHistory(){
 try{
 
 
-let end =
+const end =
 new Date();
 
 
-let start =
+
+const start =
 new Date();
 
 
@@ -713,39 +720,41 @@ end.getDate()-30
 
 
 
-let format =
+const format =
 date =>
 date.toISOString()
-.split("T")[0];
+.substring(0,10);
 
 
 
-let url =
+const url =
 
 `https://api.frankfurter.dev/v2/rates?from=${format(start)}&to=${format(end)}&base=${fromCurrency}&symbols=${toCurrency}`;
 
 
 
-let response =
+const response =
 await fetch(url);
 
 
 
-let data =
+const data =
 await response.json();
 
 
 
-
-let rates =
+const rates =
 data.map(item=>({
+
 
 date:item.date,
 
-rate:item.rates[toCurrency]
+
+rate:item.rate
 
 
 }));
+
 
 
 
@@ -753,11 +762,11 @@ recentRate.innerHTML =
 
 `
 
-최근 환율:
-
 1 ${fromCurrency}
+
 =
-${rates.at(-1)?.rate || "-"}
+
+${rates.at(-1)?.rate ?? "-"}
 
 ${toCurrency}
 
@@ -771,7 +780,8 @@ drawCharts(rates);
 
 }
 
-catch(e){
+
+catch(error){
 
 
 recentRate.innerText =
@@ -790,16 +800,20 @@ recentRate.innerText =
 
 
 
+
+
 function drawCharts(data){
 
 
-let labels =
+
+const labels =
 data.map(
 item=>item.date
 );
 
 
-let values =
+
+const values =
 data.map(
 item=>item.rate
 );
@@ -818,87 +832,90 @@ chart30.destroy();
 
 
 
-let ctx7 =
-document
-.getElementById("chart7")
-.getContext("2d");
-
-
-
 chart7 =
 new Chart(
-ctx7,
+
+document
+.getElementById("chart7"),
+
 {
 
 type:"line",
 
 data:{
 
+
 labels:
 labels.slice(-7),
 
+
 datasets:[{
 
-label:
-"7일 환율",
+
+label:"7일 환율",
 
 data:
 values.slice(-7)
 
+
 }]
+
 
 }
 
-});
+}
+
+);
 
 
 
-
-
-
-
-let ctx30 =
-document
-.getElementById("chart30")
-.getContext("2d");
 
 
 
 chart30 =
 new Chart(
-ctx30,
+
+document
+.getElementById("chart30"),
+
 {
 
 type:"line",
 
 data:{
 
+
 labels,
+
 
 datasets:[{
 
-label:
-"30일 환율",
+
+label:"30일 환율",
 
 data:values
 
+
 }]
 
-}
-
-});
-
-
-
 
 }
 
+}
+
+);
+
+
+
+}
 
 
 
 
 
-loadFavorites();
+
+
+renderFavorites();
 
 loadHistory();
 
