@@ -12,36 +12,6 @@ document.getElementById("fromCurrency");
 const toCurrency =
 document.getElementById("toCurrency");
 
-function loadCurrencies(){
-
-    currencies.forEach(currency=>{
-
-        const option =
-        document.createElement("option");
-
-        option.value =
-        currency.code;
-
-        option.textContent =
-        `${currency.flag} ${currency.code} (${currency.name})`;
-
-        fromCurrency.appendChild(
-            option.cloneNode(true)
-        );
-
-        toCurrency.appendChild(
-            option
-        );
-
-    });
-
-
-    fromCurrency.value = "USD";
-
-    toCurrency.value = "KRW";
-
-}
-
 const calculateButton =
 document.getElementById("calculate");
 
@@ -50,6 +20,57 @@ document.getElementById("result");
 
 const exchangeInfo =
 document.getElementById("exchangeInfo");
+
+
+
+
+
+/* ==========================
+   Currency Select Generate
+========================== */
+
+
+function loadCurrencies(){
+
+
+    currencies.forEach(currency=>{
+
+
+        const optionFrom =
+        document.createElement("option");
+
+
+        optionFrom.value =
+        currency.code;
+
+
+        optionFrom.textContent =
+        `${currency.code} (${currency.name})`;
+
+
+
+        const optionTo =
+        optionFrom.cloneNode(true);
+
+
+
+        fromCurrency.appendChild(optionFrom);
+
+        toCurrency.appendChild(optionTo);
+
+
+    });
+
+
+
+    fromCurrency.value = "USD";
+
+    toCurrency.value = "KRW";
+
+
+}
+
+
 
 
 
@@ -122,6 +143,11 @@ function createRateObject(data){
 
 
 }
+
+
+
+
+
 
 
 /* ==========================
@@ -337,6 +363,7 @@ calculateExchange;
 /* ==========================
    First Load
 ========================== */
+
 
 loadCurrencies();
 
