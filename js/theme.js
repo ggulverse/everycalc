@@ -21,6 +21,25 @@ if(savedTheme === "dark"){
 
 
 
+// 차트 업데이트 연결용
+
+function refreshCharts(){
+
+    if(window.updateCharts){
+
+        window.updateCharts();
+
+    }
+
+}
+
+
+window.refreshCharts =
+refreshCharts;
+
+
+
+
 // 버튼 클릭
 
 darkModeToggle.addEventListener(
@@ -33,6 +52,7 @@ darkModeToggle.addEventListener(
         );
 
 
+
         if(
             document.body.classList.contains("dark-mode")
         ){
@@ -43,6 +63,7 @@ darkModeToggle.addEventListener(
             );
 
         }
+
         else{
 
             localStorage.setItem(
@@ -51,6 +72,11 @@ darkModeToggle.addEventListener(
             );
 
         }
+
+
+
+        refreshCharts();
+
 
 
     }
