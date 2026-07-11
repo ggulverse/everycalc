@@ -6,10 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EveryCalc | 환율 계산기</title>
+<title>환율 계산기 - EveryCalc</title>
 
 <meta name="description"
-content="EveryCalc 실시간 환율 계산기">
+content="EveryCalc 실시간 환율 계산기. 주요 국가 통화 변환과 환율 차트를 제공합니다.">
+
 
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/header.css">
@@ -79,9 +80,7 @@ Every Calculation in One Place
 <div class="header-buttons">
 
 <button id="darkModeToggle">
-
 🌙
-
 </button>
 
 </div>
@@ -107,20 +106,17 @@ Every Calculation in One Place
 
 <div class="calculator-header">
 
-
 <h1>
 💱 환율 계산기
 </h1>
 
 
 <p>
-실시간 환율 기준으로 원하는 통화를 변환합니다.
+실시간 환율 API 기반 통화 변환
 </p>
 
 
 </div>
-
-
 
 
 
@@ -149,8 +145,6 @@ min="0">
 
 
 
-
-
 <label>
 변환 전 통화
 </label>
@@ -159,12 +153,11 @@ min="0">
 <div class="currency-selector">
 
 
-<div
-id="fromSelected"
+<div id="fromSelected"
 class="selected-currency">
 
 
-<span id="fromFlag">
+<span id="fromIcon">
 🇺🇸
 </span>
 
@@ -177,16 +170,13 @@ USD - 미국 달러
 </div>
 
 
-
 <input
 id="fromSearch"
 type="text"
 placeholder="통화 검색">
 
 
-
-<div
-id="fromOptions"
+<div id="fromOptions"
 class="currency-options">
 
 </div>
@@ -200,16 +190,13 @@ class="currency-options">
 
 
 
-
-
 <button
 id="swapButton"
-type="button">
+class="swap-button">
 
-⇅ 통화 변경
+⇄
 
 </button>
-
 
 
 
@@ -225,12 +212,11 @@ type="button">
 <div class="currency-selector">
 
 
-<div
-id="toSelected"
+<div id="toSelected"
 class="selected-currency">
 
 
-<span id="toFlag">
+<span id="toIcon">
 🇰🇷
 </span>
 
@@ -243,20 +229,16 @@ KRW - 대한민국 원
 </div>
 
 
-
 <input
 id="toSearch"
 type="text"
 placeholder="통화 검색">
 
 
-
-<div
-id="toOptions"
+<div id="toOptions"
 class="currency-options">
 
 </div>
-
 
 
 </div>
@@ -277,10 +259,6 @@ class="calculate-button">
 
 
 
-</div>
-
-
-
 
 
 
@@ -294,29 +272,20 @@ class="calculator-result">
 
 
 <div
-id="exchangeInfo">
+id="exchangeInfo"
+class="calculator-result">
 
 </div>
 
 
 
 
-<button
-id="favoriteButton">
 
-⭐ 즐겨찾기 추가
-
-</button>
-
-
-
-
-
-<section>
+<section class="favorite-section">
 
 
 <h3>
-즐겨찾기
+⭐ 즐겨찾기
 </h3>
 
 
@@ -331,10 +300,7 @@ id="favoriteButton">
 
 
 
-
-
 <section>
-
 
 <h3>
 최근 환율
@@ -353,6 +319,7 @@ id="favoriteButton">
 
 
 
+
 <section>
 
 
@@ -361,12 +328,11 @@ id="favoriteButton">
 </h3>
 
 
-<canvas id="chart7">
-
-</canvas>
+<canvas id="chart7"></canvas>
 
 
 </section>
+
 
 
 
@@ -380,9 +346,7 @@ id="favoriteButton">
 </h3>
 
 
-<canvas id="chart30">
-
-</canvas>
+<canvas id="chart30"></canvas>
 
 
 </section>
@@ -390,10 +354,11 @@ id="favoriteButton">
 
 
 
+</div>
+
 
 
 </section>
-
 
 
 </div>
@@ -403,9 +368,6 @@ id="favoriteButton">
 
 
 </main>
-
-
-
 
 
 
@@ -423,12 +385,8 @@ id="favoriteButton">
 
 
 <p>
-© 2026 EveryCalc. All Rights Reserved.
-</p>
-
-
-<p>
-Developed for GitHub Pages
+© 2026 EveryCalc.
+All Rights Reserved.
 </p>
 
 
@@ -445,13 +403,10 @@ Developed for GitHub Pages
 
 
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 <script src="../js/currencies.js"></script>
-
 
 <script src="../js/exchange.js"></script>
 
@@ -460,5 +415,6 @@ Developed for GitHub Pages
 
 
 </body>
+
 
 </html>
