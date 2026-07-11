@@ -1156,9 +1156,6 @@ chartTextColor
 ========================== */
 
 
-loadFavorites();
-
-
 loadHistory();
 
 
