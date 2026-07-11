@@ -76,10 +76,6 @@ const favoriteList =
 document.getElementById("favoriteList");
 
 
-const recentRate =
-document.getElementById("recentRate");
-
-
 
 let fromCurrency =
 "USD";
@@ -1003,21 +999,6 @@ data[data.length-1];
 
 
 
-recentRate.innerHTML = `
-
-최근 환율
-
-<br>
-
-1 ${fromCurrency}
-=
-${latest.rate}
-${toCurrency}
-
-`;
-
-
-
 drawCharts(data);
 
 
@@ -1032,10 +1013,6 @@ catch(error){
 
 
 console.log(error);
-
-
-recentRate.innerText =
-"환율 정보를 불러올 수 없습니다.";
 
 
 }
