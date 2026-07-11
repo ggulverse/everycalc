@@ -1,62 +1,181 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-const amountInput = document.getElementById("amount");
-const calculateBtn = document.getElementById("calculate");
-const swapBtn = document.getElementById("swapButton");
-
-const result = document.getElementById("result");
-const exchangeInfo = document.getElementById("exchangeInfo");
-
-const fromSelected = document.getElementById("fromSelected");
-const toSelected = document.getElementById("toSelected");
-
-const fromSearch = document.getElementById("fromSearch");
-const toSearch = document.getElementById("toSearch");
-
-const fromOptions = document.getElementById("fromOptions");
-const toOptions = document.getElementById("toOptions");
-
-const fromText = document.getElementById("fromText");
-const toText = document.getElementById("toText");
-
-const fromIcon = document.getElementById("fromIcon");
-const toIcon = document.getElementById("toIcon");
-
-const favoriteList = document.getElementById("favoriteList");
-const recentRate = document.getElementById("recentRate");
+/* ==================================================
+   EveryCalc Exchange Calculator
+   exchange.js
+   Part 1/2
+================================================== */
 
 
-let fromCurrency = "USD";
-let toCurrency = "KRW";
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
-let chart7 = null;
-let chart30 = null;
+
+const amountInput =
+document.getElementById("amount");
+
+
+const calculateBtn =
+document.getElementById("calculate");
+
+
+const swapButton =
+document.getElementById("swapButton");
 
 
 
-/*
-==============================
-통화 선택
-==============================
-*/
+const result =
+document.getElementById("result");
 
 
-function renderCurrencies(container, keyword, callback){
+const exchangeInfo =
+document.getElementById("exchangeInfo");
 
 
-container.innerHTML = "";
+
+const fromSelected =
+document.getElementById("fromSelected");
 
 
-const search =
+const toSelected =
+document.getElementById("toSelected");
+
+
+
+const fromSearch =
+document.getElementById("fromSearch");
+
+
+const toSearch =
+document.getElementById("toSearch");
+
+
+
+const fromOptions =
+document.getElementById("fromOptions");
+
+
+const toOptions =
+document.getElementById("toOptions");
+
+
+
+const fromText =
+document.getElementById("fromText");
+
+
+const toText =
+document.getElementById("toText");
+
+
+
+const fromIcon =
+document.getElementById("fromIcon");
+
+
+const toIcon =
+document.getElementById("toIcon");
+
+
+
+const favoriteList =
+document.getElementById("favoriteList");
+
+
+
+const recentRate =
+document.getElementById("recentRate");
+
+
+
+let fromCurrency =
+"USD";
+
+
+let toCurrency =
+"KRW";
+
+
+
+let chart7 =
+null;
+
+
+let chart30 =
+null;
+
+
+
+
+
+/* ==========================
+   통화 표시
+========================== */
+
+
+function setCurrency(type,currency){
+
+
+if(type==="from"){
+
+
+fromCurrency =
+currency.code;
+
+
+fromText.innerText =
+`${currency.code} - ${currency.name}`;
+
+
+fromIcon.innerText =
+currency.flag;
+
+
+}
+else{
+
+
+toCurrency =
+currency.code;
+
+
+toText.innerText =
+`${currency.code} - ${currency.name}`;
+
+
+toIcon.innerText =
+currency.flag;
+
+
+}
+
+
+}
+
+
+
+
+/* ==========================
+   국가 검색 목록
+========================== */
+
+
+function renderCurrencies(
+container,
+keyword,
+type
+){
+
+
+container.innerHTML="";
+
+
+let search =
 keyword.toLowerCase();
 
 
 
-currencyGroups.forEach(group=>{
-
-
-const matches =
-group.currencies.filter(currency=>{
+currencies
+.filter(currency=>{
 
 
 return (
@@ -74,64 +193,53 @@ currency.name
 );
 
 
-});
+})
+.forEach(currency=>{
 
 
-
-if(matches.length){
-
-
-const title =
+let item =
 document.createElement("div");
 
-
-title.className =
-"currency-group-title";
-
-
-title.textContent =
-group.group;
-
-
-container.appendChild(title);
-
-
-
-matches.forEach(currency=>{
-
-
-const item =
-document.createElement("div");
 
 
 item.className =
 "currency-option";
 
 
+
 item.innerHTML = `
 
-<span>${currency.flag}</span>
+<span>
+${currency.flag}
+</span>
 
 <span>
-${currency.code} - ${currency.name}
+${currency.code}
+-
+${currency.name}
 </span>
 
 `;
 
 
 
-item.onclick = ()=>{
+item.onclick =
+()=>{
 
 
-callback(currency);
+setCurrency(
+type,
+currency
+);
+
 
 
 container.style.display =
 "none";
 
 
-};
 
+};
 
 
 container.appendChild(item);
@@ -141,87 +249,13 @@ container.appendChild(item);
 });
 
 
-}
 
-
-});
-
-
-container.style.display="block";
+container.style.display =
+"block";
 
 
 }
 
-
-
-
-
-
-function selectFrom(currency){
-
-
-fromCurrency =
-currency.code;
-
-
-fromText.textContent =
-`${currency.code} - ${currency.name}`;
-
-
-fromIcon.textContent =
-currency.flag;
-
-
-}
-
-
-
-function selectTo(currency){
-
-
-toCurrency =
-currency.code;
-
-
-toText.textContent =
-`${currency.code} - ${currency.name}`;
-
-
-toIcon.textContent =
-currency.flag;
-
-
-}
-
-
-
-
-
-fromSelected.onclick=()=>{
-
-
-renderCurrencies(
-fromOptions,
-"",
-selectFrom
-);
-
-
-};
-
-
-
-toSelected.onclick=()=>{
-
-
-renderCurrencies(
-toOptions,
-"",
-selectTo
-);
-
-
-};
 
 
 
@@ -235,11 +269,12 @@ fromSearch.addEventListener(
 renderCurrencies(
 fromOptions,
 fromSearch.value,
-selectFrom
+"from"
 );
 
 
 });
+
 
 
 
@@ -252,7 +287,7 @@ toSearch.addEventListener(
 renderCurrencies(
 toOptions,
 toSearch.value,
-selectTo
+"to"
 );
 
 
@@ -262,33 +297,67 @@ selectTo
 
 
 
+fromSelected.onclick =
+()=>{
+
+
+renderCurrencies(
+fromOptions,
+"",
+"from"
+);
+
+
+toOptions.style.display =
+"none";
+
+
+};
+
+
+
+
+
+toSelected.onclick =
+()=>{
+
+
+renderCurrencies(
+toOptions,
+"",
+"to"
+);
+
+
+fromOptions.style.display =
+"none";
+
+
+};
+
+
+
+
+
 document.addEventListener(
 "click",
-e=>{
+(e)=>{
 
 
 if(
-!fromSelected.contains(e.target)
-&&
-!fromOptions.contains(e.target)
+!e.target.closest(".currency-selector")
 ){
 
-fromOptions.style.display="none";
+
+fromOptions.style.display =
+"none";
+
+
+toOptions.style.display =
+"none";
+
 
 }
-
-
-
-if(
-!toSelected.contains(e.target)
-&&
-!toOptions.contains(e.target)
-){
-
-toOptions.style.display="none";
-
-}
-
 
 
 });
@@ -297,31 +366,28 @@ toOptions.style.display="none";
 
 
 
-
-/*
-==============================
-환율 API
-==============================
-*/
+/* ==========================
+   API 환율
+========================== */
 
 
 async function getRate(){
 
 
-const cacheKey =
+let key =
 `${fromCurrency}_${toCurrency}`;
 
 
 
-const saved =
-localStorage.getItem(cacheKey);
+let saved =
+localStorage.getItem(key);
 
 
 
 if(saved){
 
 
-const cache =
+let cache =
 JSON.parse(saved);
 
 
@@ -345,8 +411,7 @@ return cache.rate;
 
 
 
-
-const response =
+let response =
 await fetch(
 
 `https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&symbols=${toCurrency}`
@@ -355,64 +420,20 @@ await fetch(
 
 
 
-
-if(!response.ok){
-
-throw new Error(
-"환율 서버 오류"
-);
-
-}
-
-
-
-
-
-const data =
+let data =
 await response.json();
 
 
 
-let rate = null;
-
-
-
-// Frankfurter v2 배열 대응
-
-if(Array.isArray(data)){
-
-
-if(data.length > 0){
-
-rate =
-data[0].rate;
-
-}
-
-
-}
-
-
-// 객체 응답 대응
-
-else if(data.rates){
-
-
-rate =
-data.rates[toCurrency];
-
-
-}
-
-
-
-
-
-if(!rate){
+if(
+!data.rates
+||
+!data.rates[toCurrency]
+){
 
 
 throw new Error(
-"지원하지 않는 환율입니다."
+"환율 데이터를 찾을 수 없습니다."
 );
 
 
@@ -420,10 +441,14 @@ throw new Error(
 
 
 
+
+let rate =
+data.rates[toCurrency];
+
+
+
 localStorage.setItem(
-
-cacheKey,
-
+key,
 JSON.stringify({
 
 rate:rate,
@@ -431,7 +456,6 @@ rate:rate,
 time:Date.now()
 
 })
-
 );
 
 
@@ -440,118 +464,122 @@ return rate;
 
 
 }
-return rate;
-
-}
-
-
-
+/* ==================================================
+   exchange.js
+   Part 2/2
+================================================== */
 
 
 
-/*
-==========================
-환율 계산
-==========================
-*/
+/* ==========================
+   계산
+========================== */
 
 
 async function calculate(){
 
 
-    try{
+try{
 
 
-        let amount =
-        Number(amountInput.value);
-
-
-
-        if(
-            isNaN(amount) ||
-            amount < 0
-        ){
-
-            result.innerHTML =
-            "올바른 금액을 입력하세요.";
-
-            return;
-
-        }
+let amount =
+Number(amountInput.value);
 
 
 
-        let rate =
-        await getRate();
+if(
+isNaN(amount)
+){
 
 
-
-        let value =
-        amount * rate;
-
+result.innerHTML =
+"금액을 입력하세요.";
 
 
-        result.innerHTML = `
-
-        <strong>
-
-        ${amount.toLocaleString()}
-
-        ${fromCurrency}
-
-        =
-
-        ${value.toLocaleString(
-            undefined,
-            {
-                maximumFractionDigits:2
-            }
-        )}
-
-        ${toCurrency}
-
-        </strong>
-
-        `;
-
-
-
-        exchangeInfo.innerHTML = `
-
-        1 ${fromCurrency}
-
-        =
-
-        ${rate.toLocaleString()}
-
-        ${toCurrency}
-
-        <br>
-
-        업데이트:
-
-        ${new Date().toLocaleString()}
-
-        `;
-
-
-
-    }
-    catch(error){
-
-
-        result.innerHTML =
-        "환율 정보를 불러오지 못했습니다.";
-
-
-        console.error(error);
-
-
-    }
+return;
 
 
 }
 
+
+
+let rate =
+await getRate();
+
+
+
+let value =
+amount * rate;
+
+
+
+result.innerHTML = `
+
+<strong>
+
+${amount.toLocaleString()}
+
+${fromCurrency}
+
+=
+
+${value.toLocaleString(
+undefined,
+{
+maximumFractionDigits:2
+}
+)}
+
+${toCurrency}
+
+</strong>
+
+`;
+
+
+
+exchangeInfo.innerHTML = `
+
+1 ${fromCurrency}
+
+=
+
+${rate}
+
+${toCurrency}
+
+<br>
+
+업데이트:
+
+${new Date().toLocaleString()}
+
+`;
+
+
+
+loadHistory();
+
+
+
+}
+
+
+catch(error){
+
+
+console.error(error);
+
+
+result.innerHTML =
+"환율 계산에 실패했습니다.";
+
+
+}
+
+
+
+}
 
 
 
@@ -567,58 +595,58 @@ calculate
 
 
 
-/*
-==========================
-통화 교환
-==========================
-*/
+
+/* ==========================
+   환율 교환
+========================== */
 
 
-swapBtn.addEventListener(
+swapButton.addEventListener(
 "click",
 ()=>{
 
 
-    let temp =
-    fromCurrency;
+let temp =
+fromCurrency;
 
 
-    fromCurrency =
-    toCurrency;
+fromCurrency =
+toCurrency;
 
 
-    toCurrency =
-    temp;
-
-
-
-    let tempText =
-    fromText.innerText;
-
-
-    fromText.innerText =
-    toText.innerText;
-
-
-    toText.innerText =
-    tempText;
+toCurrency =
+temp;
 
 
 
-    let tempIcon =
-    fromIcon.innerText;
+let tempText =
+fromText.innerText;
 
 
-    fromIcon.innerText =
-    toIcon.innerText;
+fromText.innerText =
+toText.innerText;
 
 
-    toIcon.innerText =
-    tempIcon;
+toText.innerText =
+tempText;
 
 
 
-    loadHistory();
+let tempIcon =
+fromIcon.innerText;
+
+
+fromIcon.innerText =
+toIcon.innerText;
+
+
+toIcon.innerText =
+tempIcon;
+
+
+
+loadHistory();
+
 
 
 }
@@ -630,113 +658,121 @@ swapBtn.addEventListener(
 
 
 
-/*
-==========================
-즐겨찾기
-==========================
-*/
+/* ==========================
+   즐겨찾기
+========================== */
 
 
 function loadFavorites(){
 
 
-    let favorites =
-    JSON.parse(
-        localStorage.getItem("favorites")
-    ) || [];
+let favorites =
+JSON.parse(
+localStorage.getItem("favorites")
+)
+||
+[];
 
 
 
-    favoriteList.innerHTML="";
+
+favoriteList.innerHTML="";
 
 
 
-    favorites.forEach(pair=>{
+favorites.forEach(pair=>{
 
 
-        let button =
-        document.createElement("button");
+let button =
+document.createElement("button");
 
 
-        button.className =
-        "favorite-button";
-
-
-        button.innerText =
-        pair;
+button.innerText =
+pair;
 
 
 
-        button.onclick = ()=>{
+button.onclick =
+()=>{
 
 
-            let data =
-            pair.split("/");
-
-
-
-            fromCurrency =
-            data[0];
-
-
-            toCurrency =
-            data[1];
+let list =
+pair.split("/");
 
 
 
-            let from =
-            currencies.find(
-                c=>c.code===fromCurrency
-            );
+fromCurrency =
+list[0];
 
 
-            let to =
-            currencies.find(
-                c=>c.code===toCurrency
-            );
+toCurrency =
+list[1];
 
 
 
-            if(from){
-
-                fromText.innerText =
-                `${from.code} - ${from.name}`;
-
-                fromIcon.innerText =
-                from.flag;
-
-            }
+let from =
+currencies.find(
+c=>c.code===fromCurrency
+);
 
 
 
-            if(to){
-
-                toText.innerText =
-                `${to.code} - ${to.name}`;
-
-                toIcon.innerText =
-                to.flag;
-
-            }
+let to =
+currencies.find(
+c=>c.code===toCurrency
+);
 
 
 
-            loadHistory();
+if(from){
 
 
-        };
+fromText.innerText =
+`${from.code} - ${from.name}`;
+
+
+fromIcon.innerText =
+from.flag;
+
+
+}
 
 
 
-        favoriteList.appendChild(button);
+if(to){
+
+
+toText.innerText =
+`${to.code} - ${to.name}`;
+
+
+toIcon.innerText =
+to.flag;
+
+
+}
 
 
 
-    });
+loadHistory();
+
+
+
+};
+
+
+
+favoriteList.appendChild(button);
+
+
+
+});
 
 
 
 }
+
+
 
 
 
@@ -744,35 +780,41 @@ function loadFavorites(){
 function addFavorite(){
 
 
-    let favorites =
-    JSON.parse(
-        localStorage.getItem("favorites")
-    ) || [];
+let favorites =
+JSON.parse(
+localStorage.getItem("favorites")
+)
+||
+[];
 
 
 
-    let pair =
-    `${fromCurrency}/${toCurrency}`;
+
+let pair =
+`${fromCurrency}/${toCurrency}`;
 
 
 
-    if(
-        !favorites.includes(pair)
-    ){
-
-        favorites.push(pair);
+if(
+!favorites.includes(pair)
+){
 
 
-        localStorage.setItem(
-            "favorites",
-            JSON.stringify(favorites)
-        );
-
-    }
+favorites.push(pair);
 
 
+localStorage.setItem(
+"favorites",
+JSON.stringify(favorites)
+);
 
-    loadFavorites();
+
+
+}
+
+
+loadFavorites();
+
 
 
 }
@@ -781,10 +823,7 @@ function addFavorite(){
 
 
 
-
-document
-.getElementById("exchangeInfo")
-.addEventListener(
+exchangeInfo.addEventListener(
 "click",
 addFavorite
 );
@@ -794,273 +833,271 @@ addFavorite
 
 
 
-/*
-==========================
-환율 기록
-==========================
-*/
+
+
+/* ==========================
+   환율 기록 + 차트
+========================== */
 
 
 async function loadHistory(){
 
 
-    try{
+try{
 
 
-        let end =
-        new Date();
-
-
-
-        let start =
-        new Date();
+let end =
+new Date();
 
 
 
-        start.setDate(
-            end.getDate()-30
-        );
+let start =
+new Date();
+
+
+start.setDate(
+end.getDate()-30
+);
 
 
 
-        let format =
-        date =>
-        date.toISOString()
-        .split("T")[0];
+let format =
+d=>
+d.toISOString()
+.split("T")[0];
 
 
 
-        let url =
+let url =
 
-        `https://api.frankfurter.dev/v2/rates?base=${fromCurrency}&symbols=${toCurrency}&from=${format(start)}&to=${format(end)}`;
-
-
-
-        let response =
-        await fetch(url);
+`https://api.frankfurter.dev/v2/rates?from=${format(start)}&to=${format(end)}&base=${fromCurrency}&symbols=${toCurrency}`;
 
 
 
-        let data =
-        await response.json();
+let response =
+await fetch(url);
 
 
 
-        let rates =
-        data.map(item=>({
-
-
-            date:item.date,
-
-
-            rate:item.rate || item.rates[toCurrency]
-
-
-        }));
+let data =
+await response.json();
 
 
 
-        recentRate.innerHTML = `
+let rates =
+data.map(item=>({
 
-        최근 환율:
 
-        1 ${fromCurrency}
+date:item.date,
 
-        =
 
-        ${rates.length ? rates[rates.length-1].rate : "-"}
+rate:item.rates[toCurrency]
 
-        ${toCurrency}
 
-        `;
+}));
 
 
 
-        drawCharts(rates);
+recentRate.innerHTML = `
+
+최근 환율
+
+<br>
+
+1 ${fromCurrency}
+
+=
+
+${rates.length ?
+rates[rates.length-1].rate :
+"-"}
+
+${toCurrency}
+
+`;
 
 
 
-    }
-    catch(error){
+drawCharts(rates);
 
-
-        console.error(error);
-
-
-        recentRate.innerText =
-        "최근 환율 정보를 불러올 수 없습니다.";
-
-
-    }
 
 
 }
+catch(error){
+
+
+console.error(error);
+
+
+recentRate.innerText =
+"최근 환율 정보를 불러올 수 없습니다.";
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
 function drawCharts(data){
 
 
-    let labels =
-    data.map(
-        item=>item.date
-    );
+let labels =
+data.map(
+item=>item.date
+);
 
 
 
-    let values =
-    data.map(
-        item=>item.rate
-    );
+let values =
+data.map(
+item=>item.rate
+);
 
 
 
-    if(chart7){
 
-        chart7.destroy();
 
-    }
+if(chart7)
+chart7.destroy();
 
 
-    if(chart30){
+if(chart30)
+chart30.destroy();
 
-        chart30.destroy();
 
-    }
 
 
 
 
+let ctx7 =
+document
+.getElementById("chart7")
+.getContext("2d");
 
-    let ctx7 =
-    document
-    .getElementById("chart7")
-    .getContext("2d");
 
 
+chart7 =
+new Chart(
+ctx7,
+{
 
-    chart7 =
-    new Chart(
-        ctx7,
-        {
 
-            type:"line",
+type:"line",
 
-            data:{
 
+data:{
 
-                labels:
-                labels.slice(-7),
 
+labels:
+labels.slice(-7),
 
-                datasets:[{
 
+datasets:[{
 
-                    label:
-                    `${fromCurrency} → ${toCurrency} 7일`,
 
+label:
+"7일 환율",
 
-                    data:
-                    values.slice(-7),
 
+data:
+values.slice(-7),
 
-                    tension:0.3
 
+tension:0.3
 
-                }]
 
+}]
 
-            },
 
+},
 
-            options:{
 
+options:{
 
-                responsive:true,
 
+responsive:true,
 
-                maintainAspectRatio:false,
 
+maintainAspectRatio:false
 
-                plugins:{
 
+}
 
-                    legend:{
 
 
-                        display:true
+}
+);
 
 
-                    }
 
 
-                }
 
 
-            }
 
 
-        }
-    );
+let ctx30 =
+document
+.getElementById("chart30")
+.getContext("2d");
 
 
 
+chart30 =
+new Chart(
+ctx30,
+{
 
 
+type:"line",
 
 
-    let ctx30 =
-    document
-    .getElementById("chart30")
-    .getContext("2d");
+data:{
 
 
+labels:labels,
 
-    chart30 =
-    new Chart(
-        ctx30,
-        {
 
-            type:"line",
+datasets:[{
 
-            data:{
 
+label:
+"30일 환율",
 
-                labels:
-                labels,
 
+data:values,
 
-                datasets:[{
 
+tension:0.3
 
-                    label:
-                    `${fromCurrency} → ${toCurrency} 30일`,
 
+}]
 
-                    data:
-                    values,
 
+},
 
-                    tension:0.3
 
+options:{
 
-                }]
 
+responsive:true,
 
-            },
 
+maintainAspectRatio:false
 
-            options:{
 
+}
 
-                responsive:true,
 
+}
+);
 
-                maintainAspectRatio:false
-
-
-            }
-
-
-        }
-    );
 
 
 }
@@ -1071,68 +1108,41 @@ function drawCharts(data){
 
 
 
-/*
-==========================
-초기 설정
-==========================
-*/
+/* ==========================
+   시작
+========================== */
+
+
+function init(){
+
+
+let usd =
+currencies.find(
+c=>c.code==="USD"
+);
+
+
+let krw =
+currencies.find(
+c=>c.code==="KRW"
+);
 
 
 
-function initCurrency(){
-
-
-    let from =
-    currencies.find(
-        c=>c.code==="USD"
-    );
-
-
-
-    let to =
-    currencies.find(
-        c=>c.code==="KRW"
-    );
+if(usd)
+setCurrency(
+"from",
+usd
+);
 
 
 
-    if(from){
+if(krw)
+setCurrency(
+"to",
+krw
+);
 
-
-        fromText.innerText =
-        `${from.code} - ${from.name}`;
-
-
-        fromIcon.innerText =
-        from.flag;
-
-
-    }
-
-
-
-    if(to){
-
-
-        toText.innerText =
-        `${to.code} - ${to.name}`;
-
-
-        toIcon.innerText =
-        to.flag;
-
-
-    }
-
-
-}
-
-
-
-
-
-
-initCurrency();
 
 
 loadFavorites();
@@ -1142,165 +1152,12 @@ loadHistory();
 
 
 
-
-
-/*
-==========================
-선택창 외부 클릭 닫기
-==========================
-*/
-
-
-document.addEventListener(
-"click",
-(e)=>{
-
-
-    if(
-        !e.target.closest(".currency-selector")
-    ){
-
-        fromOptions.style.display="none";
-
-        toOptions.style.display="none";
-
-
-    }
-
-
-});
-
-
-
-
-
-
-
-fromSelected.addEventListener(
-"click",
-()=>{
-
-
-    fromOptions.style.display="block";
-
-    toOptions.style.display="none";
-
-
-});
-
-
-
-
-
-
-toSelected.addEventListener(
-"click",
-()=>{
-
-
-    toOptions.style.display="block";
-
-    fromOptions.style.display="none";
-
-
-});
-
-
-
-
-
-
-
-
-function renderCurrencies(
-container,
-keyword,
-callback
-){
-
-
-    container.innerHTML="";
-
-
-    let search =
-    keyword.toLowerCase();
-
-
-
-    currencies
-    .filter(currency=>{
-
-
-        return (
-
-            currency.code
-            .toLowerCase()
-            .includes(search)
-
-            ||
-
-            currency.name
-            .toLowerCase()
-            .includes(search)
-
-        );
-
-
-    })
-    .forEach(currency=>{
-
-
-        let item =
-        document.createElement("div");
-
-
-        item.className =
-        "currency-option";
-
-
-
-        item.innerHTML = `
-
-        <span>
-
-        ${currency.flag}
-
-        </span>
-
-
-        <span>
-
-        ${currency.code}
-
-        -
-
-        ${currency.name}
-
-        </span>
-
-        `;
-
-
-
-        item.onclick=()=>{
-
-
-            callback(currency);
-
-
-            container.style.display="none";
-
-
-        };
-
-
-
-        container.appendChild(item);
-
-
-
-    });
-
-
 }
-                        
+
+
+
+init();
+
+
+
+});
