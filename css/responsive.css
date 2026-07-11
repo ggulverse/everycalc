@@ -154,3 +154,26 @@
 
 
 }
+
+/* ==========================
+   Mobile Currency Safety
+========================== */
+
+@media(max-width:768px){
+
+    .currency-selected{
+
+        max-width:100%;
+
+        box-sizing:border-box;
+
+    }
+
+
+    .currency-option{
+
+        word-break:keep-all;
+
+    }
+
+}
