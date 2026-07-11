@@ -2,345 +2,175 @@
 <html lang="ko">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>환율 계산기 - EveryCalc</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-
-<title>
-EveryCalc | 환율 계산기
-</title>
-
-
-<meta name="description"
-content="EveryCalc 환율 계산기. 세계 주요 통화를 실시간 환율 기준으로 계산합니다.">
-
-
-<link rel="stylesheet"
-href="../css/style.css">
-
-
-<link rel="stylesheet"
-href="../css/calculator.css">
-
-
-<link rel="stylesheet"
-href="../css/darkmode.css">
-
-
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
 
 </head>
-
 
 
 <body>
 
 
+<header class="site-header">
 
-<!-- ==========================
-     Header
-========================== -->
+    <h1>
+        EveryCalc
+    </h1>
 
-
-<header class="header">
-
-
-<div class="container">
-
-
-<a href="../index.html"
-class="logo">
-
-
-<span class="logo-main">
-
-EveryCalc
-
-</span>
-
-
-<span class="logo-sub">
-
-모든 계산기를 하나로
-
-</span>
-
-
-</a>
-
-
-
-
-
-<nav class="navigation">
-
-
-<ul>
-
-
-<li>
-
-<a href="../index.html">
-
-홈
-
-</a>
-
-</li>
-
-
-</ul>
-
-
-</nav>
-
-
-
-
-
-<div class="header-buttons">
-
-
-<button
-id="darkModeToggle"
-aria-label="다크모드">
-
-🌙
-
-</button>
-
-
-</div>
-
-
-
-</div>
-
+    <p>
+        실시간 환율 계산기
+    </p>
 
 </header>
 
 
 
+<main class="calculator-container">
+
+
+<section class="calculator-box">
+
+
+<h2>
+환율 계산기
+</h2>
 
 
 
+<!-- 금액 입력 -->
 
-<!-- ==========================
-     Main
-========================== -->
-
-
-<main class="calculator-page">
-
-
-<div class="container">
-
-
-
-<section class="calculator-header">
-
-
-<h1>
-
-💱 환율 계산기
-
-</h1>
-
-
-<p>
-
-세계 주요 통화를 실시간 환율 기준으로 계산합니다.
-
-</p>
-
-
-</section>
-
-
-
-
-
-<div class="calculator-container">
-
-
-<div class="calculator-box">
-
-
-
-
-
-<form class="calculator-form"
-onsubmit="return false;">
-
-
-
-
+<div class="input-group">
 
 <label>
-
 금액
-
 </label>
 
-
-<input
-
-type="number"
-
+<input 
 id="amount"
-
+type="number"
 value="1"
+min="0">
 
-min="0"
-
-step="0.01"
-
->
+</div>
 
 
 
 
-
-<label>
-
-변환 전 통화
-
-</label>
-
-
-
-
+<!-- 출발 통화 -->
 
 <div class="currency-selector">
 
 
-
-<div class="selected-currency">
-
-
-<span id="fromIcon">
-
-🇺🇸
-
-</span>
+<label>
+변환 전 통화
+</label>
 
 
+<div 
+class="selected-currency"
+id="fromSelected">
+
+<span id="fromIcon"></span>
 
 <span id="fromText">
-
-USD 미국 달러
-
+USD - 미국 달러
 </span>
 
-
-
 </div>
 
 
 
+<input
+type="text"
+id="fromSearch"
+placeholder="통화 검색">
 
 
-<div id="fromOptions"
+<div
+id="fromOptions"
 class="currency-options">
 
+</div>
+
 
 </div>
 
 
 
 
-</div>
 
+<!-- 교환 버튼 -->
 
+<button 
+id="swapButton"
+class="swap-button">
 
-
-
-<div class="exchange-swap">
-
-
-<button
-
-type="button"
-
-id="swapBtn"
-
->
-
-⇅
+⇄
 
 </button>
 
 
-</div>
 
 
 
 
-
-<label>
-
-변환 후 통화
-
-</label>
-
-
-
-
+<!-- 도착 통화 -->
 
 <div class="currency-selector">
 
 
+<label>
+변환 후 통화
+</label>
 
-<div class="selected-currency">
+
+<div 
+class="selected-currency"
+id="toSelected">
 
 
-<span id="toIcon">
-
-🇰🇷
-
-</span>
-
+<span id="toIcon"></span>
 
 
 <span id="toText">
-
-KRW 대한민국 원
-
+KRW - 대한민국 원
 </span>
 
 
-
 </div>
 
 
 
 
+<input
+type="text"
+id="toSearch"
+placeholder="통화 검색">
 
-<div id="toOptions"
+
+<div
+id="toOptions"
 class="currency-options">
 
-
 </div>
 
 
 
 </div>
+
 
 
 
 
 
 <button
-
-type="button"
-
 id="calculate"
-
-class="calculate-button"
-
->
+class="calculate-button">
 
 계산하기
 
@@ -350,20 +180,21 @@ class="calculate-button"
 
 
 
-</form>
+
+
+<!-- 결과 -->
+
+<div 
+id="result"
+class="result-box">
+
+</div>
 
 
 
-
-
-<!-- 결과 영역 -->
-
-
-<div id="result"
-class="calculator-result">
-
-
-계산 결과 표시
+<div
+id="exchangeInfo"
+class="exchange-info">
 
 </div>
 
@@ -371,60 +202,70 @@ class="calculator-result">
 
 
 
-<!-- 환율 정보 -->
+
+<!-- 즐겨찾기 -->
+
+<section class="favorite-section">
 
 
-<div id="exchangeInfo"
-class="calculator-info">
+<h3>
+즐겨찾기 환율
+</h3>
 
 
-환율 정보를 불러오는 중...
-
+<div id="favoriteList">
 
 </div>
 
 
+</section>
 
 
 
-<section class="calculator-info">
-
-
-<h2>
-
-EveryCalc 환율 계산기
-
-</h2>
 
 
 
-<p>
 
-EveryCalc 환율 계산기는
-세계 주요 통화의 환율을 기준으로
-빠르고 간편하게 변환할 수 있는
-온라인 계산기입니다.
+<!-- 최근 환율 -->
 
-</p>
+<section class="history-section">
 
 
+<h3>
+최근 환율 정보
+</h3>
 
-<p>
 
-미국 달러(USD),
-대한민국 원(KRW),
-유로(EUR),
-일본 엔(JPY),
-중국 위안(CNY)을 포함하여
+<div
+id="recentRate">
 
-아시아,
-유럽,
-미주,
-중동,
-아프리카 등
-총 38개 통화를 지원합니다.
+</div>
 
-</p>
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 차트 -->
+
+<section class="chart-section">
+
+
+<h3>
+7일 환율 변화
+</h3>
+
+
+<canvas
+id="chart7">
+
+</canvas>
 
 
 
@@ -434,100 +275,18 @@ EveryCalc 환율 계산기는
 
 
 
-<section class="calculator-faq">
+<section class="chart-section">
 
 
-
-<h2>
-
-자주 묻는 질문
-
-</h2>
+<h3>
+30일 환율 변화
+</h3>
 
 
-<details>
+<canvas
+id="chart30">
 
-
-<summary>
-
-지원하는 통화는 몇 개인가요?
-
-</summary>
-
-
-
-<p>
-
-현재 총 38개의 주요 국제 통화를 지원합니다.
-
-대한민국 원,
-미국 달러,
-유로,
-일본 엔,
-중국 위안 등
-세계 주요 통화를 포함합니다.
-
-</p>
-
-
-</details>
-
-
-
-
-
-
-
-<details>
-
-
-<summary>
-
-환율 계산기는 무료인가요?
-
-</summary>
-
-
-
-<p>
-
-네.
-EveryCalc의 모든 계산기는
-회원가입 없이 무료로 이용할 수 있습니다.
-
-</p>
-
-
-</details>
-
-
-
-
-
-
-<details>
-
-
-<summary>
-
-모바일에서도 사용할 수 있나요?
-
-</summary>
-
-
-
-<p>
-
-네.
-스마트폰과 태블릿에서도
-사용할 수 있도록 반응형 구조로 제작됩니다.
-
-</p>
-
-
-</details>
-
-
+</canvas>
 
 
 
@@ -536,11 +295,7 @@ EveryCalc의 모든 계산기는
 
 
 
-
-</div>
-
-
-</div>
+</section>
 
 
 </main>
@@ -551,209 +306,39 @@ EveryCalc의 모든 계산기는
 
 
 
-
-<!-- ==========================
-     Footer
-========================== -->
-
-
-<footer class="footer">
-
-
-<div class="container">
-
-
-<div class="footer-top">
-
-
-
-
-
-<div class="footer-logo">
-
-
-<h2>
-
-EveryCalc
-
-</h2>
-
+<footer>
 
 <p>
-
-Every Calculation in One Place
-
+© EveryCalc
 </p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="footer-menu">
-
-
-<h3>
-
-메뉴
-
-</h3>
-
-
-<ul>
-
-
-<li>
-
-<a href="../index.html">
-
-홈
-
-</a>
-
-</li>
-
-
-<li>
-
-<a href="../index.html#popular">
-
-인기 계산기
-
-</a>
-
-</li>
-
-
-<li>
-
-<a href="../index.html#categories">
-
-카테고리
-
-</a>
-
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="footer-links">
-
-
-<h3>
-
-정책
-
-</h3>
-
-
-<ul>
-
-
-<li>
-
-<a href="#">
-
-개인정보처리방침
-
-</a>
-
-</li>
-
-
-<li>
-
-<a href="#">
-
-이용약관
-
-</a>
-
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-<hr>
-
-
-
-
-
-<div class="footer-bottom">
-
-
-<p>
-
-© 2026 EveryCalc.
-All Rights Reserved.
-
-</p>
-
-
-<p>
-
-Developed for GitHub Pages
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
 
 </footer>
-<!-- ==========================
-     Scripts
-========================== -->
 
 
-<script src="../js/theme.js"></script>
 
+
+
+
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+<!-- 통화 데이터 -->
 
 <script src="../js/currencies.js"></script>
 
+
+
+<!-- 환율 계산기 -->
 
 <script src="../js/exchange.js"></script>
 
 
 
-
-
 </body>
-
 
 </html>
