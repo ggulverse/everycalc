@@ -64,7 +64,6 @@ let currency =
 currencySelect.value;
 
 
-
 let response =
 await fetch(
 
@@ -114,6 +113,7 @@ return target.rate;
 
 
 }
+
 
 
 
@@ -264,7 +264,6 @@ ${currencySelect.value}
 loadHistory();
 
 
-
 }
 
 catch(error){
@@ -281,26 +280,34 @@ error.message;
 
 
 
-
 calculateBtn.onclick =
 calculate;
+
 
 metalSelect.addEventListener(
 "change",
 ()=>{
-    loadHistory();
+
+loadHistory();
+
 }
 );
+
 
 
 currencySelect.addEventListener(
 "change",
 ()=>{
-    loadHistory();
+
+loadHistory();
+
 }
 );
 
+
+
 async function loadHistory(){
+
 
 try{
 
@@ -359,7 +366,6 @@ await response.json();
 drawCharts(data);
 
 
-
 }
 
 catch(error){
@@ -370,11 +376,6 @@ console.log(error);
 
 
 }
-
-
-
-
-
 function drawCharts(data){
 
 
@@ -406,10 +407,103 @@ item=>item.rate
 );
 
 
-let chartTextColor =
-getComputedStyle(document.body)
-.getPropertyValue("--text")
-.trim();
+
+let textColor =
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222";
+
+
+
+
+const chartOptions = {
+
+
+plugins:{
+
+
+legend:{
+
+
+labels:{
+
+
+color:textColor
+
+
+}
+
+
+}
+
+
+},
+
+
+
+scales:{
+
+
+x:{
+
+
+ticks:{
+
+
+color:textColor
+
+
+},
+
+
+grid:{
+
+
+color:textColor + "33"
+
+
+}
+
+
+},
+
+
+
+y:{
+
+
+ticks:{
+
+
+color:textColor
+
+
+},
+
+
+grid:{
+
+
+color:textColor + "33"
+
+
+}
+
+
+}
+
+
+
+}
+
+
+
+};
+
+
+
 
 
 chart7 =
@@ -423,10 +517,13 @@ document
 
 type:"line",
 
+
 data:{
+
 
 labels:
 labels.slice(-7),
+
 
 datasets:[{
 
@@ -438,53 +535,17 @@ values.slice(-7)
 
 }]
 
-},
-
-options:{
-
-plugins:{
-
-legend:{
-
-labels:{
-
-color:textColor
-
-}
-
-}
 
 },
 
-scales:{
 
-x:{
+options:chartOptions
 
-ticks:{
-
-color:textColor
-
-}
-
-},
-
-y:{
-
-ticks:{
-
-color:textColor
-
-}
-
-}
-
-}
-
-}
 
 }
 
 );
+
 
 
 
@@ -499,11 +560,15 @@ document
 
 {
 
+
 type:"line",
+
 
 data:{
 
+
 labels,
+
 
 datasets:[{
 
@@ -514,49 +579,12 @@ data:values
 
 }]
 
-},
-
-options:{
-
-plugins:{
-
-legend:{
-
-labels:{
-
-color:textColor
-
-}
-
-}
 
 },
 
-scales:{
 
-x:{
+options:chartOptions
 
-ticks:{
-
-color:textColor
-
-}
-
-},
-
-y:{
-
-ticks:{
-
-color:textColor
-
-}
-
-}
-
-}
-
-}
 
 }
 
@@ -568,12 +596,15 @@ color:textColor
 
 
 
+
+
 window.updateMetalCharts =
 function(){
 
-    loadHistory();
+loadHistory();
 
 };
+
 
 
 loadHistory();
