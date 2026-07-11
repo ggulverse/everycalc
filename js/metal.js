@@ -542,7 +542,7 @@ labels.slice(-7),
 datasets:[{
 
 label:
-`7일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세 (1oz 기준)`,
+`7일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세`,
 
 data:
 values.slice(-7)
@@ -587,7 +587,7 @@ labels,
 datasets:[{
 
 label:
-`30일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세 (1oz 기준)`,
+`30일 ${metalSelect.options[metalSelect.selectedIndex].text} 시세`,
 
 data:values
 
