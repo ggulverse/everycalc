@@ -809,16 +809,49 @@ addFavorite;
 
 async function loadHistory(){
 
-
 try{
+
+
+let today =
+new Date();
+
+
+let end =
+today.toISOString()
+.split("T")[0];
+
+
+let startDate =
+new Date();
+
+
+startDate.setDate(
+today.getDate()-30
+);
+
+
+let start =
+startDate.toISOString()
+.split("T")[0];
+
 
 
 let response =
 await fetch(
 
-`https://api.frankfurter.dev/v2/rates?base=${fromCurrency}`
+`https://api.frankfurter.dev/v2/rates?from=${start}&to=${end}&base=${fromCurrency}&symbols=${toCurrency}`
 
 );
+
+
+
+if(!response.ok){
+
+throw new Error(
+"차트 API 실패"
+);
+
+}
 
 
 
@@ -827,18 +860,13 @@ await response.json();
 
 
 
-let target =
-data.find(
 
-item=>
-
-item.quote === toCurrency
-
-);
+if(data.length){
 
 
+let latest =
+data[data.length-1];
 
-if(target){
 
 
 recentRate.innerHTML = `
@@ -849,10 +877,15 @@ recentRate.innerHTML = `
 
 1 ${fromCurrency}
 =
-${target.rate}
+${latest.rate}
 ${toCurrency}
 
 `;
+
+
+
+drawCharts(data);
+
 
 
 }
@@ -876,7 +909,6 @@ recentRate.innerText =
 
 
 }
-
 
 
 
