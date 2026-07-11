@@ -115,27 +115,23 @@ keyword.toLowerCase();
 
 
 
+/* ==========================
+   검색 중
+========================== */
+
+if(search !== ""){
+
+
+let results = [];
+
+
 currencyGroups.forEach(group=>{
 
 
-let groupTitle =
-document.createElement("div");
+group.currencies.forEach(currency=>{
 
 
-groupTitle.className =
-"currency-group-title";
-
-
-groupTitle.innerText =
-group.group;
-
-
-
-let matchedCurrencies =
-group.currencies.filter(currency=>{
-
-
-return (
+if(
 
 currency.code
 .toLowerCase()
@@ -147,39 +143,52 @@ currency.name
 .toLowerCase()
 .includes(search)
 
-);
+){
+
+results.push(currency);
+
+}
+
+
+});
 
 
 });
 
 
 
-if(
-matchedCurrencies.length === 0
-){
+if(results.length === 0){
 
-return;
+
+let empty =
+document.createElement("div");
+
+
+empty.className =
+"currency-option";
+
+
+empty.innerText =
+"검색 결과가 없습니다.";
+
+
+container.appendChild(empty);
+
 
 }
 
+else{
 
 
-container.appendChild(groupTitle);
-
-
-
-
-matchedCurrencies.forEach(currency=>{
+results.forEach(currency=>{
 
 
 let item =
 document.createElement("div");
 
 
-
 item.className =
 "currency-option";
-
 
 
 item.innerHTML = `
@@ -220,8 +229,92 @@ container.appendChild(item);
 });
 
 
+}
+
+
+}
+
+
+/* ==========================
+   일반 목록
+========================== */
+
+else{
+
+
+currencyGroups.forEach(group=>{
+
+
+let groupTitle =
+document.createElement("div");
+
+
+groupTitle.className =
+"currency-group-title";
+
+
+groupTitle.innerText =
+group.group;
+
+
+
+container.appendChild(groupTitle);
+
+
+
+group.currencies.forEach(currency=>{
+
+
+let item =
+document.createElement("div");
+
+
+item.className =
+"currency-option";
+
+
+item.innerHTML = `
+
+<span>
+${currency.flag || ""}
+</span>
+
+<span>
+${currency.code}
+-
+${currency.name}
+</span>
+
+`;
+
+
+
+item.onclick =
+()=>{
+
+
+callback(currency);
+
+
+container.style.display =
+"none";
+
+
+};
+
+
+
+container.appendChild(item);
+
+
 
 });
+
+
+});
+
+
+}
 
 
 
@@ -230,7 +323,6 @@ container.style.display =
 
 
 }
-
 
 
 
