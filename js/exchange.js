@@ -4,6 +4,7 @@
 ================================================== */
 
 
+
 const amountInput =
 document.getElementById("amount");
 
@@ -36,6 +37,10 @@ const calculateButton =
 document.getElementById("calculate");
 
 
+const swapButton =
+document.getElementById("swapBtn");
+
+
 const result =
 document.getElementById("result");
 
@@ -45,8 +50,13 @@ document.getElementById("exchangeInfo");
 
 
 
-let selectedFrom="USD";
-let selectedTo="KRW";
+
+
+let selectedFrom = "USD";
+
+let selectedTo = "KRW";
+
+
 
 
 
@@ -58,53 +68,84 @@ let selectedTo="KRW";
 
 function saveCache(key,data){
 
+
     localStorage.setItem(
+
         key,
+
         JSON.stringify({
-            time:Date.now(),
+
+            time: Date.now(),
+
             data:data
+
         })
+
     );
+
 
 }
 
 
 
+
+
 function getCache(key){
+
 
     const cache =
     localStorage.getItem(key);
 
 
+
     if(!cache){
+
         return null;
+
     }
+
+
 
 
     const parsed =
     JSON.parse(cache);
 
 
-    const tenMinutes =
+
+
+    const expire =
     10 * 60 * 1000;
 
 
+
+
     if(
-        Date.now()-parsed.time
+        Date.now()
+        -
+        parsed.time
         >
-        tenMinutes
+        expire
     ){
+
 
         localStorage.removeItem(key);
 
+
         return null;
+
 
     }
 
 
+
     return parsed.data;
 
+
+
 }
+
+
+
 
 
 
@@ -118,145 +159,208 @@ function getCache(key){
 function createCurrencyMenu(target){
 
 
-    target.innerHTML="";
+
+    target.innerHTML = "";
 
 
-    const groups={};
+
+
+    const groups = {};
 
 
 
-    currencies.forEach(currency=>{
+
+
+    currencies.forEach(currency => {
+
 
 
         if(!groups[currency.group]){
 
-            groups[currency.group]=[];
+
+            groups[currency.group] = [];
+
 
         }
+
 
 
         groups[currency.group]
         .push(currency);
 
 
+
     });
 
 
 
+
+
+
+
     Object.keys(groups)
-    .forEach(group=>{
+    .forEach(group => {
+
 
 
         const wrapper =
         document.createElement("div");
 
 
+
         const title =
         document.createElement("div");
+
 
 
         title.textContent =
         group;
 
 
-        title.style.fontWeight="bold";
+
+        title.style.fontWeight =
+        "bold";
 
 
-        title.style.padding="10px";
+
+        title.style.padding =
+        "10px";
+
 
 
         wrapper.appendChild(title);
 
 
 
-        groups[group].forEach(currency=>{
+
+
+
+
+        groups[group]
+        .forEach(currency => {
+
 
 
             const item =
             document.createElement("div");
 
 
+
             item.className =
             "currency-option";
 
 
+
             item.innerHTML = `
 
-            <span>
-            ${currency.flag}
-            ${currency.code}
-            ${currency.name}
-            </span>
+                <span>
+                ${currency.flag}
+                ${currency.code}
+                ${currency.name}
+                </span>
 
             `;
 
 
 
-            item.onclick=function(){
 
 
-                if(target===fromOptions){
+
+
+
+            item.onclick = function(){
+
+
+
+
+
+                if(target === fromOptions){
+
+
 
                     selectedFrom =
                     currency.code;
 
 
-                    fromText.textContent =
-                    `${currency.code} ${currency.name}`;
 
                     fromIcon.textContent =
                     currency.flag;
 
 
+
+                    fromText.textContent =
+                    `${currency.code} ${currency.name}`;
+
+
+
                 }
+
                 else{
+
 
 
                     selectedTo =
                     currency.code;
 
 
-                    toText.textContent =
-                    `${currency.code} ${currency.name}`;
 
                     toIcon.textContent =
                     currency.flag;
+
+
+
+                    toText.textContent =
+                    `${currency.code} ${currency.name}`;
+
 
 
                 }
 
 
 
-                target.style.display="none";
+
+
+
+                target.style.display =
+                "none";
+
 
 
                 calculateExchange();
+
 
 
             };
 
 
 
+
+
+
+
             wrapper.appendChild(item);
+
 
 
         });
 
 
 
+
+
+
+
         target.appendChild(wrapper);
+
 
 
     });
 
 
+
+
+
 }
-
-
-
-
-
-
 /* ==========================
    Frankfurter API
 ========================== */
@@ -269,6 +373,7 @@ async function getRates(){
     getCache("exchangeRates");
 
 
+
     if(cache){
 
         return cache;
@@ -277,10 +382,14 @@ async function getRates(){
 
 
 
+
     const response =
     await fetch(
-    "https://api.frankfurter.dev/v2/rates?base=EUR"
+
+        "https://api.frankfurter.dev/v2/rates?base=EUR"
+
     );
+
 
 
     const data =
@@ -288,16 +397,25 @@ async function getRates(){
 
 
 
+
     saveCache(
+
         "exchangeRates",
+
         data
+
     );
+
 
 
     return data;
 
 
+
 }
+
+
+
 
 
 
@@ -306,28 +424,39 @@ async function getRates(){
 function makeRates(data){
 
 
-    const rates={
+
+    const rates = {
+
 
         EUR:1
+
 
     };
 
 
 
-    data.forEach(item=>{
 
 
-        rates[item.quote]=
+    data.forEach(item => {
+
+
+
+        rates[item.quote] =
         item.rate;
+
 
 
     });
 
 
+
+
     return rates;
 
 
+
 }
+
 
 
 
@@ -343,101 +472,271 @@ function makeRates(data){
 async function calculateExchange(){
 
 
-try{
 
-
-    const amount =
-    Number(
-        amountInput.value.replace(/,/g,"")
-    );
+    try{
 
 
 
-    if(!amount){
+        const amount =
+        Number(
+            amountInput.value
+        );
 
-        return;
+
+
+
+
+        if(
+            !amount
+            ||
+            amount <= 0
+        ){
+
+
+            result.innerHTML =
+            "금액을 입력하세요.";
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+        const data =
+        await getRates();
+
+
+
+
+
+
+
+        const rates =
+        makeRates(data);
+
+
+
+
+
+
+
+
+        if(
+            !rates[selectedFrom]
+            ||
+            !rates[selectedTo]
+        ){
+
+
+
+            result.innerHTML =
+
+            "지원하지 않는 통화입니다.";
+
+
+            return;
+
+
+        }
+
+
+
+
+
+
+
+
+        const euroValue =
+
+        amount
+        /
+        rates[selectedFrom];
+
+
+
+
+
+
+
+        const converted =
+
+        euroValue
+        *
+        rates[selectedTo];
+
+
+
+
+
+
+
+        result.innerHTML = `
+
+
+
+        <h2>
+
+        ${amount.toLocaleString()}
+
+        ${selectedFrom}
+
+        =
+
+        ${converted.toLocaleString(
+            undefined,
+            {
+                maximumFractionDigits:2
+            }
+        )}
+
+        ${selectedTo}
+
+
+        </h2>
+
+
+
+        `;
+
+
+
+
+
+
+
+
+        exchangeInfo.innerHTML = `
+
+
+
+        <p>
+
+        기준 환율:
+        Frankfurter API
+
+        </p>
+
+
+
+        <p>
+
+        마지막 업데이트:
+
+        ${new Date()
+        .toLocaleString()}
+
+        </p>
+
+
+
+        `;
+
+
+
+
+    }
+
+    catch(error){
+
+
+
+        console.error(error);
+
+
+
+        result.innerHTML =
+
+        "환율 정보를 불러오지 못했습니다.";
+
+
 
     }
 
 
 
-    const data =
-    await getRates();
+}
 
 
 
-    const rates =
-    makeRates(data);
 
 
 
-    const euro =
-    amount / rates[selectedFrom];
+
+
+/* ==========================
+   Swap
+========================== */
+
+
+function swapCurrency(){
 
 
 
-    const converted =
-    euro * rates[selectedTo];
+    const temp =
+    selectedFrom;
 
 
 
-    result.innerHTML = `
-
-    <h2>
-
-    ${amount.toLocaleString()}
-    ${selectedFrom}
-
-    =
-
-    ${converted.toLocaleString(
-        undefined,
-        {
-            maximumFractionDigits:2
-        }
-    )}
-
-    ${selectedTo}
-
-    </h2>
-
-    `;
+    selectedFrom =
+    selectedTo;
 
 
 
-    exchangeInfo.innerHTML = `
+    selectedTo =
+    temp;
 
-    <p>
-    기준:
-    Frankfurter API
-    </p>
 
-    <p>
-    마지막 업데이트:
-    ${new Date()
-    .toLocaleString()}
-    </p>
 
-    `;
+
+
+
+    const tempText =
+    fromText.textContent;
+
+
+
+    fromText.textContent =
+    toText.textContent;
+
+
+
+    toText.textContent =
+    tempText;
+
+
+
+
+
+
+    const tempIcon =
+    fromIcon.textContent;
+
+
+
+    fromIcon.textContent =
+    toIcon.textContent;
+
+
+
+    toIcon.textContent =
+    tempIcon;
+
+
+
+
+
+    calculateExchange();
 
 
 
 }
 
-catch(error){
-
-
-    console.error(error);
-
-
-    result.innerHTML =
-    "환율 정보를 불러오지 못했습니다.";
-
-
-}
-
-
-}
 
 
 
@@ -450,37 +749,89 @@ catch(error){
 ========================== */
 
 
-fromOptions.previousElementSibling
-.onclick=function(){
+
+fromOptions
+.previousElementSibling
+.onclick = function(){
+
+
 
     fromOptions.style.display =
-    fromOptions.style.display==="block"
+
+    fromOptions.style.display === "block"
+
     ?
+
     "none"
+
     :
+
     "block";
+
+
 
 };
 
 
 
-toOptions.previousElementSibling
-.onclick=function(){
+
+
+
+
+toOptions
+.previousElementSibling
+.onclick = function(){
+
+
 
     toOptions.style.display =
-    toOptions.style.display==="block"
+
+    toOptions.style.display === "block"
+
     ?
+
     "none"
+
     :
+
     "block";
 
+
+
 };
+
+
+
 
 
 
 
 calculateButton.onclick =
+
 calculateExchange;
+
+
+
+
+
+
+
+if(swapButton){
+
+
+
+    swapButton.onclick =
+
+    swapCurrency;
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -489,26 +840,42 @@ calculateExchange;
 ========================== */
 
 
+
 createCurrencyMenu(fromOptions);
+
 
 createCurrencyMenu(toOptions);
 
 
 
+
+
 fromText.textContent =
+
 "USD 미국 달러";
 
 
+
 toText.textContent =
+
 "KRW 대한민국 원";
 
 
+
+
+
 fromIcon.textContent =
+
 "🇺🇸";
 
 
+
 toIcon.textContent =
+
 "🇰🇷";
+
+
+
 
 
 
