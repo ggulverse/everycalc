@@ -107,7 +107,6 @@ keyword,
 callback
 ){
 
-
 container.innerHTML="";
 
 
@@ -116,8 +115,24 @@ keyword.toLowerCase();
 
 
 
-currencies
-.filter(currency=>{
+currencyGroups.forEach(group=>{
+
+
+let groupTitle =
+document.createElement("div");
+
+
+groupTitle.className =
+"currency-group-title";
+
+
+groupTitle.innerText =
+group.group;
+
+
+
+let matchedCurrencies =
+group.currencies.filter(currency=>{
 
 
 return (
@@ -135,8 +150,26 @@ currency.name
 );
 
 
-})
-.forEach(currency=>{
+});
+
+
+
+if(
+matchedCurrencies.length === 0
+){
+
+return;
+
+}
+
+
+
+container.appendChild(groupTitle);
+
+
+
+
+matchedCurrencies.forEach(currency=>{
 
 
 let item =
@@ -181,6 +214,10 @@ container.style.display =
 
 
 container.appendChild(item);
+
+
+
+});
 
 
 
