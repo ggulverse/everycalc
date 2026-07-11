@@ -1,10 +1,11 @@
 /* ==================================================
    EveryCalc - currencies.js
-   Currency Information
+   Currency & Metal Information
 ================================================== */
 
 
 const currencies = [
+
 
     {
         code:"KRW",
@@ -13,12 +14,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"USD",
         name:"미국 달러",
         flag:"🇺🇸",
         type:"currency"
     },
+
 
     {
         code:"EUR",
@@ -27,12 +30,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"JPY",
         name:"일본 엔",
         flag:"🇯🇵",
         type:"currency"
     },
+
 
     {
         code:"CNY",
@@ -41,12 +46,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"GBP",
         name:"영국 파운드",
         flag:"🇬🇧",
         type:"currency"
     },
+
 
     {
         code:"AUD",
@@ -55,12 +62,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"CAD",
         name:"캐나다 달러",
         flag:"🇨🇦",
         type:"currency"
     },
+
 
     {
         code:"CHF",
@@ -69,12 +78,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"HKD",
         name:"홍콩 달러",
         flag:"🇭🇰",
         type:"currency"
     },
+
 
     {
         code:"SGD",
@@ -83,12 +94,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"THB",
         name:"태국 바트",
         flag:"🇹🇭",
         type:"currency"
     },
+
 
     {
         code:"VND",
@@ -97,12 +110,14 @@ const currencies = [
         type:"currency"
     },
 
+
     {
         code:"TWD",
         name:"대만 달러",
         flag:"🇹🇼",
         type:"currency"
     },
+
 
     {
         code:"INR",
@@ -111,66 +126,11 @@ const currencies = [
         type:"currency"
     },
 
-    {
-        code:"IDR",
-        name:"인도네시아 루피아",
-        flag:"🇮🇩",
-        type:"currency"
-    },
-
-    {
-        code:"MYR",
-        name:"말레이시아 링깃",
-        flag:"🇲🇾",
-        type:"currency"
-    },
-
-    {
-        code:"PHP",
-        name:"필리핀 페소",
-        flag:"🇵🇭",
-        type:"currency"
-    },
-
-    {
-        code:"AED",
-        name:"아랍에미리트 디르함",
-        flag:"🇦🇪",
-        type:"currency"
-    },
-
-    {
-        code:"SAR",
-        name:"사우디 리얄",
-        flag:"🇸🇦",
-        type:"currency"
-    },
-
-    {
-        code:"TRY",
-        name:"터키 리라",
-        flag:"🇹🇷",
-        type:"currency"
-    },
-
-    {
-        code:"RUB",
-        name:"러시아 루블",
-        flag:"🇷🇺",
-        type:"currency"
-    },
-
-    {
-        code:"BRL",
-        name:"브라질 헤알",
-        flag:"🇧🇷",
-        type:"currency"
-    },
 
 
-    /* ==========================
+    /*
        Precious Metals
-    ========================== */
+    */
 
 
     {
@@ -178,7 +138,7 @@ const currencies = [
         name:"금 (Gold)",
         flag:"🟨",
         type:"metal",
-        unit:"1 트로이온스 = 31.1035g"
+        unit:"troy ounce"
     },
 
 
@@ -187,7 +147,8 @@ const currencies = [
         name:"은 (Silver)",
         flag:"⬜",
         type:"metal",
-        unit:"1 트로이온스 = 31.1035g"
+        unit:"troy ounce"
     }
+
 
 ];
