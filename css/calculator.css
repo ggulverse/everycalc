@@ -751,3 +751,64 @@ body.dark-mode .currency-options{
     }
 
 }
+
+/* ==========================
+   Currency Selector UI
+========================== */
+
+
+.currency-selected{
+
+    cursor:pointer;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+
+
+.currency-options{
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    background:var(--surface);
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
+}
+
+
+
+.currency-option{
+
+    padding:12px 14px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    transition:0.2s;
+
+}
+
+
+
+.currency-option:hover{
+
+    background:rgba(128,128,128,0.15);
+
+}
