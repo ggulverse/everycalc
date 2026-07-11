@@ -572,6 +572,12 @@ color:textColor
 
 
 
+window.updateMetalCharts =
+function(){
+
+    loadHistory();
+
+};
 
 
 loadHistory();
