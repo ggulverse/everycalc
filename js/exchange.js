@@ -694,7 +694,12 @@ exchangeInfo.innerHTML = `
 
 1 ${fromCurrency}
 =
-${rate}
+${Number(rate).toLocaleString(
+undefined,
+{
+maximumFractionDigits:2
+}
+)}
 ${toCurrency}
 
 <br>
