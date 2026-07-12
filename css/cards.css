@@ -51,7 +51,7 @@
 
     border-radius:16px;
 
-    padding:20px;
+    padding:18px;
 
     box-shadow:var(--shadow);
 
@@ -69,7 +69,7 @@
 
     border:1px solid var(--border);
 
-    min-height:180px;
+    min-height:150px;
 
 }
 
@@ -91,7 +91,7 @@
 
     height:55px;
 
-    border-radius:50%;
+    border-radius:16px;
 
     background:#edf4ff;
 
@@ -111,30 +111,17 @@
 
 .calculator-card h3{
 
-    margin-bottom:15px;
+    margin-bottom:0;
 
-    font-size:1.1rem;
+    font-size:1.05rem;
 
 }
-
 
 /* Button */
 
 .card-button{
 
-    display:inline-block;
-
-    padding:9px 22px;
-
-    background:var(--primary);
-
-    color:#fff;
-
-    border-radius:999px;
-
-    font-weight:700;
-
-    transition:.25s;
+    display:none;
 
 }
 
