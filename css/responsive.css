@@ -94,18 +94,11 @@
 .calculator-grid{
 
     grid-template-columns:
-    repeat(3,1fr);
+    repeat(2,1fr);
 
     gap:12px;
 
 }
-
-
-    .calculator-card{
-
-        padding:25px;
-
-    }
 
 
 
