@@ -1,5 +1,5 @@
 /* ==================================================
-   EveryCalc - header.css
+   EveryCalc 2.0 - header.css
 ================================================== */
 
 
@@ -7,32 +7,31 @@
 
 .header{
 
-    width:100%;
-
-    background:var(--surface);
-
-    border-bottom:1px solid var(--border);
-
     position:sticky;
 
     top:0;
 
     z-index:1000;
 
+    background:var(--background);
+
+    border-bottom:1px solid var(--border);
+
 }
 
 
-/* ---------- Container ---------- */
+
+/* ---------- Header Container ---------- */
 
 .header .container{
+
+    height:64px;
 
     display:flex;
 
     align-items:center;
 
     justify-content:space-between;
-
-    height:80px;
 
 }
 
@@ -48,27 +47,27 @@
 
     text-decoration:none;
 
+    color:var(--text);
+
 }
+
 
 
 .logo-main{
 
-    font-size:1.8rem;
+    font-size:1.25rem;
 
     font-weight:800;
 
-    color:var(--primary);
-
-    line-height:1.1;
+    letter-spacing:-0.5px;
 
 }
 
 
+
 .logo-sub{
 
-    font-size:.75rem;
-
-    color:var(--text-light);
+    display:none;
 
 }
 
@@ -82,41 +81,47 @@
 
     align-items:center;
 
-    gap:35px;
+    gap:24px;
 
     list-style:none;
 
+    margin:0;
+
+    padding:0;
+
 }
+
 
 
 .navigation a{
 
     text-decoration:none;
 
-    color:var(--text);
+    color:var(--text-light);
 
-    font-weight:600;
+    font-size:0.95rem;
 
-    transition:.25s;
+    transition:.2s;
 
 }
+
 
 
 .navigation a:hover{
 
-    color:var(--primary);
+    color:var(--text);
 
 }
 
 
 
-/* ---------- Dark Button ---------- */
+/* ---------- Header Button ---------- */
 
 .header-buttons button{
 
-    width:42px;
+    width:38px;
 
-    height:42px;
+    height:38px;
 
     border-radius:50%;
 
@@ -126,16 +131,13 @@
 
     cursor:pointer;
 
-    font-size:1.2rem;
+    font-size:1rem;
 
-    transition:.25s;
+    display:flex;
 
-}
+    align-items:center;
 
-
-.header-buttons button:hover{
-
-    transform:rotate(15deg);
+    justify-content:center;
 
 }
 
@@ -148,38 +150,28 @@
 
     .header .container{
 
-        height:auto;
-
-        padding:15px;
-
-        flex-wrap:wrap;
-
-    }
-
-
-    .navigation{
-
-        width:100%;
-
-        margin-top:20px;
-
-    }
-
-
-    .navigation ul{
-
-        justify-content:center;
-
-        gap:18px;
-
-        flex-wrap:wrap;
+        height:58px;
 
     }
 
 
     .logo-main{
 
-        font-size:1.5rem;
+        font-size:1.1rem;
+
+    }
+
+
+    .navigation ul{
+
+        gap:12px;
+
+    }
+
+
+    .navigation a{
+
+        font-size:0.8rem;
 
     }
 
