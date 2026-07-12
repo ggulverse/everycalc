@@ -148,25 +148,14 @@
 @media(max-width:768px){
 
 
-    .header .container{
+.header .container{
 
-        height:auto;
+    height:58px;
 
-        padding:12px 0;
+    padding:0;
 
-        flex-direction:column;
+}
 
-        gap:10px;
-
-    }
-
-
-
-    .logo{
-
-        text-align:center;
-
-    }
 
 
 
