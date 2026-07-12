@@ -375,3 +375,15 @@
     transform:none;
 
 }
+
+/* ---------- Mobile Hover Remove ---------- */
+
+@media(max-width:768px){
+
+    .calculator-card:hover{
+
+        transform:none;
+
+    }
+
+}
