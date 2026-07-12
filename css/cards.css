@@ -1,6 +1,7 @@
 /* ==================================================
-   EveryCalc - cards.css
+   EveryCalc 2.0 - cards.css
 ================================================== */
+
 
 /* ---------- Section ---------- */
 
@@ -9,11 +10,13 @@
 .about,
 .faq{
 
-    padding:80px 0;
+    padding:70px 0;
 
 }
 
-/* ---------- Title ---------- */
+
+
+/* ---------- Section Title ---------- */
 
 .popular h2,
 .categories h2,
@@ -22,13 +25,15 @@
 
     text-align:center;
 
-    font-size:2.2rem;
+    font-size:2rem;
 
-    margin-bottom:50px;
+    margin-bottom:35px;
 
     color:var(--text);
 
 }
+
+
 
 /* ---------- Calculator Grid ---------- */
 
@@ -37,11 +42,13 @@
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(180px,1fr));
+    repeat(auto-fit,minmax(150px,1fr));
 
-    gap:20px;
+    gap:16px;
 
 }
+
+
 
 /* ---------- Card ---------- */
 
@@ -49,74 +56,87 @@
 
     background:var(--surface);
 
-    border-radius:16px;
+    border:1px solid var(--border);
 
-    padding:14px;
+    border-radius:18px;
 
-    box-shadow:var(--shadow);
+    min-height:130px;
 
-    transition:all .25s ease;
+    padding:18px;
 
     display:flex;
 
     flex-direction:column;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     text-align:center;
 
-    border:1px solid var(--border);
+    text-decoration:none;
 
-    min-height:130px;
+    color:var(--text);
+
+    transition:.2s;
 
 }
+
+
 
 /* Hover */
 
 .calculator-card:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-5px);
 
-    box-shadow:0 15px 30px rgba(0,0,0,.10);
+    border-color:#777;
 
 }
 
-/* Icon */
+
+
+/* ---------- Icon ---------- */
 
 .card-icon{
 
-    width:55px;
+    width:48px;
 
-    height:55px;
+    height:48px;
 
-    border-radius:16px;
+    border-radius:14px;
 
-    background:#edf4ff;
+    background:#222;
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
 
-    font-size:1.6rem;
+    justify-content:center;
 
-    margin-bottom:20px;
+    font-size:1.4rem;
+
+    margin-bottom:14px;
 
 }
 
-/* Title */
+
+
+/* ---------- Title ---------- */
 
 .calculator-card h3{
 
-    margin-bottom:8px;
+    margin:0;
 
-    font-size:1rem;
+    font-size:.95rem;
+
+    font-weight:700;
 
 }
-/* Button */
+
+
+
+/* ---------- Remove Button ---------- */
 
 .card-button{
 
@@ -124,65 +144,70 @@
 
 }
 
-.card-button:hover{
 
-    background:var(--primary-dark);
 
-}
 /* ==================================================
    Category
 ================================================== */
 
+
 .category-grid{
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+    justify-content:center;
 
-    gap:20px;
+    flex-wrap:wrap;
+
+    gap:10px;
 
 }
+
+
 
 .category-item{
 
     background:var(--surface);
 
-    border-radius:14px;
-
-    padding:18px;
-
-    text-align:center;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s;
-
     border:1px solid var(--border);
 
+    border-radius:999px;
+
+    padding:10px 18px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-size:.9rem;
+
+    transition:.2s;
+
 }
+
+
 
 .category-item:hover{
 
-    transform:translateY(-4px);
+    background:#222;
 
-    box-shadow:0 15px 30px rgba(0,0,0,.10);
+    color:white;
 
 }
+
+
 
 /* ==================================================
    About
 ================================================== */
 
+
 .about{
 
-    background:white;
+    background:var(--surface);
 
 }
+
 
 .about p{
 
@@ -192,50 +217,51 @@
 
     text-align:center;
 
-    font-size:1.1rem;
-
     color:var(--text-light);
 
     line-height:2;
 
 }
+
+
+
 /* ==================================================
    FAQ
 ================================================== */
 
+
 .faq-list{
 
-    max-width:900px;
+    max-width:850px;
 
     margin:auto;
 
 }
 
+
 .faq details{
 
-    background:white;
+    background:var(--surface);
 
-    margin-bottom:18px;
+    margin-bottom:15px;
 
     border-radius:14px;
 
-    box-shadow:var(--shadow);
-
-    padding:20px;
+    padding:18px;
 
     border:1px solid var(--border);
 
 }
 
+
 .faq summary{
 
     cursor:pointer;
 
-    font-size:1.1rem;
-
     font-weight:700;
 
 }
+
 
 .faq p{
 
@@ -243,67 +269,44 @@
 
     color:var(--text-light);
 
-    line-height:1.8;
-
 }
+
+
+
+/* ---------- Mobile ---------- */
+
 
 @media(max-width:768px){
 
-    .calculator-card:hover{
 
-        transform:none;
+    .calculator-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:12px;
 
     }
 
-}
 
-/* ==========================
-   Upcoming Calculator
-========================== */
+    .calculator-card{
 
-.upcoming{
+        min-height:120px;
 
-    padding:80px 0;
+        padding:14px;
 
-}
+    }
 
 
-.upcoming h2{
+    .card-icon{
 
-    text-align:center;
+        width:42px;
 
-    font-size:2.2rem;
+        height:42px;
 
-    margin-bottom:20px;
+        font-size:1.2rem;
 
-}
+    }
 
-
-.upcoming p{
-
-    text-align:center;
-
-    margin-bottom:50px;
-
-    color:var(--text-light);
-
-}
-
-
-.upcoming-label{
-
-    margin-top:10px;
-
-    padding:6px 14px;
-
-    border-radius:999px;
-
-    background:var(--primary);
-
-    color:white;
-
-    font-size:.85rem;
-
-    font-weight:600;
 
 }
