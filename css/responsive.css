@@ -91,11 +91,14 @@
 
     /* Cards */
 
-    .calculator-grid{
+.calculator-grid{
 
-        grid-template-columns:1fr;
+    grid-template-columns:
+    repeat(3,1fr);
 
-    }
+    gap:12px;
+
+}
 
 
     .calculator-card{
@@ -125,7 +128,12 @@
 
 @media(max-width:480px){
 
+.calculator-grid{
 
+    grid-template-columns:
+    repeat(2,1fr);
+
+}
     .category-grid{
 
         grid-template-columns:1fr;
