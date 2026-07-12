@@ -1,12 +1,6 @@
-# 깃허브 페이지 빌드 중단 설정
-exclude:
+# Jekyll 빌드 엔진 끄기
+include:
   - sitemap.xml
-  - sitemap.txt
-  - .nojekyll
-
-# 지킬이 XML을 건드리지 못하게 처리
-defaults:
-  - scope:
-      path: ""
-    values:
-      layout: ""
+exclude:
+  - README.md
+  - LICENSE
