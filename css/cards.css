@@ -146,15 +146,15 @@
 
 .category-item{
 
-    background:white;
+    background:var(--surface);
 
-    border-radius:16px;
+    border-radius:14px;
 
-    padding:22px;
+    padding:18px;
 
     text-align:center;
 
-    font-size:1.1rem;
+    font-size:1rem;
 
     font-weight:600;
 
@@ -168,13 +168,12 @@
 
 .category-item:hover{
 
-    background:var(--primary);
+    transform:translateY(-4px);
 
-    color:white;
-
-    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,.10);
 
 }
+
 /* ==================================================
    About
 ================================================== */
