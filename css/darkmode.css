@@ -169,3 +169,14 @@ body.dark-mode .header-buttons button{
     border-color:var(--border);
 
 }
+
+/* ==========================
+   Mobile Dark Header Fix
+========================== */
+
+body.dark-mode .logo-main,
+body.dark-mode .logo a{
+
+    color:var(--text);
+
+}
