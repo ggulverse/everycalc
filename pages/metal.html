@@ -15,7 +15,7 @@ content="width=device-width, initial-scale=1.0">
 
 
 <meta name="description"
-content="금, 은, 백금, 팔라듐 등 주요 귀금속 시세를 계산하고 변동 차트를 확인하는 무료 귀금속 계산기">
+content="금, 은, 백금, 팔라듐 귀금속 시세 계산 및 변동 차트 확인">
 
 
 <link rel="stylesheet"
@@ -23,9 +23,6 @@ href="../css/style.css">
 
 <link rel="stylesheet"
 href="../css/header.css">
-
-<link rel="stylesheet"
-href="../css/cards.css">
 
 <link rel="stylesheet"
 href="../css/calculator.css">
@@ -37,49 +34,80 @@ href="../css/footer.css">
 href="../css/responsive.css">
 
 
-
 </head>
 
 
 <body>
 
 
-
-<header class="site-header">
-
-
-<div class="container header-inner">
+<header class="header">
 
 
-
-<a href="../index.html"
-class="logo">
+<div class="container">
 
 
-<strong>
+<div class="logo">
+
+
+<a href="../index.html">
+
+
+<span class="logo-main">
 EveryCalc
-</strong>
+</span>
 
 
-<span>
-모든 계산을 하나로
+<span class="logo-sub">
+Every Calculation in One Place
 </span>
 
 
 </a>
 
 
+</div>
+
+
+
+<nav class="navigation">
+
+
+<ul>
+
+<li>
+<a href="../index.html">
+홈
+</a>
+</li>
+
+
+<li>
+<a href="../index.html#popular">
+계산기 목록
+</a>
+</li>
+
+
+</ul>
+
+
+</nav>
+
+
+
+<div class="header-buttons">
 
 
 <button
-class="theme-button"
-id="themeButton">
-
+id="darkModeToggle"
+aria-label="다크모드">
 
 🌙
 
-
 </button>
+
+
+</div>
 
 
 </div>
@@ -100,98 +128,73 @@ id="themeButton">
 <div class="container">
 
 
-<div class="section-title">
+<div class="calculator-header">
 
 
-
-<div class="page-icon metal-icon">
-
-</div>
-
+<div class="page-icon metal-icon"></div>
 
 
 <h1>
-
 귀금속 시세 계산기
-
 </h1>
 
 
 <p>
-
-금, 은, 백금, 팔라듐의 시세를 계산하고
-변동 차트를 확인합니다.
-
+금, 은, 백금, 팔라듐의 현재 시세를 계산하고 변동 차트를 확인합니다.
 </p>
 
 
 </div>
 
+<div class="calculator-container">
+
+
+
 <div class="calculator-box">
 
 
 
-<div class="input-group">
+<div class="calculator-form">
+
 
 
 <label>
-
 귀금속 선택
-
 </label>
-
 
 
 <select id="metalSelect">
 
 
 <option value="XAU">
-
 금 (XAU)
-
 </option>
 
 
 <option value="XAG">
-
 은 (XAG)
-
 </option>
 
 
 <option value="XPT">
-
 백금 (XPT)
-
 </option>
 
 
 <option value="XPD">
-
 팔라듐 (XPD)
-
 </option>
 
 
 </select>
 
 
-</div>
 
-
-
-
-
-
-<div class="input-group">
 
 
 <label>
-
 수량
-
 </label>
-
 
 
 <input
@@ -205,106 +208,67 @@ value="1"
 placeholder="예: 1">
 
 
-</div>
 
-
-
-
-
-
-<div class="input-group">
 
 
 <label>
-
 단위
-
 </label>
-
 
 
 <select id="unitSelect">
 
 
 <option value="g">
-
 그램 (g)
-
 </option>
 
 
 <option value="don">
-
 돈 (3.75g)
-
 </option>
 
 
 <option value="oz">
-
 트로이온스 (oz)
-
 </option>
 
 
 </select>
 
 
-</div>
 
-
-
-
-
-
-
-<div class="input-group">
 
 
 <label>
-
 표시 통화
-
 </label>
-
 
 
 <select id="currencySelect">
 
 
 <option value="KRW">
-
 대한민국 원 (KRW)
-
 </option>
 
 
 <option value="USD">
-
 미국 달러 (USD)
-
 </option>
 
 
 <option value="EUR">
-
 유로 (EUR)
-
 </option>
 
 
 <option value="JPY">
-
 일본 엔 (JPY)
-
 </option>
 
 
 </select>
-
-
-</div>
-
 
 
 
@@ -316,9 +280,7 @@ id="calculate"
 
 class="calculate-button">
 
-
 계산하기
-
 
 </button>
 
@@ -326,25 +288,115 @@ class="calculate-button">
 
 </div>
 
-<div class="result-card">
+<div class="calculator-result"
+
+id="result">
+
+결과가 표시됩니다.
+
+</div>
+
+
+
+
+
+<div class="metal-info"
+
+id="metalInfo">
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="calculator-info">
+
 
 
 <h2>
 
-계산 결과
+귀금속 시세 변화
 
 </h2>
 
 
 
-<div
+<p
 
-id="result"
+id="metalChartUnit"
 
-class="result-value">
+class="chart-unit">
+
+1 트로이온스(oz)당 KRW
+
+</p>
 
 
-결과가 표시됩니다.
+
+
+
+<div class="chart-control">
+
+
+<label>
+
+기간
+
+</label>
+
+
+<select id="chartPeriod">
+
+
+<option value="7">
+
+최근 7일
+
+</option>
+
+
+
+<option value="30" selected>
+
+최근 30일
+
+</option>
+
+
+
+<option value="90">
+
+최근 90일
+
+</option>
+
+
+
+<option value="365">
+
+최근 1년
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+<div class="chart-container">
+
+
+<canvas id="metalChart">
+
+</canvas>
 
 
 </div>
@@ -357,10 +409,183 @@ class="result-value">
 
 
 
-<div class="description-card"
 
-id="metalInfo">
+<div class="calculator-info">
+
+
+<h2>
+
+귀금속 계산기 사용 방법
+
+</h2>
+
+
+
+<p>
+
+금, 은, 백금, 팔라듐 중 원하는 귀금속을 선택합니다.
+
+</p>
+
+
+
+<p>
+
+그램(g), 돈, 트로이온스 단위와 원하는 통화 기준으로 시세를 계산합니다.
+
+</p>
+
+
+
+<p>
+
+차트 기간을 선택하여 최근 귀금속 가격 변화를 확인할 수 있습니다.
+
+</p>
+
 
 
 </div>
 
+
+
+
+
+<div class="ad-container">
+
+
+</div>
+
+<div class="calculator-info related-section">
+
+
+<h2>
+
+관련 계산기
+
+</h2>
+
+
+
+<div class="calculator-grid">
+
+
+
+<a href="currency.html"
+
+class="calculator-card">
+
+
+<div class="card-icon currency-icon">
+
+</div>
+
+
+<h3>
+
+환율 계산기
+
+</h3>
+
+
+<p>
+
+주요 국가 통화를 빠르게 변환합니다.
+
+</p>
+
+
+</a>
+
+
+
+
+
+<a href="percent.html"
+
+class="calculator-card">
+
+
+<div class="card-icon percent-icon">
+
+</div>
+
+
+<h3>
+
+퍼센트 계산기
+
+</h3>
+
+
+<p>
+
+증가율과 할인율을 계산합니다.
+
+</p>
+
+
+</a>
+
+
+
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+
+
+
+<footer class="footer">
+
+
+<div class="container">
+
+
+<div class="footer-bottom">
+
+
+<p>
+
+© 2026 EveryCalc. All Rights Reserved.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script src="../js/theme.js"></script>
+
+
+<script src="../js/metal.js"></script>
+
+
+
+</body>
+
+</html>
