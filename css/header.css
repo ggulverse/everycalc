@@ -1,0 +1,348 @@
+/* ==================================================
+   EveryCalc 2.0
+   header.css
+================================================== */
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.site-header{
+
+
+    position:
+
+    sticky;
+
+
+    top:
+
+    0;
+
+
+    z-index:
+
+    1000;
+
+
+    width:
+
+    100%;
+
+
+    background:
+
+    rgba(245,245,245,.82);
+
+
+    backdrop-filter:
+
+    blur(14px);
+
+
+    -webkit-backdrop-filter:
+
+    blur(14px);
+
+
+    border-bottom:
+
+    1px solid var(--border);
+
+
+    transition:
+
+    var(--transition);
+
+
+}
+
+
+
+
+body.dark .site-header{
+
+
+    background:
+
+    rgba(18,18,18,.82);
+
+
+}
+
+
+
+
+
+
+/* =========================
+   HEADER INNER
+========================= */
+
+
+.header-inner{
+
+
+    height:
+
+    72px;
+
+
+    display:
+
+    flex;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    space-between;
+
+
+}
+
+
+
+
+
+/* =========================
+   LOGO
+========================= */
+
+
+.logo{
+
+
+    display:
+
+    flex;
+
+
+    flex-direction:
+
+    column;
+
+
+    gap:
+
+    0;
+
+
+}
+
+
+
+
+
+.logo strong{
+
+
+    font-size:
+
+    1.45rem;
+
+
+    font-weight:
+
+    800;
+
+
+    letter-spacing:
+
+    -.6px;
+
+
+}
+
+
+
+
+
+.logo span{
+
+
+    font-size:
+
+    .72rem;
+
+
+    color:
+
+    var(--text-sub);
+
+
+    line-height:
+
+    1.2;
+
+
+}
+/* =========================
+   THEME BUTTON
+========================= */
+
+
+.theme-button{
+
+
+    width:
+
+    44px;
+
+
+    height:
+
+    44px;
+
+
+    display:
+
+    flex;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    center;
+
+
+    border:
+
+    1px solid var(--border);
+
+
+    border-radius:
+
+    50%;
+
+
+    background:
+
+    var(--surface);
+
+
+    color:
+
+    var(--text);
+
+
+    cursor:
+
+    pointer;
+
+
+    font-size:
+
+    1.15rem;
+
+
+    transition:
+
+    var(--transition);
+
+
+}
+
+
+
+
+.theme-button:hover{
+
+
+    transform:
+
+    rotate(15deg);
+
+
+}
+
+
+
+
+
+.theme-button:active{
+
+
+    transform:
+
+    scale(.9);
+
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:600px){
+
+
+    .header-inner{
+
+
+        height:
+
+        62px;
+
+
+    }
+
+
+
+
+    .logo strong{
+
+
+        font-size:
+
+        1.25rem;
+
+
+    }
+
+
+
+    .logo span{
+
+
+        font-size:
+
+        .65rem;
+
+
+    }
+
+
+
+    .theme-button{
+
+
+        width:
+
+        40px;
+
+
+        height:
+
+        40px;
+
+
+    }
+
+
+}
