@@ -293,3 +293,32 @@ img{
     background:#edf4ff;
 
 }
+
+/* ==========================
+   AdSense Area
+========================== */
+
+.ad-section{
+
+    padding:40px 0;
+
+}
+
+
+.ad-box{
+
+    min-height:120px;
+
+    background:var(--surface);
+
+    border:1px dashed var(--border);
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
