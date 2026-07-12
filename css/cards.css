@@ -1,0 +1,329 @@
+/* ==================================================
+   EveryCalc 2.0
+   cards.css
+================================================== */
+
+
+/* =========================
+   CALCULATOR CARD BASE
+========================= */
+
+
+.calculator-card{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+.calculator-card::after{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+
+    transform:
+
+    translateX(-120%);
+
+
+    transition:
+
+    .5s ease;
+
+
+}
+
+
+
+.calculator-card:hover::after{
+
+
+    transform:
+
+    translateX(120%);
+
+
+}
+
+
+
+
+
+/* =========================
+   ICON STYLE
+========================= */
+
+
+.calculator-icon{
+
+
+    background:
+
+    #f1f1f1;
+
+
+    color:
+
+    #333;
+
+
+}
+
+
+
+body.dark .calculator-icon{
+
+
+    background:
+
+    #2b2b2b;
+
+
+}
+
+
+
+
+
+/* =========================
+   CATEGORY ICON
+========================= */
+
+
+.category-icon{
+
+
+    background:
+
+    #f3f3f3;
+
+
+}
+
+
+
+body.dark .category-icon{
+
+
+    background:
+
+    #292929;
+
+
+}
+
+
+
+
+
+/* =========================
+   CARD ACTIVE
+========================= */
+
+
+.calculator-card:active,
+.category-item:active{
+
+
+    transform:
+
+    scale(.97);
+
+
+}
+
+
+
+
+
+/* =========================
+   POPULAR SECTION
+========================= */
+
+
+.popular-section .calculator-card{
+
+
+    min-height:
+
+    110px;
+
+
+}
+
+
+
+
+
+/* =========================
+   ALL CALCULATOR
+========================= */
+
+
+.all-calculator-section .calculator-card{
+
+
+    min-height:
+
+    95px;
+
+
+}
+
+/* =========================
+   DARK CARD DETAIL
+========================= */
+
+
+body.dark .calculator-card,
+body.dark .category-item,
+body.dark .info-card,
+body.dark .info-item{
+
+
+    background:
+
+    var(--surface);
+
+
+    border-color:
+
+    var(--border);
+
+
+}
+
+
+
+
+
+
+/* =========================
+   TOUCH OPTIMIZATION
+========================= */
+
+
+@media(max-width:600px){
+
+
+    .calculator-card{
+
+
+        min-height:
+
+        82px;
+
+
+    }
+
+
+
+    .calculator-info h3{
+
+
+        font-size:
+
+        1rem;
+
+
+    }
+
+
+
+    .calculator-info span{
+
+
+        font-size:
+
+        .8rem;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   CLEAN HOVER
+========================= */
+
+
+@media(min-width:900px){
+
+
+
+    .calculator-card:hover,
+    .category-item:hover{
+
+
+        border-color:
+
+        #cfcfcf;
+
+
+    }
+
+
+
+    body.dark .calculator-card:hover,
+    body.dark .category-item:hover{
+
+
+        border-color:
+
+        #555;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   NO SELECT
+========================= */
+
+
+.calculator-icon,
+.category-icon{
+
+
+    user-select:
+
+    none;
+
+
+}
