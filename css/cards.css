@@ -256,3 +256,54 @@
     }
 
 }
+
+/* ==========================
+   Upcoming Calculator
+========================== */
+
+.upcoming{
+
+    padding:80px 0;
+
+}
+
+
+.upcoming h2{
+
+    text-align:center;
+
+    font-size:2.2rem;
+
+    margin-bottom:20px;
+
+}
+
+
+.upcoming p{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+    color:var(--text-light);
+
+}
+
+
+.upcoming-label{
+
+    margin-top:10px;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+}
