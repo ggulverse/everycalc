@@ -310,3 +310,45 @@
 
 
 }
+
+/* ==================================================
+   Upcoming Card
+================================================== */
+
+
+.upcoming{
+
+    padding:70px 0;
+
+}
+
+
+.upcoming-card{
+
+    cursor:default;
+
+}
+
+
+.upcoming-label{
+
+    margin-top:10px;
+
+    font-size:.75rem;
+
+    color:var(--text-light);
+
+    background:#222;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+}
+
+
+.upcoming-card:hover{
+
+    transform:none;
+
+}
