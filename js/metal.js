@@ -56,6 +56,7 @@ const DON_TO_GRAM = 3.75;
 
 
 
+
 /* =========================
    Metal Name
 ========================= */
@@ -64,29 +65,28 @@ const DON_TO_GRAM = 3.75;
 function getMetalName(){
 
 
-return (
-
-metalSelect.options[
+return metalSelect.options[
 metalSelect.selectedIndex
-].text
-
-);
+].text;
 
 
 }
 
+
+
+
+
+
 /* =========================
-   Get Metal Rate
+   API Rate
 ========================= */
 
 
 async function getMetalRate(){
 
 
-
 const metal =
 metalSelect.value;
-
 
 
 const currency =
@@ -94,9 +94,7 @@ currencySelect.value;
 
 
 
-
 const response =
-
 await fetch(
 
 `https://api.frankfurter.dev/v2/rates?base=${metal}&quotes=${currency}`
@@ -105,18 +103,13 @@ await fetch(
 
 
 
-
-
 if(!response.ok){
-
 
 throw new Error(
 "귀금속 시세 정보를 불러올 수 없습니다."
 );
 
-
 }
-
 
 
 
@@ -125,29 +118,21 @@ await response.json();
 
 
 
-
-
 const target =
-
 data.find(
 
 item =>
-
 item.quote === currency
 
 );
 
 
 
-
-
 if(!target){
-
 
 throw new Error(
 "시세 데이터를 찾을 수 없습니다."
 );
-
 
 }
 
@@ -156,13 +141,7 @@ throw new Error(
 return target.rate;
 
 
-
 }
-
-
-
-
-
 
 /* =========================
    Unit Convert
@@ -175,12 +154,9 @@ unit
 ){
 
 
-
 if(unit === "oz"){
 
-
 return price;
-
 
 }
 
@@ -188,16 +164,13 @@ return price;
 
 if(unit === "g"){
 
-
 return price / OZ_TO_GRAM;
-
 
 }
 
 
 
 if(unit === "don"){
-
 
 return (
 
@@ -209,12 +182,15 @@ price / OZ_TO_GRAM
 
 DON_TO_GRAM;
 
-
 }
 
 
 
+return price;
+
+
 }
+
 
 
 
@@ -229,7 +205,6 @@ DON_TO_GRAM;
 async function calculate(){
 
 
-
 try{
 
 
@@ -242,8 +217,7 @@ amountInput.value
 
 
 
-
-if(isNaN(amount)){
+if(isNaN(amount) || amount <= 0){
 
 
 throw new Error(
@@ -290,14 +264,16 @@ unitPrice * amount;
 result.innerHTML =
 
 
-
 `
+
+<span>
 
 ${amount.toLocaleString()}
 
 ${unitSelect.value}
 
-<br>
+</span>
+
 
 <strong>
 
@@ -321,8 +297,10 @@ ${currencySelect.value}
 
 
 
-metalInfo.innerHTML =
 
+
+
+metalInfo.innerHTML =
 
 
 `
@@ -334,6 +312,7 @@ ${getMetalName()}
 국제 시세
 
 </h3>
+
 
 
 <p>
@@ -359,6 +338,7 @@ ${currencySelect.value}
 </p>
 
 
+
 <p>
 
 환산 기준
@@ -377,11 +357,14 @@ ${currencySelect.value}
 
 
 
+
+
 loadHistory();
 
 
 
 }
+
 
 catch(error){
 
@@ -389,7 +372,6 @@ catch(error){
 result.innerText =
 
 error.message;
-
 
 
 }
@@ -406,9 +388,7 @@ error.message;
 async function loadHistory(){
 
 
-
 try{
-
 
 
 const metal =
@@ -432,12 +412,9 @@ chartPeriod.value
 
 
 
-
 const today =
 
 new Date();
-
-
 
 
 
@@ -445,7 +422,6 @@ const end =
 
 today.toISOString()
 .split("T")[0];
-
 
 
 
@@ -465,12 +441,10 @@ today.getDate() - days
 
 
 
-
 const start =
 
 startDate.toISOString()
 .split("T")[0];
-
 
 
 
@@ -505,6 +479,7 @@ drawChart(data);
 
 }
 
+
 catch(error){
 
 
@@ -523,8 +498,9 @@ console.log(error);
 
 
 
+
 /* =========================
-   Draw Single Chart
+   Draw Chart
 ========================= */
 
 
@@ -539,8 +515,6 @@ metalChart.destroy();
 
 
 }
-
-
 
 
 
@@ -577,7 +551,6 @@ getMetalName();
 
 
 
-
 const currency =
 
 currencySelect.value;
@@ -586,7 +559,7 @@ currencySelect.value;
 
 
 
-const dark =
+const isDark =
 
 document.body.classList.contains(
 "dark-mode"
@@ -598,7 +571,7 @@ document.body.classList.contains(
 
 const textColor =
 
-dark
+isDark
 
 ?
 
@@ -606,7 +579,8 @@ dark
 
 :
 
-"#333333";
+"#222222";
+
 
 
 
@@ -625,6 +599,7 @@ type:"line",
 
 
 
+
 data:{
 
 
@@ -636,7 +611,7 @@ datasets:[{
 
 label:
 
-`${metalName} 1oz 가격 (${currency})`,
+`${metalName} · 1oz 기준 ${currency}`,
 
 
 
@@ -648,16 +623,22 @@ tension:0.35,
 
 
 
-fill:false
+fill:false,
+
+
+
+pointRadius:0,
+
+
+
+pointHoverRadius:5
 
 
 
 }]
 
 
-
 },
-
 
 
 
@@ -668,12 +649,14 @@ options:{
 responsive:true,
 
 
+maintainAspectRatio:false,
+
+
 
 interaction:{
 
 
 mode:"index",
-
 
 intersect:false
 
@@ -686,7 +669,11 @@ intersect:false
 plugins:{
 
 
+
 legend:{
+
+
+display:true,
 
 
 labels:{
@@ -702,6 +689,7 @@ color:textColor
 
 
 
+
 tooltip:{
 
 
@@ -709,7 +697,6 @@ callbacks:{
 
 
 label:function(context){
-
 
 
 return (
@@ -727,7 +714,6 @@ currency
 );
 
 
-
 }
 
 
@@ -739,7 +725,6 @@ currency
 
 
 },
-
 
 
 
@@ -770,10 +755,7 @@ display:false
 }
 
 
-
 },
-
-
 
 
 
@@ -808,16 +790,14 @@ color:textColor,
 callback:function(value){
 
 
-
 return value.toLocaleString();
-
 
 
 }
 
 
-
 },
+
 
 
 
@@ -826,7 +806,7 @@ grid:{
 
 color:
 
-dark
+isDark
 
 ?
 
@@ -835,7 +815,6 @@ dark
 :
 
 "rgba(0,0,0,0.08)"
-
 
 
 }
@@ -880,7 +859,6 @@ calculate
 
 
 
-
 metalSelect.addEventListener(
 
 "change",
@@ -894,7 +872,6 @@ loadHistory();
 }
 
 );
-
 
 
 
@@ -923,7 +900,6 @@ loadHistory();
 
 
 
-
 chartPeriod.addEventListener(
 
 "change",
@@ -944,13 +920,13 @@ loadHistory();
 
 
 
+
 /* =========================
-   Chart Unit Text
+   Chart Unit
 ========================= */
 
 
 function updateChartUnit(){
-
 
 
 const unit =
@@ -961,24 +937,21 @@ document.getElementById(
 
 
 
-
 if(unit){
-
 
 
 unit.innerText =
 
 
-
 `1 트로이온스(oz)당 ${currencySelect.value}`;
 
 
-
 }
 
 
 
 }
+
 
 
 
@@ -987,7 +960,7 @@ unit.innerText =
 
 
 /* =========================
-   Dark Mode Refresh
+   Dark Mode Update
 ========================= */
 
 
@@ -996,20 +969,13 @@ window.updateMetalChart =
 function(){
 
 
-
 loadHistory();
 
 
 };
 
-
-
-
-
-
-
 /* =========================
-   Initial
+   Initial Load
 ========================= */
 
 
@@ -1021,30 +987,3 @@ loadHistory();
 
 
 });
-
-<select id="chartPeriod">
-
-<option value="7">
-최근 7일
-</option>
-
-
-<option value="30" selected>
-최근 30일
-</option>
-
-
-<option value="90">
-최근 90일
-</option>
-
-
-<option value="365">
-최근 1년
-</option>
-
-
-</select>
-
-
-<canvas id="metalChart"></canvas>
