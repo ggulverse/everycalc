@@ -1723,3 +1723,44 @@ input{
 
 
 }
+
+/* =========================
+   DARK MODE SYSTEM
+========================= */
+
+
+body.dark-mode{
+
+
+    --background:#121212;
+
+
+    --surface:#1e1e1e;
+
+
+    --text:#f5f5f5;
+
+
+    --text-light:#aaaaaa;
+
+
+    --border:#333333;
+
+
+}
+
+
+
+
+
+body.dark-mode{
+
+
+    background:
+    var(--background);
+
+
+    color:
+    var(--text);
+
+}
