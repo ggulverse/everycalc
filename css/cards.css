@@ -49,9 +49,9 @@
 
     background:var(--surface);
 
-    border-radius:18px;
+    border-radius:16px;
 
-    padding:30px;
+    padding:20px;
 
     box-shadow:var(--shadow);
 
@@ -63,9 +63,13 @@
 
     align-items:center;
 
+    justify-content:center;
+
     text-align:center;
 
     border:1px solid var(--border);
+
+    min-height:180px;
 
 }
 
@@ -83,9 +87,9 @@
 
 .card-icon{
 
-    width:70px;
+    width:55px;
 
-    height:70px;
+    height:55px;
 
     border-radius:50%;
 
@@ -97,7 +101,7 @@
 
     align-items:center;
 
-    font-size:2rem;
+    font-size:1.6rem;
 
     margin-bottom:20px;
 
@@ -109,21 +113,10 @@
 
     margin-bottom:15px;
 
-    font-size:1.3rem;
+    font-size:1.1rem;
 
 }
 
-/* Description */
-
-.calculator-card p{
-
-    color:var(--text-light);
-
-    margin-bottom:25px;
-
-    flex:1;
-
-}
 
 /* Button */
 
@@ -131,7 +124,7 @@
 
     display:inline-block;
 
-    padding:12px 26px;
+    padding:9px 22px;
 
     background:var(--primary);
 
