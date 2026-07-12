@@ -33,7 +33,7 @@
 
     justify-content:space-between;
 
-    height:64px;
+    height:60px;
 
 }
 
@@ -57,7 +57,7 @@
 
 .logo-main{
 
-    font-size:1.35rem;
+    font-size:1.25rem;
 
     font-weight:800;
 
@@ -69,7 +69,7 @@
 
 .logo-sub{
 
-    font-size:.65rem;
+    font-size:.6rem;
 
     color:var(--text-light);
 
@@ -85,7 +85,7 @@
 
     align-items:center;
 
-    gap:28px;
+    gap:22px;
 
     list-style:none;
 
@@ -103,7 +103,7 @@
 
     color:var(--text);
 
-    font-size:.9rem;
+    font-size:.85rem;
 
     font-weight:600;
 
@@ -121,13 +121,13 @@
 
 
 
-/* ---------- Header Button ---------- */
+/* ---------- Dark Mode Button ---------- */
 
 .header-buttons button{
 
-    width:38px;
+    width:36px;
 
-    height:38px;
+    height:36px;
 
     border-radius:50%;
 
@@ -137,7 +137,7 @@
 
     cursor:pointer;
 
-    font-size:1rem;
+    font-size:.95rem;
 
 }
 
@@ -148,39 +148,48 @@
 @media(max-width:768px){
 
 
-.header .container{
+    .header .container{
 
-    height:58px;
+        height:56px;
 
-    padding:0;
+        padding:0;
 
-}
+        flex-direction:row;
 
-
-.navigation{
-
-    width:100%;
-
-}
+    }
 
 
-.navigation ul{
 
-    gap:15px;
+    .logo-main{
 
-    flex-wrap:wrap;
+        font-size:1.15rem;
 
-    justify-content:center;
+    }
 
-}
+
+
+    .logo-sub{
+
+        display:none;
+
+    }
+
+
+
+    .navigation ul{
+
+        gap:12px;
+
+    }
 
 
 
     .navigation a{
 
-        font-size:.85rem;
+        font-size:.75rem;
 
     }
+
 
 
 }
