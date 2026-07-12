@@ -325,3 +325,116 @@ and (orientation:landscape){
 
 
 }
+
+/* =========================
+   Metal Calculator Mobile
+========================= */
+
+
+@media(max-width:600px){
+
+
+
+.page-icon{
+
+
+    width:56px;
+
+
+    height:56px;
+
+
+}
+
+
+
+
+
+.calculator-result{
+
+
+    padding:22px 15px;
+
+
+}
+
+
+
+
+
+.calculator-result strong{
+
+
+    font-size:1.5rem;
+
+
+}
+
+
+
+
+
+.chart-control{
+
+
+    flex-direction:column;
+
+
+    align-items:stretch;
+
+
+}
+
+
+
+
+
+.chart-control select{
+
+
+    width:100%;
+
+
+}
+
+
+
+
+
+.chart-container{
+
+
+    height:260px;
+
+
+    padding:12px;
+
+
+}
+
+
+
+
+
+.metal-info{
+
+
+    padding:20px;
+
+
+}
+
+
+
+
+.ad-container{
+
+
+    min-height:100px;
+
+
+}
+
+
+
+}
