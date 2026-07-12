@@ -3,280 +3,164 @@
 ================================================== */
 
 
-/* ---------- Section ---------- */
+/* ==========================
+   Tablet
+========================== */
 
-.popular,
-.categories,
-.about,
-.faq{
+@media(max-width:1024px){
 
-    padding:70px 0;
+
+    .container{
+
+        width:90%;
+
+    }
+
+
+
+    .calculator-grid{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+    }
+
+
 
 }
 
 
 
-/* ---------- Section Title ---------- */
-
-.popular h2,
-.categories h2,
-.about h2,
-.faq h2{
-
-    text-align:center;
-
-    font-size:2rem;
-
-    margin-bottom:35px;
-
-    color:var(--text);
-
-}
-
-
-
-/* ---------- Calculator Grid ---------- */
-
-.calculator-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(150px,1fr));
-
-    gap:16px;
-
-}
-
-
-
-/* ---------- Card ---------- */
-
-.calculator-card{
-
-    background:var(--surface);
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    min-height:130px;
-
-    padding:18px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    color:var(--text);
-
-    transition:.2s;
-
-}
-
-
-
-/* Hover */
-
-.calculator-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:#777;
-
-}
-
-
-
-/* ---------- Icon ---------- */
-
-.card-icon{
-
-    width:48px;
-
-    height:48px;
-
-    border-radius:14px;
-
-    background:#222;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:1.4rem;
-
-    margin-bottom:14px;
-
-}
-
-
-
-/* ---------- Title ---------- */
-
-.calculator-card h3{
-
-    margin:0;
-
-    font-size:.95rem;
-
-    font-weight:700;
-
-}
-
-
-
-/* ---------- Remove Button ---------- */
-
-.card-button{
-
-    display:none;
-
-}
-
-
-
-/* ==================================================
-   Category
-================================================== */
-
-
-.category-grid{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-}
-
-
-
-.category-item{
-
-    background:var(--surface);
-
-    border:1px solid var(--border);
-
-    border-radius:999px;
-
-    padding:10px 18px;
-
-    text-decoration:none;
-
-    color:var(--text);
-
-    font-size:.9rem;
-
-    transition:.2s;
-
-}
-
-
-
-.category-item:hover{
-
-    background:#222;
-
-    color:white;
-
-}
-
-
-
-/* ==================================================
-   About
-================================================== */
-
-
-.about{
-
-    background:var(--surface);
-
-}
-
-
-.about p{
-
-    max-width:900px;
-
-    margin:auto;
-
-    text-align:center;
-
-    color:var(--text-light);
-
-    line-height:2;
-
-}
-
-
-
-/* ==================================================
-   FAQ
-================================================== */
-
-
-.faq-list{
-
-    max-width:850px;
-
-    margin:auto;
-
-}
-
-
-.faq details{
-
-    background:var(--surface);
-
-    margin-bottom:15px;
-
-    border-radius:14px;
-
-    padding:18px;
-
-    border:1px solid var(--border);
-
-}
-
-
-.faq summary{
-
-    cursor:pointer;
-
-    font-weight:700;
-
-}
-
-
-.faq p{
-
-    margin-top:15px;
-
-    color:var(--text-light);
-
-}
-
-
-
-/* ---------- Mobile ---------- */
-
+/* ==========================
+   Mobile
+========================== */
 
 @media(max-width:768px){
+
+
+    /* ---------- Container ---------- */
+
+
+    .container{
+
+        width:92%;
+
+    }
+
+
+
+    /* ---------- Header ---------- */
+
+
+    .header .container{
+
+        height:56px;
+
+    }
+
+
+
+    .navigation ul{
+
+        gap:10px;
+
+    }
+
+
+
+    .navigation a{
+
+        font-size:.75rem;
+
+    }
+
+
+
+    .header-buttons button{
+
+        width:34px;
+
+        height:34px;
+
+    }
+
+
+
+    /* ---------- Hero ---------- */
+
+
+    .hero{
+
+        padding:45px 0 30px;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .hero p{
+
+        font-size:.95rem;
+
+    }
+
+
+
+    .hero-search{
+
+        width:100%;
+
+    }
+
+
+
+    .hero-search input{
+
+        padding:14px;
+
+        font-size:.9rem;
+
+    }
+
+
+
+    .hero-search button{
+
+        padding:0 18px;
+
+    }
+
+
+
+    /* ---------- Categories ---------- */
+
+
+    .category-grid{
+
+        gap:8px;
+
+    }
+
+
+
+    .category-item{
+
+        padding:8px 14px;
+
+        font-size:.8rem;
+
+    }
+
+
+
+    /* ---------- Calculator Cards ---------- */
 
 
     .calculator-grid{
@@ -289,6 +173,7 @@
     }
 
 
+
     .calculator-card{
 
         min-height:120px;
@@ -296,6 +181,7 @@
         padding:14px;
 
     }
+
 
 
     .card-icon{
@@ -307,6 +193,129 @@
         font-size:1.2rem;
 
     }
+
+
+
+    .calculator-card h3{
+
+        font-size:.85rem;
+
+    }
+
+
+
+    /* ---------- Calculator Page ---------- */
+
+
+    .calculator-page{
+
+        padding:50px 0;
+
+    }
+
+
+
+    .calculator-box{
+
+        padding:25px;
+
+    }
+
+
+
+    .calculator-header h1{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .calculator-form input,
+    .calculator-form select{
+
+        padding:13px;
+
+    }
+
+
+
+    /* ---------- Footer ---------- */
+
+
+    .footer{
+
+        padding:50px 0 25px;
+
+    }
+
+
+
+    .footer-top{
+
+        grid-template-columns:1fr;
+
+        gap:35px;
+
+        text-align:center;
+
+    }
+
+
+
+    .footer-bottom{
+
+        flex-direction:column;
+
+        gap:10px;
+
+        text-align:center;
+
+    }
+
+
+
+}
+
+
+
+/* ==========================
+   Small Mobile
+========================== */
+
+@media(max-width:480px){
+
+
+    .navigation{
+
+        display:none;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:1.7rem;
+
+    }
+
+
+
+    .calculator-grid{
+
+        gap:10px;
+
+    }
+
+
+
+    .calculator-card{
+
+        min-height:110px;
+
+    }
+
 
 
 }
