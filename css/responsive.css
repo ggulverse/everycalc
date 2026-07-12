@@ -319,3 +319,66 @@
 
 
 }
+
+/* ==========================
+   Mobile Header Fix
+========================== */
+
+@media(max-width:768px){
+
+    .header{
+
+        display:block;
+
+    }
+
+
+    .header .container{
+
+        display:flex;
+
+        overflow:visible;
+
+    }
+
+
+    .navigation{
+
+        display:block !important;
+
+        visibility:visible !important;
+
+        opacity:1 !important;
+
+        height:auto !important;
+
+        overflow:visible !important;
+
+    }
+
+
+    .navigation ul{
+
+        display:flex !important;
+
+        visibility:visible !important;
+
+    }
+
+
+    .navigation li{
+
+        display:block !important;
+
+    }
+
+
+    .navigation a{
+
+        display:block !important;
+
+        color:var(--text) !important;
+
+    }
+
+}
