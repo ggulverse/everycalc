@@ -180,3 +180,11 @@ body.dark-mode .logo a{
     color:var(--text);
 
 }
+
+/* ---------- Footer Logo Dark Mode ---------- */
+
+body.dark-mode .footer-logo h2{
+
+    color:white;
+
+}
