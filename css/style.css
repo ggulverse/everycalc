@@ -189,7 +189,7 @@ img{
 
     border-radius:50%;
 
-    background:#f0f4ff;
+    background:#eeeeee;
 
     cursor:pointer;
 
@@ -214,12 +214,12 @@ img{
     background:
     linear-gradient(
     135deg,
-    #2563eb,
-    #3b82f6);
+    #222222,
+    #555555);
 
     color:white;
 
-    padding:90px 0;
+    padding:70px 0;
 
     text-align:center;
 
@@ -302,7 +302,7 @@ img{
 
 .hero-search button:hover{
 
-    background:#edf4ff;
+    background:#eeeeee;
 
 }
 
