@@ -776,3 +776,269 @@ body.dark .input-group select{
 
 
 }
+
+/* =========================
+   EveryCalc 2.0
+   Metal Calculator
+========================= */
+
+
+/* Page Icon */
+
+.page-icon{
+
+
+    width:64px;
+
+
+    height:64px;
+
+
+    margin:0 auto 20px;
+
+
+    border-radius:18px;
+
+
+}
+
+
+
+.metal-icon{
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #f6d365,
+        #c28b16
+    );
+
+
+}
+
+
+
+
+/* Result */
+
+.calculator-result{
+
+
+    margin-top:25px;
+
+
+    padding:28px;
+
+
+    text-align:center;
+
+
+    background:
+
+    var(--surface);
+
+
+    border:
+
+    1px solid var(--border);
+
+
+    border-radius:
+
+    var(--radius);
+
+
+}
+
+
+
+
+
+.calculator-result strong{
+
+
+    display:block;
+
+
+    margin-top:15px;
+
+
+    font-size:1.8rem;
+
+
+}
+
+
+
+
+
+/* Metal Info */
+
+.metal-info{
+
+
+    margin-top:25px;
+
+
+    padding:25px;
+
+
+    background:
+
+    var(--surface);
+
+
+    border:
+
+    1px solid var(--border);
+
+
+    border-radius:
+
+    var(--radius);
+
+
+}
+
+
+
+
+
+/* Chart */
+
+.chart-control{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    margin:
+
+    20px 0;
+
+
+}
+
+
+
+
+
+.chart-control select{
+
+
+    padding:
+
+    10px 16px;
+
+
+    border-radius:
+
+    12px;
+
+
+    border:
+
+    1px solid var(--border);
+
+
+    background:
+
+    var(--surface);
+
+
+}
+
+
+
+
+
+.chart-container{
+
+
+    width:100%;
+
+
+    height:360px;
+
+
+    padding:20px;
+
+
+    background:
+
+    var(--surface);
+
+
+    border:
+
+    1px solid var(--border);
+
+
+    border-radius:
+
+    var(--radius);
+
+
+}
+
+
+
+
+
+#metalChart{
+
+
+    width:100% !important;
+
+
+    height:100% !important;
+
+
+}
+
+
+
+
+
+
+/* Advertisement Space */
+
+
+.ad-container{
+
+
+    width:100%;
+
+
+    min-height:120px;
+
+
+    margin:
+
+    40px 0;
+
+
+    border-radius:
+
+    var(--radius);
+
+
+    background:
+
+    var(--surface);
+
+
+    border:
+
+    1px dashed var(--border);
+
+
+}
