@@ -1,0 +1,327 @@
+/* ==================================================
+   EveryCalc 2.0
+   responsive.css
+================================================== */
+
+
+/* =========================
+   LARGE PC
+========================= */
+
+
+@media(min-width:1400px){
+
+
+    .container{
+
+
+        max-width:
+
+        1280px;
+
+
+    }
+
+
+
+    .calculator-grid{
+
+
+        grid-template-columns:
+
+        repeat(4,1fr);
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   LAPTOP
+========================= */
+
+
+@media(max-width:1200px){
+
+
+    .calculator-grid{
+
+
+        grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   TABLET
+========================= */
+
+
+@media(max-width:900px){
+
+
+    .header-inner{
+
+
+        height:
+
+        65px;
+
+
+    }
+
+
+
+    .logo strong{
+
+
+        font-size:
+
+        1.25rem;
+
+
+    }
+
+
+
+    .category-grid{
+
+
+        grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    }
+
+
+
+    .calculator-grid{
+
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:600px){
+
+
+    body{
+
+
+        overflow-x:
+
+        hidden;
+
+
+    }
+
+
+
+
+    .header-inner{
+
+
+        height:
+
+        60px;
+
+
+    }
+
+
+
+
+
+    .category-grid{
+
+
+        grid-template-columns:
+
+        repeat(3,1fr);
+
+
+    }
+
+
+
+    .calculator-grid{
+
+
+        grid-template-columns:
+
+        1fr;
+
+
+    }
+
+
+
+
+
+    .section-title h2{
+
+
+        font-size:
+
+        1.35rem;
+
+
+    }
+
+
+
+
+
+}
+/* =========================
+   SMALL MOBILE
+========================= */
+
+
+@media(max-width:380px){
+
+
+    .container{
+
+
+        width:
+
+        92%;
+
+
+    }
+
+
+
+    .category-grid{
+
+
+        gap:
+
+        8px;
+
+
+    }
+
+
+
+    .category-item{
+
+
+        padding:
+
+        15px 5px;
+
+
+    }
+
+
+
+    .category-item span{
+
+
+        font-size:
+
+        .8rem;
+
+
+    }
+
+
+
+    .calculator-card{
+
+
+        gap:
+
+        12px;
+
+
+        padding:
+
+        16px;
+
+
+    }
+
+
+
+    .calculator-icon{
+
+
+        width:
+
+        48px;
+
+
+        height:
+
+        48px;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+
+
+@media(max-height:500px)
+and (orientation:landscape){
+
+
+
+    .intro-section{
+
+
+        padding:
+
+        35px 0;
+
+
+    }
+
+
+
+}
