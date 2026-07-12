@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ggulverse.github.io/everycalc/sitemap.xml
