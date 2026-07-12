@@ -1,0 +1,256 @@
+/* ==================================================
+   EveryCalc 2.0
+   footer.css
+================================================== */
+
+
+/* =========================
+   FOOTER BASE
+========================= */
+
+
+.footer{
+
+
+    width:
+
+    100%;
+
+
+    background:
+
+    var(--surface);
+
+
+    border-top:
+
+    1px solid var(--border);
+
+
+}
+
+
+
+
+
+.footer .container{
+
+
+    display:
+
+    flex;
+
+
+    flex-direction:
+
+    column;
+
+
+    align-items:
+
+    center;
+
+
+}
+
+
+
+
+
+/* =========================
+   FOOTER LOGO
+========================= */
+
+
+.footer-logo{
+
+
+    font-size:
+
+    1.4rem;
+
+
+    font-weight:
+
+    800;
+
+
+    letter-spacing:
+
+    -.5px;
+
+
+    color:
+
+    var(--text);
+
+
+}
+
+
+
+
+
+
+/* =========================
+   FOOTER MENU
+========================= */
+
+
+.footer-links{
+
+
+    display:
+
+    flex;
+
+
+    align-items:
+
+    center;
+
+
+    justify-content:
+
+    center;
+
+
+    flex-wrap:
+
+    wrap;
+
+
+}
+
+
+
+
+
+.footer-links a{
+
+
+    position:
+
+    relative;
+
+
+    transition:
+
+    .2s ease;
+
+
+}
+
+
+
+.footer-links a:hover{
+
+
+    color:
+
+    var(--text);
+
+
+}
+
+
+
+
+
+.footer-links a:not(:last-child)::after{
+
+
+    content:
+
+    "|";
+
+
+    margin-left:
+
+    18px;
+
+
+    color:
+
+    var(--border);
+
+
+}
+/* =========================
+   COPYRIGHT
+========================= */
+
+
+.copyright{
+
+
+    color:
+
+    var(--text-sub);
+
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE FOOTER
+========================= */
+
+
+@media(max-width:600px){
+
+
+
+    .footer-links{
+
+
+        gap:
+
+        12px;
+
+
+        flex-direction:
+
+        column;
+
+
+    }
+
+
+
+
+
+    .footer-links a:not(:last-child)::after{
+
+
+        display:
+
+        none;
+
+
+    }
+
+
+
+
+
+    .copyright{
+
+
+        text-align:
+
+        center;
+
+
+        line-height:
+
+        1.5;
+
+
+    }
+
+
+}
