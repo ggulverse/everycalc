@@ -387,3 +387,15 @@
     }
 
 }
+
+.upcoming-desc{
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    font-size:.95rem;
+
+    margin-bottom:30px;
+
+}
