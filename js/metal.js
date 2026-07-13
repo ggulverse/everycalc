@@ -594,7 +594,7 @@ isDark
 
 ?
 
-"#eeeeee"
+"#ffffff"
 
 :
 
