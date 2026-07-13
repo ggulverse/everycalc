@@ -865,7 +865,7 @@ await response.json();
 data =
 data.filter(
 item =>
-item.rate
+typeof item.rate === "number"
 );
 
 
