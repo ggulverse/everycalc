@@ -763,20 +763,9 @@ y:{
 
 title:{
 
-
-display:true,
-
-
-text:
-
-`${metalName} 가격 (${currency})`,
-
-
-color:textColor
-
+display:false
 
 },
-
 
 
 ticks:{
