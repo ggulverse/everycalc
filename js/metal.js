@@ -977,13 +977,17 @@ unit.innerText =
 ========================= */
 
 
-window.updateMetalChart =
+window.updateMetalChart = function(){
 
-function(){
+    if(metalChart){
 
+        metalChart.destroy();
 
-loadHistory();
+        metalChart = null;
 
+    }
+
+    loadHistory();
 
 };
 
