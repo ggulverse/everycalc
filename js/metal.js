@@ -474,7 +474,7 @@ if(selectedPeriod === 365){
     chartData =
     data.filter(
         (item,index)=>
-        index % 3 === 0
+        index % 12 === 0
     );
 
 }
