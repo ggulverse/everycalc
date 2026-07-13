@@ -635,23 +635,29 @@ function drawChart(data){
 
     ticks:{
 
-        color:chartTextColor,
+    color:chartTextColor,
 
-        autoSkip:true,
+    autoSkip:true,
 
-        maxTicksLimit:
+    autoSkipPadding:20,
 
-        selectedPeriod === 365
-        ?
-        12
-        :
-        selectedPeriod === 30
-        ?
-        10
-        :
-        7
+    maxTicksLimit:
 
-    },
+    selectedPeriod === 365
+    ?
+    12
+    :
+    selectedPeriod === 30
+    ?
+    10
+    :
+    7,
+
+    maxRotation:0,
+
+    minRotation:0
+
+},
 
     grid:{
 
