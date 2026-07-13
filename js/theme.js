@@ -32,9 +32,9 @@ function refreshCharts(){
     }
 
 
-    if(window.updateMetalCharts){
+    if(window.updateMetalChart){
 
-        window.updateMetalCharts();
+        window.updateMetalChart();
     }
 
 }
