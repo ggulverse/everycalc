@@ -900,6 +900,7 @@ console.log(error);
 
 function drawCharts(data){
 
+
 const canvas =
 document.getElementById("exchangeChart");
 
@@ -911,7 +912,6 @@ return;
 }
 
 
-
 if(exchangeChart){
 
 exchangeChart.destroy();
@@ -920,21 +920,21 @@ exchangeChart.destroy();
 
 
 
-let labels =
+const labels =
 data.map(
 item=>item.date
 );
 
 
 
-let values =
+const values =
 data.map(
 item=>item.rate
 );
 
 
 
-let chartTextColor =
+const chartTextColor =
 document.body.classList.contains("dark-mode")
 ?
 "#ffffff"
@@ -943,156 +943,86 @@ document.body.classList.contains("dark-mode")
 
 
 
-
 exchangeChart =
 new Chart(
-
 canvas.getContext("2d"),
-
 {
 
 type:"line",
 
-
 data:{
 
-
 labels:labels,
-
 
 datasets:[{
 
 label:
-`${selectedPeriod}일 환율`,
-
+selectedPeriod === 7
+?
+"7일 환율"
+:
+selectedPeriod === 30
+?
+"1개월 환율"
+:
+"1년 환율",
 
 data:values
 
 }]
 
-
 },
-
 
 
 options:{
 
-
 responsive:true,
-
-
 
 plugins:{
 
-
 legend:{
-
 
 labels:{
 
-
 color:chartTextColor
 
-
 }
 
-
 }
-
 
 },
-
-
 
 scales:{
 
-
 x:{
-
 
 ticks:{
 
-
 color:chartTextColor
 
-
 }
-
 
 },
 
-
-
 y:{
-
 
 ticks:{
 
-
 color:chartTextColor
 
+}
 
 }
 
-
 }
 
-
 }
-
-
-
-}
-
-
-}
-
-
-}
-
-
-);
-
-
-}
-
-document.querySelectorAll(".period-button")
-.forEach(button=>{
-
-
-button.addEventListener(
-"click",
-()=>{
-
-
-document
-.querySelectorAll(".period-button")
-.forEach(btn=>
-btn.classList.remove("active")
-);
-
-
-
-button.classList.add("active");
-
-
-
-selectedPeriod =
-Number(
-button.dataset.period
-);
-
-
-
-loadHistory();
-
 
 }
 
 );
 
-
-});
+}
 
 window.updateCharts = function(){
 
