@@ -842,3 +842,17 @@ body.dark-mode .currency-options{
     font-size:1.25rem;
 
 }
+
+/* ==========================
+   Chart Size
+========================== */
+
+.chart-container{
+
+    position:relative;
+
+    width:100%;
+
+    height:350px;
+
+}
