@@ -468,19 +468,12 @@ let chartData = data;
 
 if(selectedPeriod === 365){
 
-    const monthlyData = {};
+    chartData =
+    data.filter(item=>{
 
-    data.forEach(item=>{
-
-        const month =
-        item.date.substring(0,7);
-
-        monthlyData[month] = item;
+        return item.date.endsWith("-01");
 
     });
-
-    chartData =
-    Object.values(monthlyData);
 
 }
 
