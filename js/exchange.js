@@ -1063,6 +1063,37 @@ window.updateCharts = function(){
 
 };
 
+document.querySelectorAll(".period-button")
+.forEach(button=>{
+
+    button.addEventListener(
+    "click",
+    ()=>{
+
+        document
+        .querySelectorAll(".period-button")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+
+        button.classList.add("active");
+
+
+        selectedPeriod =
+        Number(
+            button.dataset.period
+        );
+
+
+        console.log("선택 기간:", selectedPeriod);
+
+
+        loadHistory();
+
+    });
+
+});
 
 /* ==========================
    시작
