@@ -41,7 +41,7 @@ const chartCanvas =
 document.getElementById("metalChart");
 
 
-
+let metalChart = null;
 let selectedPeriod = 7;
 
 
