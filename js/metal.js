@@ -648,15 +648,7 @@ selectedPeriod === 30
 `${metalName} · 1년`,
 
 
-data:values,
-
-fill:false,
-
-tension:0,
-
-pointRadius:3,
-
-pointHoverRadius:5
+data:values
 
 }]
 
