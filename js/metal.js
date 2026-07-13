@@ -42,7 +42,7 @@ document.getElementById("metalChart");
 
 
 
-let metalChart = null;
+let selectedPeriod = 7;
 
 
 
@@ -399,7 +399,7 @@ currencySelect.value;
 
 
 
-const days = 7;
+const days = selectedPeriod;
 
 
 
@@ -602,8 +602,23 @@ datasets:[{
 
 label:
 
-`${metalName} · 1oz 기준 ${currency}`,
+selectedPeriod === 7
 
+?
+
+`${metalName} · 7일`
+
+:
+
+selectedPeriod === 30
+
+?
+
+`${metalName} · 1개월`
+
+:
+
+`${metalName} · 1년`,
 
 
 data:values,
@@ -882,7 +897,38 @@ loadHistory();
 
 );
 
+document
+.querySelectorAll(".period-button")
+.forEach(button=>{
 
+    button.addEventListener(
+    "click",
+    ()=>{
+
+        document
+        .querySelectorAll(".period-button")
+        .forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+
+        button.classList.add("active");
+
+
+        selectedPeriod =
+        Number(
+            button.dataset.period
+        );
+
+
+        loadHistory();
+
+
+    });
+
+});
 
 
 
