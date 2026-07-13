@@ -861,6 +861,7 @@ throw new Error(
 let data =
 await response.json();
 
+
 data =
 data.filter(
 item =>
@@ -868,13 +869,25 @@ item.rate
 );
 
 
+/* ==========================
+   기간별 데이터 보정
+========================== */
+
+if(selectedPeriod === 365){
+
+    data =
+    data.filter(
+        (item,index)=>
+        index % 7 === 0
+    );
+
+}
+
+
+
 if(data.length){
 
-
-
-drawCharts(data);
-
-
+    drawCharts(data);
 
 }
 
