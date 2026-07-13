@@ -399,14 +399,7 @@ currencySelect.value;
 
 
 
-const days = selectedPeriod;
-
-const requestDays =
-selectedPeriod === 365
-?
-730
-:
-selectedPeriod;
+const requestDays = selectedPeriod;
 
 const today =
 
