@@ -529,7 +529,24 @@ const labels =
 
 data.map(
 
-item => item.date
+(item,index)=>{
+
+
+if(selectedPeriod === 365){
+
+    return index % 12 === 0
+    ?
+    item.date
+    :
+    "";
+
+}
+
+
+return item.date;
+
+
+}
 
 );
 
