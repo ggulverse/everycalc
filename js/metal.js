@@ -37,10 +37,6 @@ const metalInfo =
 document.getElementById("metalInfo");
 
 
-const chartPeriod =
-document.getElementById("chartPeriod");
-
-
 const chartCanvas =
 document.getElementById("metalChart");
 
@@ -894,28 +890,6 @@ loadHistory();
 }
 
 );
-
-
-
-
-
-
-chartPeriod.addEventListener(
-
-"change",
-
-()=>{
-
-
-loadHistory();
-
-
-}
-
-);
-
-
-
 
 
 
