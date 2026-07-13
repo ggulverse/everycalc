@@ -756,7 +756,7 @@ selectedPeriod === 365
 
 ?
 
-12
+6
 
 :
 
