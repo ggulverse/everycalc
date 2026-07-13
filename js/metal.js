@@ -649,27 +649,31 @@ function drawChart(data){
 
 },
 
-                    y:{
+                   y:{
 
-                        ticks:{
+    beginAtZero:false,
 
-                            color:chartTextColor,
+    ticks:{
 
-                            callback:function(value){
+        color:chartTextColor,
 
-                                return value.toLocaleString();
+        maxTicksLimit:6,
 
-                            }
+        callback:function(value){
 
-                        },
+            return Number(value).toLocaleString();
 
-                        grid:{
+        }
 
-                            color:chartTextColor + "33"
+    },
 
-                        }
+    grid:{
 
-                    }
+        color:chartTextColor + "33"
+
+    }
+
+}
 
                 }
 
