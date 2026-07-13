@@ -401,7 +401,12 @@ currencySelect.value;
 
 const days = selectedPeriod;
 
-
+const requestDays =
+selectedPeriod === 365
+?
+730
+:
+selectedPeriod;
 
 const today =
 
@@ -425,7 +430,7 @@ new Date();
 
 startDate.setDate(
 
-today.getDate() - days
+today.getDate() - requestDays
 
 );
 
@@ -461,19 +466,21 @@ const data =
 await response.json();
 
 
+let chartData = data;
+
+
 if(selectedPeriod === 365){
 
-    data =
+    chartData =
     data.filter(
         (item,index)=>
-        index % 7 === 0
+        index % 3 === 0
     );
 
 }
 
 
-drawChart(data);
-
+drawChart(chartData);
 
 
 }
