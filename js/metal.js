@@ -614,7 +614,6 @@ labels,
 
 datasets:[{
 
-
 label:
 
 selectedPeriod === 7
@@ -638,10 +637,13 @@ selectedPeriod === 30
 
 data:values,
 
+fill:false,
 
+tension:0,
 
-fill:false
+pointRadius:3,
 
+pointHoverRadius:5
 
 }]
 
