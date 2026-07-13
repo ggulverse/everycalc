@@ -875,11 +875,21 @@ typeof item.rate === "number"
 
 if(selectedPeriod === 365){
 
+    const monthlyData = {};
+
+    data.forEach(item=>{
+
+        const month =
+        item.date.substring(0,7);
+
+
+        monthlyData[month] = item;
+
+    });
+
+
     data =
-    data.filter(
-        (item,index)=>
-        index % 7 === 0
-    );
+    Object.values(monthlyData);
 
 }
 
@@ -940,10 +950,17 @@ exchangeChart.destroy();
 
 
 const labels =
-data.map(
-item=>item.date
-);
+data.map(item=>{
 
+    if(selectedPeriod === 365){
+
+        return item.date.substring(0,7);
+
+    }
+
+    return item.date;
+
+});
 
 
 const values =
