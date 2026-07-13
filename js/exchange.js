@@ -883,7 +883,9 @@ if(selectedPeriod === 365){
 
 }
 
-
+console.log("기간:", selectedPeriod);
+console.log("데이터 개수:", data.length);
+console.log(data);
 
 if(data.length){
 
