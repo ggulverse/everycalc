@@ -779,15 +779,7 @@ grid:{
 
 color:
 
-isDark
-
-?
-
-"rgba(255,255,255,0.08)"
-
-:
-
-"rgba(0,0,0,0.08)"
+textColor + "33"
 
 }
 
@@ -826,22 +818,11 @@ return value.toLocaleString();
 
 grid:{
 
-
 color:
 
-isDark
-
-?
-
-"rgba(255,255,255,0.08)"
-
-:
-
-"rgba(0,0,0,0.08)"
-
+textColor + "33"
 
 }
-
 
 
 }
