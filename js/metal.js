@@ -517,324 +517,160 @@ console.log(error);
 
 function drawChart(data){
 
+    if(metalChart){
 
-
-if(metalChart){
-
-
-metalChart.destroy();
-
-
-}
-
-
-
-
-const labels =
-data.map(item=>{
-
-    if(selectedPeriod === 365){
-
-        return item.date.substring(0,7);
+        metalChart.destroy();
 
     }
 
-    return item.date;
+    const labels =
+    data.map(item=>{
 
-});
+        if(selectedPeriod === 365){
 
+            return item.date.substring(0,7);
 
+        }
 
+        return item.date;
 
+    });
 
-const values =
+    const values =
+    data.map(
+        item=>Number(item.rate)
+    );
 
-data.map(
+    const chartTextColor =
+    document.body.classList.contains("dark-mode")
+    ?
+    "#ffffff"
+    :
+    "#222222";
 
-item => item.rate
+    metalChart =
+    new Chart(
+        chartCanvas.getContext("2d"),
+        {
 
-);
+            type:"line",
 
+            data:{
 
+                labels:labels,
 
+                datasets:[{
 
+                    label:
+                    selectedPeriod === 7
+                    ?
+                    "7일 귀금속"
+                    :
+                    selectedPeriod === 30
+                    ?
+                    "1개월 귀금속"
+                    :
+                    "1년 귀금속",
 
-const metalName =
+                    data:values,
 
-getMetalName();
+                    fill:false,
 
+                    tension:0,
 
+                    borderWidth:2,
 
+                    pointRadius:3,
 
+                    pointHoverRadius:5,
 
-const currency =
+                    pointHitRadius:10
 
-currencySelect.value;
+                }]
 
+            },
 
+            options:{
 
+                responsive:true,
 
+                maintainAspectRatio:false,
 
-const isDark =
+                interaction:{
 
-document.body.classList.contains(
-"dark-mode"
-);
+                    mode:"index",
 
+                    intersect:false
 
+                },
 
+                plugins:{
 
+                    legend:{
+                        display:false
+                    },
 
-const textColor =
+                    tooltip:{
+                        callbacks:{
+                            label:function(context){
 
-isDark
+                                return context.raw.toLocaleString()
+                                + " "
+                                + currencySelect.value;
 
-?
+                            }
+                        }
+                    }
 
-"#ffffff"
+                },
 
-:
+                scales:{
 
-"#222222";
+                    x:{
 
+                        ticks:{
 
+                            color:chartTextColor
 
+                        },
 
+                        grid:{
 
+                            color:chartTextColor + "33"
 
-metalChart =
+                        }
 
-new Chart(
+                    },
 
-chartCanvas,
+                    y:{
 
-{
+                        ticks:{
 
+                            color:chartTextColor,
 
-type:"line",
+                            callback:function(value){
 
+                                return value.toLocaleString();
 
+                            }
 
+                        },
 
-data:{
+                        grid:{
 
+                            color:chartTextColor + "33"
 
-labels,
+                        }
 
+                    }
 
-datasets:[{
+                }
 
-label:
+            }
 
-selectedPeriod === 7
+        }
 
-?
-
-`${metalName} · 7일`
-
-:
-
-selectedPeriod === 30
-
-?
-
-`${metalName} · 1개월`
-
-:
-
-`${metalName} · 1년`,
-
-data:values,
-
-fill:false,
-
-tension:0,
-
-borderWidth:2,
-
-pointRadius:3,
-
-pointHoverRadius:5,
-
-pointHitRadius:10
-
-}]
-
-},
-
-
-
-
-options:{
-
-
-responsive:true,
-
-
-maintainAspectRatio:false,
-aspectRatio:2,
-
-
-interaction:{
-
-
-mode:"index",
-
-intersect:false
-
-
-},
-
-
-
-
-plugins:{
-
-
-
-legend:{
-    display:false
-},
-
-
-
-tooltip:{
-
-
-callbacks:{
-
-
-label:function(context){
-
-
-return (
-
-context.raw.toLocaleString()
-
-+
-
-" "
-
-+
-
-currency
-
-);
-
-
-}
-
-
-}
-
-
-}
-
-
-
-},
-
-
-
-
-
-scales:{
-
-
-
-x:{
-
-ticks:{
-
-color:textColor,
-
-maxRotation:0,
-
-minRotation:0,
-
-autoSkip:true,
-
-maxTicksLimit:
-
-selectedPeriod === 365
-
-?
-
-6
-
-:
-
-selectedPeriod === 30
-
-?
-
-10
-
-:
-
-7
-
-},
-
-grid:{
-    color:textColor + "33"
-}
-   
-},
-
-
-y:{
-
-
-title:{
-
-display:false
-
-},
-
-
-ticks:{
-
-
-color:textColor,
-
-
-callback:function(value){
-
-
-return value.toLocaleString();
-
-
-}
-
-
-},
-
-
-
-
-grid:{
-    color:textColor + "33"
-}
-
-
-}
-
-
-
-}
-
-
-
-}
-
-
-
-}
-
-);
-
-
+    );
 
 }
 
