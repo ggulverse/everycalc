@@ -461,7 +461,15 @@ const data =
 await response.json();
 
 
+if(selectedPeriod === 365){
 
+    data =
+    data.filter(
+        (item,index)=>
+        index % 7 === 0
+    );
+
+}
 
 
 drawChart(data);
@@ -625,20 +633,7 @@ data:values,
 
 
 
-tension:0.35,
-
-
-
-fill:false,
-
-
-
-pointRadius:0,
-
-
-
-pointHoverRadius:5
-
+fill:false
 
 
 }]
