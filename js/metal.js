@@ -727,27 +727,23 @@ scales:{
 
 x:{
 
-
 ticks:{
 
+color:textColor,
 
-color:textColor
+maxRotation:0,
 
+minRotation:0
 
 },
-
 
 grid:{
 
-
 display:false
-
 
 }
 
-
 },
-
 
 
 
