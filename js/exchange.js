@@ -82,7 +82,7 @@ let toCurrency =
 
 let exchangeChart = null;
 
-let selectedPeriod = 30;
+let selectedPeriod = 7;
 
 
 
