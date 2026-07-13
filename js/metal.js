@@ -781,12 +781,22 @@ selectedPeriod === 30
 
 grid:{
 
-color:
+    color:
 
-textColor + "33"
+    isDark
+
+    ?
+
+    "rgba(255,255,255,0.08)"
+
+    :
+
+    "rgba(0,0,0,0.08)",
+
+    drawBorder:false
 
 }
-
+   
 },
 
 
@@ -822,9 +832,19 @@ return value.toLocaleString();
 
 grid:{
 
-color:
+    color:
 
-textColor + "33"
+    isDark
+
+    ?
+
+    "rgba(255,255,255,0.08)"
+
+    :
+
+    "rgba(0,0,0,0.08)",
+
+    drawBorder:false
 
 }
 
