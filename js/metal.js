@@ -656,7 +656,7 @@ responsive:true,
 
 
 maintainAspectRatio:false,
-
+aspectRatio:2,
 
 
 interaction:{
