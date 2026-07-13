@@ -738,7 +738,29 @@ color:textColor,
 
 maxRotation:0,
 
-minRotation:0
+minRotation:0,
+
+autoSkip:true,
+
+maxTicksLimit:
+
+selectedPeriod === 365
+
+?
+
+12
+
+:
+
+selectedPeriod === 30
+
+?
+
+10
+
+:
+
+7
 
 },
 
@@ -759,7 +781,6 @@ isDark
 }
 
 },
-
 
 
 y:{
