@@ -867,10 +867,6 @@ await response.json();
 if(data.length){
 
 
-let latest =
-data[data.length-1];
-
-
 
 drawCharts(data);
 
