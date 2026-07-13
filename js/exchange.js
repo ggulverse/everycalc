@@ -80,9 +80,9 @@ let toCurrency =
 
 
 
-let chart7 = null;
+let exchangeChart = null;
 
-let chart30 = null;
+let selectedPeriod = 30;
 
 
 
@@ -829,7 +829,7 @@ new Date();
 
 
 startDate.setDate(
-today.getDate()-30
+today.getDate()-selectedPeriod
 );
 
 
@@ -904,12 +904,11 @@ console.log(error);
 
 function drawCharts(data){
 
+const canvas =
+document.getElementById("exchangeChart");
 
-if(
-!document.getElementById("chart7")
-||
-!document.getElementById("chart30")
-){
+
+if(!canvas){
 
 return;
 
@@ -917,17 +916,9 @@ return;
 
 
 
-if(chart7){
+if(exchangeChart){
 
-chart7.destroy();
-
-}
-
-
-
-if(chart30){
-
-chart30.destroy();
+exchangeChart.destroy();
 
 }
 
@@ -956,142 +947,43 @@ document.body.classList.contains("dark-mode")
 
 
 
-chart7 =
+
+exchangeChart =
 new Chart(
 
-document
-.getElementById("chart7")
-.getContext("2d"),
+canvas.getContext("2d"),
 
 {
 
 type:"line",
 
-data:{
-
-labels:
-labels.slice(-7),
-
-datasets:[{
-
-label:"7일 환율",
-
-data:
-values.slice(-7)
-
-}]
-
-},
-
-
-options:{
-
-
-plugins:{
-
-
-legend:{
-
-
-labels:{
-
-
-color:
-chartTextColor
-
-
-}
-
-
-}
-
-
-},
-
-
-scales:{
-
-x:{
-
-ticks:{
-
-color:
-chartTextColor
-
-},
-
-grid:{
-
-color:
-chartTextColor + "33"
-
-}
-
-},
-
-y:{
-
-ticks:{
-
-color:
-chartTextColor
-
-},
-
-grid:{
-
-color:
-chartTextColor + "33"
-
-}
-
-}
-
-}
-
-
-
-}
-
-
-}
-
-
-);
-
-
-
-
-
-
-
-chart30 =
-new Chart(
-
-document
-.getElementById("chart30")
-.getContext("2d"),
-
-{
-
-type:"line",
 
 data:{
 
-labels,
+
+labels:labels,
+
 
 datasets:[{
 
-label:"30일 환율",
+label:
+`${selectedPeriod}일 환율`,
+
 
 data:values
 
 }]
 
+
 },
 
 
+
 options:{
+
+
+responsive:true,
+
 
 
 plugins:{
@@ -1103,8 +995,7 @@ legend:{
 labels:{
 
 
-color:
-chartTextColor
+color:chartTextColor
 
 
 }
@@ -1114,48 +1005,48 @@ chartTextColor
 
 
 },
+
 
 
 scales:{
 
+
 x:{
+
 
 ticks:{
 
-color:
-chartTextColor
 
-},
+color:chartTextColor
 
-grid:{
-
-color:
-chartTextColor + "33"
 
 }
 
+
 },
+
+
 
 y:{
 
+
 ticks:{
 
-color:
-chartTextColor
 
-},
+color:chartTextColor
 
-grid:{
-
-color:
-chartTextColor + "33"
 
 }
 
-}
 
 }
 
+
+}
+
+
+
+}
 
 
 }
@@ -1168,6 +1059,44 @@ chartTextColor + "33"
 
 
 }
+
+document.querySelectorAll(".period-button")
+.forEach(button=>{
+
+
+button.addEventListener(
+"click",
+()=>{
+
+
+document
+.querySelectorAll(".period-button")
+.forEach(btn=>
+btn.classList.remove("active")
+);
+
+
+
+button.classList.add("active");
+
+
+
+selectedPeriod =
+Number(
+button.dataset.period
+);
+
+
+
+loadHistory();
+
+
+}
+
+);
+
+
+});
 
 window.updateCharts = function(){
 
