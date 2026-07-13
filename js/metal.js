@@ -399,12 +399,7 @@ currencySelect.value;
 
 
 
-const days =
-
-Number(
-chartPeriod.value
-);
-
+const days = 7;
 
 
 
