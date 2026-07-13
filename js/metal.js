@@ -677,22 +677,8 @@ plugins:{
 
 
 legend:{
-
-
-display:true,
-
-
-labels:{
-
-
-color:textColor
-
-
-}
-
-
+    display:false
 },
-
 
 
 
