@@ -471,11 +471,19 @@ let chartData = data;
 
 if(selectedPeriod === 365){
 
+    const monthlyData = {};
+
+    data.forEach(item=>{
+
+        const month =
+        item.date.substring(0,7);
+
+        monthlyData[month] = item;
+
+    });
+
     chartData =
-    data.filter(
-        (item,index)=>
-        index % 12 === 0
-    );
+    Object.values(monthlyData);
 
 }
 
@@ -526,29 +534,17 @@ metalChart.destroy();
 
 
 const labels =
+data.map(item=>{
 
-data.map(
+    if(selectedPeriod === 365){
 
-(item,index)=>{
+        return item.date.substring(0,7);
 
+    }
 
-if(selectedPeriod === 365){
+    return item.date;
 
-    return index % 12 === 0
-    ?
-    item.date
-    :
-    "";
-
-}
-
-
-return item.date;
-
-
-}
-
-);
+});
 
 
 
