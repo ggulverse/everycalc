@@ -653,9 +653,13 @@ fill:false,
 
 tension:0,
 
+borderWidth:2,
+
 pointRadius:3,
 
-pointHoverRadius:5
+pointHoverRadius:5,
+
+pointHitRadius:10
 
 }]
 
