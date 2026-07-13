@@ -621,19 +621,33 @@ function drawChart(data){
 
                     x:{
 
-                        ticks:{
+    ticks:{
 
-                            color:chartTextColor
+        color:chartTextColor,
 
-                        },
+        autoSkip:true,
 
-                        grid:{
+        maxTicksLimit:
 
-                            color:chartTextColor + "33"
+        selectedPeriod === 365
+        ?
+        12
+        :
+        selectedPeriod === 30
+        ?
+        10
+        :
+        7
 
-                        }
+    },
 
-                    },
+    grid:{
+
+        color:chartTextColor + "33"
+
+    }
+
+},
 
                     y:{
 
