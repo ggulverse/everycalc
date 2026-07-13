@@ -861,7 +861,11 @@ throw new Error(
 let data =
 await response.json();
 
-
+data =
+data.filter(
+item =>
+item.rate
+);
 
 
 if(data.length){
@@ -929,7 +933,7 @@ item=>item.date
 
 const values =
 data.map(
-item=>item.rate
+item=>Number(item.rate)
 );
 
 
