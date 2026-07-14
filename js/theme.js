@@ -38,7 +38,7 @@ if(savedTheme === "dark"){
 
 }
 
-
+updateDarkModeIcon();
 
 // 차트 업데이트 연결용
 
