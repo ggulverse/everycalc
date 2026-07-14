@@ -6,6 +6,25 @@
 const darkModeToggle =
 document.getElementById("darkModeToggle");
 
+// 다크모드 아이콘 업데이트
+
+function updateDarkModeIcon(){
+
+    if(
+        document.body.classList.contains("dark-mode")
+    ){
+
+        darkModeToggle.textContent = "☀️";
+
+    }
+
+    else{
+
+        darkModeToggle.textContent = "🌙";
+
+    }
+
+}
 
 // 저장된 테마 확인
 
