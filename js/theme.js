@@ -98,7 +98,7 @@ darkModeToggle.addEventListener(
 
         }
 
-
+         updateDarkModeIcon();
 
         refreshCharts();
 
