@@ -365,11 +365,10 @@ return "-";
 
 function drawCompoundChart(data){
 
+    compoundChartData = data;
 
-
-const canvas =
-document.getElementById("compoundChart");
-
+    const canvas =
+    document.getElementById("compoundChart");
 
 
 if(!canvas){
@@ -592,3 +591,13 @@ document.body.classList.contains("dark-mode")
 
 
 }
+
+window.updateCompoundChart = function(){
+
+    if(compoundChartData){
+
+        drawCompoundChart(compoundChartData);
+
+    }
+
+};
