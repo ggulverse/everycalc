@@ -464,7 +464,18 @@ plugins:{
 legend:{
 
 
-display:true
+labels:{
+
+
+color:
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222"
+
+
+}
 
 
 }
@@ -477,17 +488,88 @@ display:true
 scales:{
 
 
+
+x:{
+
+
+ticks:{
+
+
+color:
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222"
+
+
+},
+
+
+grid:{
+
+
+color:
+(
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222"
+)
++
+"33"
+
+
+}
+
+
+},
+
+
+
 y:{
 
 
 ticks:{
 
 
+color:
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222",
+
+
 callback:function(value){
 
 
 return value.toLocaleString("ko-KR")
-+ "원";
++
+"원";
+
+
+}
+
+
+},
+
+
+
+grid:{
+
+
+color:
+(
+document.body.classList.contains("dark-mode")
+?
+"#ffffff"
+:
+"#222222"
+)
++
+"33"
 
 
 }
@@ -497,10 +579,6 @@ return value.toLocaleString("ko-KR")
 
 
 }
-
-
-}
-
 
 
 }
