@@ -67,6 +67,8 @@ refreshCharts;
 
 // 버튼 클릭
 
+if(darkModeToggle){
+
 darkModeToggle.addEventListener(
     "click",
     function(){
@@ -106,3 +108,4 @@ darkModeToggle.addEventListener(
 
     }
 );
+}
