@@ -54,10 +54,17 @@ function refreshCharts(){
     if(window.updateMetalChart){
 
         window.updateMetalChart();
+
+    }
+
+
+    if(window.updateCompoundChart){
+
+        window.updateCompoundChart();
+
     }
 
 }
-
 
 window.refreshCharts =
 refreshCharts;
