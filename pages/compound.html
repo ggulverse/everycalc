@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <!-- ===========================
+         기본 설정
+    ============================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>복리 계산기 | EveryCalc</title>
+
+    <meta name="description"
+        content="초기 원금, 월 적립금, 연 이율, 투자 기간을 입력하여 복리 투자 결과를 계산해보세요.">
+
+    <meta name="keywords"
+        content="복리 계산기, 투자 계산기, 적금 계산기, 예금 계산기, 복리, EveryCalc">
+
+    <meta name="robots"
+        content="index, follow">
+
+    <link rel="canonical"
+        href="https://ggulverse.github.io/everycalc/pages/compound.html">
+
+    <meta property="og:type"
+        content="website">
+
+    <meta property="og:title"
+        content="복리 계산기 | EveryCalc">
+
+    <meta property="og:description"
+        content="복리 효과를 쉽고 빠르게 계산해보세요.">
+
+    <meta property="og:url"
+        content="https://ggulverse.github.io/everycalc/pages/compound.html">
+
+    <meta property="og:image"
+        content="https://ggulverse.github.io/everycalc/images/og-image.png">
+
+    <link rel="icon"
+        href="../favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet"
+        href="../css/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container">
+
+        <a href="../index.html"
+            class="logo">
+            EveryCalc
+        </a>
+
+        <button id="themeToggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="다크모드">
+            🌙
+        </button>
+
+    </div>
+
+</header>
+
+<main class="calculator-page">
+
+<section class="calculator-box">
+
+<h1>복리 계산기</h1>
+
+<p class="calculator-description">
+초기 투자금과 월 적립금을 함께 계산하여
+복리 효과를 확인할 수 있습니다.
+</p>
+
+<div class="input-group">
+
+<label for="principal">
+초기 원금
+</label>
+
+<input
+type="number"
+id="principal"
+placeholder="예 : 10000000">
+
+</div>
+
+<div class="input-group">
+
+<label for="monthlyDeposit">
+월 추가 적립금
+</label>
+
+<input
+type="number"
+id="monthlyDeposit"
+placeholder="예 : 300000">
+
+</div>
+
+<div class="input-group">
+
+<label for="interestRate">
+연 이율(%)
+</label>
+
+<input
+type="number"
+step="0.01"
+id="interestRate"
+placeholder="예 : 5">
+
+</div>
+
+<div class="input-group">
+
+<label for="investmentPeriod">
+투자 기간(년)
+</label>
+
+<input
+type="number"
+id="investmentPeriod"
+placeholder="예 : 20">
+
+</div>
+
+<div class="input-group">
+
+<label for="compoundPeriod">
+복리 주기
+</label>
+
+<select id="compoundPeriod">
+
+<option value="365">
+매일 복리
+</option>
+
+<option value="12" selected>
+매월 복리
+</option>
+
+<option value="4">
+분기 복리
+</option>
+
+<option value="2">
+반기 복리
+</option>
+
+<option value="1">
+매년 복리
+</option>
+
+</select>
+
+</div>
+
+<button
+id="calculateButton"
+class="calculate-button">
+
+계산하기
+
+</button>
+
+</section>
+
+<!-- ===========================
+     계산 결과
+=========================== -->
+
+<section class="calculator-result">
+
+    <h2>계산 결과</h2>
+
+    <div class="result-grid">
+
+        <div class="result-card">
+
+            <span class="result-title">
+                최종 금액
+            </span>
+
+            <strong id="finalAmount">
+                -
+            </strong>
+
+        </div>
+
+        <div class="result-card">
+
+            <span class="result-title">
+                총 투자원금
+            </span>
+
+            <strong id="totalPrincipal">
+                -
+            </strong>
+
+        </div>
+
+        <div class="result-card">
+
+            <span class="result-title">
+                총 이자
+            </span>
+
+            <strong id="totalInterest">
+                -
+            </strong>
+
+        </div>
+
+        <div class="result-card">
+
+            <span class="result-title">
+                수익률
+            </span>
+
+            <strong id="profitRate">
+                -
+            </strong>
+
+        </div>
+
+        <div class="result-card">
+
+            <span class="result-title">
+                적용된 복리 주기
+            </span>
+
+            <strong id="compoundType">
+                매월 복리
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+     차트
+=========================== -->
+
+<section class="calculator-box">
+
+    <h2>자산 증가 그래프</h2>
+
+    <canvas id="compoundChart"></canvas>
+
+</section>
+
+<!-- ===========================
+     사용 방법
+=========================== -->
+
+<section class="calculator-info">
+
+    <h2>사용 방법</h2>
+
+    <ol>
+
+        <li>
+            초기 투자 원금을 입력합니다.
+        </li>
+
+        <li>
+            매월 추가로 투자할 금액을 입력합니다.
+        </li>
+
+        <li>
+            연 이율을 입력합니다.
+        </li>
+
+        <li>
+            투자 기간과 복리 주기를 선택합니다.
+        </li>
+
+        <li>
+            계산하기 버튼을 누르면 결과와 그래프가 생성됩니다.
+        </li>
+
+    </ol>
+
+</section>
+
+<!-- ===========================
+     복리 계산 공식
+=========================== -->
+
+<section class="calculator-info">
+
+    <h2>복리 계산 공식</h2>
+
+    <p>
+
+        복리는 일정한 주기마다 발생한 이자가
+        원금에 합산되어 다시 이자가 붙는 방식입니다.
+
+    </p>
+
+    <p>
+
+        일반적인 복리 공식은 다음과 같습니다.
+
+    </p>
+
+    <pre>
+
+A = P × (1 + r / n)<sup>n × t</sup>
+
+    </pre>
+
+    <ul>
+
+        <li>P : 초기 원금</li>
+
+        <li>r : 연 이율</li>
+
+        <li>n : 연간 복리 횟수</li>
+
+        <li>t : 투자 기간(년)</li>
+
+        <li>A : 최종 금액</li>
+
+    </ul>
+
+    <p>
+
+        EveryCalc에서는 월 적립금까지 포함하여
+        실제 투자에 가까운 방식으로 계산합니다.
+
+    </p>
+
+</section>
+
+<!-- ===========================
+     안내 사항
+=========================== -->
+
+<section class="calculator-info">
+
+    <h2>안내 사항</h2>
+
+    <ul class="info-list">
+
+        <li>
+            본 계산 결과는 입력한 값을 기준으로 계산한 예상 결과입니다.
+        </li>
+
+        <li>
+            실제 금융상품의 세금, 수수료, 우대금리, 중도해지 조건 등은 반영되지 않습니다.
+        </li>
+
+        <li>
+            월 추가 적립금은 매월 동일한 금액이 납입된다고 가정하여 계산합니다.
+        </li>
+
+        <li>
+            복리 주기에 따라 실제 계산 결과는 달라질 수 있습니다.
+        </li>
+
+        <li>
+            투자 상품마다 이자 지급 방식이 다를 수 있으므로 참고용으로 활용하시기 바랍니다.
+        </li>
+
+    </ul>
+
+</section>
+
+<!-- ===========================
+     FAQ
+=========================== -->
+
+<section class="calculator-faq">
+
+    <h2>자주 묻는 질문 (FAQ)</h2>
+
+    <div class="faq-item">
+
+        <h3>복리란 무엇인가요?</h3>
+
+        <p>
+            복리는 원금뿐 아니라 이전에 발생한 이자에도 다시 이자가 붙는 계산 방식입니다.
+            시간이 길어질수록 복리 효과는 더욱 커집니다.
+        </p>
+
+    </div>
+
+    <div class="faq-item">
+
+        <h3>단리와 복리의 차이는 무엇인가요?</h3>
+
+        <p>
+            단리는 원금에만 이자가 붙지만,
+            복리는 원금과 누적된 이자 모두에 이자가 붙기 때문에
+            장기 투자에서 큰 차이가 발생합니다.
+        </p>
+
+    </div>
+
+    <div class="faq-item">
+
+        <h3>복리 주기는 어떤 의미인가요?</h3>
+
+        <p>
+            이자가 원금에 합산되는 빈도를 의미합니다.
+            일반적으로 연복리, 반기복리, 분기복리,
+            월복리, 일복리 등이 사용됩니다.
+        </p>
+
+    </div>
+
+    <div class="faq-item">
+
+        <h3>월 적립금도 복리 계산에 포함되나요?</h3>
+
+        <p>
+            포함됩니다.
+            EveryCalc는 초기 원금뿐 아니라
+            매월 추가 적립되는 금액까지 함께 계산하여
+            보다 현실적인 결과를 제공합니다.
+        </p>
+
+    </div>
+
+    <div class="faq-item">
+
+        <h3>실제 금융상품과 결과가 다른 이유는 무엇인가요?</h3>
+
+        <p>
+            실제 금융상품은 세금, 우대금리,
+            납입 시점, 이자 지급 방식,
+            수수료 등의 조건이 적용되므로
+            실제 수익과 차이가 발생할 수 있습니다.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+     Footer
+=========================== -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 EveryCalc. All Rights Reserved.
+        </p>
+
+        <p class="brand-parent">
+
+            A project by
+
+        <a href="https://ggulverse.github.io/">
+            GGULVERSE
+        </a>
+
+</p>
+      
+    </div>
+
+</footer>
+
+<!-- ===========================
+     Script
+=========================== -->
+
+<script src="../js/theme.js"></script>
+<script src="../js/compound.js"></script>
+
+</body>
+</html>
