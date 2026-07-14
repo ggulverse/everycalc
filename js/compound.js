@@ -169,23 +169,19 @@ totalPrincipal += monthlyDeposit;
 
 
 
-// 복리 적용 주기 계산
+// 월 단위 복리 적용
 
-if(
-month % (12 / compoundPeriod) === 0
-){
+const monthlyRate =
+Math.pow(
+1 + rate / compoundPeriod,
+compoundPeriod / 12
+)
+- 1;
 
 
 amount =
 amount *
-Math.pow(
-1 + periodRate,
-1
-);
-
-
-}
-
+(1 + monthlyRate);
 
 
 if(
